@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <div>
       <h1>Contenido de la página</h1>
+      {/* Add more content here */}
     </div>
   );
 }
