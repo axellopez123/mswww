@@ -6,8 +6,8 @@ const DrawerContext = createContext();
 export const DrawerProvider = ({ children }) => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-  const toggleDrawer = (open) => {
-    setDrawerOpen(open);
+  const toggleDrawer = () => {
+    setDrawerOpen(!isDrawerOpen);
   };
 
   return (
