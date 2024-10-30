@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useDrawerContext } from "../contexts/DrawerContext";
 import IconButton from "@mui/material/IconButton";
+import ThemeToggleButton from "./ThemeToggleButton";
 export default function Navbar() {
   const { toggleDrawer } = useDrawerContext();
 
@@ -39,9 +40,7 @@ export default function Navbar() {
           </Typography>
 
           {/* Login Button */}
-          <Button color="inherit" className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-all">
-            Login
-          </Button>
+  <ThemeToggleButton />
         </Toolbar>
       </AppBar>
 
