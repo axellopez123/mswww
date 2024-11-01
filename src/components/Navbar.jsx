@@ -2,7 +2,6 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { useDrawerContext } from "../contexts/DrawerContext";
 import IconButton from "@mui/material/IconButton";
 import ThemeToggleButton from "./ThemeToggleButton";
@@ -13,9 +12,9 @@ export default function Navbar() {
     <>
 <AppBar 
         position="fixed" 
-        sx={{ top: 0, left: 0, zIndex: 1201, backgroundColor: "#727370", boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)" }}
+        sx={{ top: 0, left: 0, zIndex: 1201, boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)" }}
       >
-        <Toolbar className="flex justify-between items-center px-4">
+        <Toolbar className="flex justify-between items-center px-4 bg-red-400 dark:bg-green-400">
           {/* Drawer Toggle Button */}
           <IconButton onClick={() => toggleDrawer(true)}>
             {isDrawerOpen ? 
