@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <>
-<AppBar 
+<AppBar className="z-10"
         position="fixed" 
         sx={{ top: 0, left: 0, zIndex: 1201, backgroundColor: "#1A202C", boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)" }}
       >
