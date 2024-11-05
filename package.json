@@ -21,11 +21,8 @@
     "next": "^15.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-<<<<<<< HEAD
     "react-native-reanimated": "^3.16.1",
-=======
     "react-router-dom": "^6.27.0",
->>>>>>> 8a1e5cfd936d5d3f471086227583dcdadcd4235f
     "react-scripts": "5.0.1",
     "react-scroll-parallax": "^3.4.5",
     "simplex-noise": "^4.0.3",
