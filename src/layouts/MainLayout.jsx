@@ -1,7 +1,7 @@
 // src/layouts/MainLayout.jsx
 import React, { useEffect, useState } from 'react';
 import { DrawerProvider } from '../contexts/DrawerContext';
-import Navbar from '../components/Navbar';
+import { Navbear } from '../components/Navbear';
 import Sidebar from '../components/Sidebar';
 import Box from "@mui/material/Box";
 import Logoindex from "../components/Logoindex";
@@ -30,18 +30,12 @@ export default function MainLayout({ children }) {
 
   return (
     <DrawerProvider className="bg-red-500">
-      {showFirstDiv ? (
-      <div className={fadeOut ? 'fade-out' : ''}>
-      <Logoindex />
-    </div>
-      ) : (
-      <Box className={`z-10 h-screen flex flex-col ${visible}`}>
-        <Navbar />
+      <Box className={`${visible}`}>
+        <Navbear />
         <Sidebar />
-        <main className="flex-1 mt-16 overflow-y-auto p-6">
+        <main>
           {children}</main>
       </Box>
-      )}
     </DrawerProvider>
   );
 }
