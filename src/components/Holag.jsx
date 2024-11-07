@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import TextLogo from "./TextLogo";
 import Logo from "./Logo";
 
-
 export default function App() {
     const animate = true;
     const words = `Optimiza tu vida`;

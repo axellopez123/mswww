@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Box from "@mui/material/Box";
 import Logoindex from "../components/Logoindex";
-
 import './MainLayout.css'; // Optional: add styles for layout
 
 export default function MainLayout({ children }) {
@@ -29,7 +28,7 @@ export default function MainLayout({ children }) {
 
 
   return (
-    <DrawerProvider className="bg-red-500">
+    <DrawerProvider>
       {showFirstDiv ? (
       <div className={fadeOut ? 'fade-out' : ''}>
       <Logoindex />
@@ -38,7 +37,7 @@ export default function MainLayout({ children }) {
       <Box className={`z-10 h-screen flex flex-col ${visible}`}>
         <Navbar />
         <Sidebar />
-        <main className="flex-1 mt-16 overflow-y-auto p-6">
+        <main >
           {children}</main>
       </Box>
       )}
