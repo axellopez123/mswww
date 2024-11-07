@@ -9,7 +9,7 @@ export default function Home() {
   }, []);
 
   return (
-      <Box sx={{ py: 4 }}>
+      <Box sx={{ py: 4 }} className="bg-blue-700">
         <div className="h-screen">d</div>
         <div className="h-screen">e</div>
       </Box>

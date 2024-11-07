@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "./Menu";
 import { cn } from "../lib/utils";
 import FloatingDock from "./FloatingDock";
+import ThemeToggleButton from "./ThemeToggleButton";
 
 export function Navbear() {
   const [active, setActive] = useState(null);
+   
   const links = [
     {
       title: "Home",
@@ -69,12 +71,22 @@ export function Navbear() {
       ),
       href: "#",
     },
+    {
+      title:"Theme",
+      icon: (
+        <MenuItem setActive={setActive} active={active} item={<ThemeToggleButton />}>
+        
+        </MenuItem>
+      ),
+      href: "#",
+    },
   ];
 
   return (
     <div className="relative w-full flex items-center justify-center">
-      <Navbar className="top-2" active={active} setActive={setActive} links={links} />
+      <Navbar className="top-5" active={active} setActive={setActive} links={links} />
     </div>
+
   );
 }
 
@@ -83,9 +95,10 @@ function Navbar({ className, active, setActive, links }) {
     <div
       className={cn("fixed top-10 inset-x-0 w-11/12 mx-auto z-50", className)}
     >
+      
       <Menu setActive={setActive}>
-          <div id="logo">
-<p>MSWWW</p>
+          <div id="logo" className="flex items-center">
+<p className="font-[helvetica] font-bold stroke-neutral-200 dark:stroke-neutral-800 fill-transparent text-4xl">MSWWW</p>
           </div>
           <div id="menu" className="pr-16">
         <FloatingDock items={links} />

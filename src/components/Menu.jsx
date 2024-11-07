@@ -18,12 +18,12 @@ function MenuItem ({
   children
 }) {
   return (
-    (<div onMouseEnter={() => setActive(item)} className="relative ">
-      <motion.p
+    (<div onMouseEnter={() => setActive(item)} className="relative">
+      <motion.div
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white">
+        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-xl font-extrabold">
         {item}
-      </motion.p>
+      </motion.div>
       {active !== null && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
@@ -60,7 +60,7 @@ function Menu ({
     (<nav
       // resets the state
       onMouseLeave={() => setActive(null)}
-      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white/[10] backdrop-blur-xl antialiased backdrop-blur-xl shadow-menu flex justify-between space-x-4 px-8 py-2">
+      className="relative border dark:border-white/[0.2] backdrop-blur-xl bg-white/30 border-white/20 rounded-xl p-6 shadow-lg flex justify-between space-x-4 px-8 py-2">
       {children}
     </nav>)
   );
