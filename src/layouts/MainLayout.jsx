@@ -6,15 +6,16 @@ import Sidebar from '../components/Sidebar';
 import Box from "@mui/material/Box";
 import Logoindex from "../components/Logoindex";
 import './MainLayout.css'; // Optional: add styles for layout
-
+import { Navbear } from '../components/Navbear';
+import TabMobile from '../components/tabsMobile';
 export default function MainLayout({ children }) {
-  const [visible, setVisisble] = useState('invisible');
+  const [visible, setVisisble] = useState("invisible");
   const [showFirstDiv, setShowFirstDiv] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   useEffect(() => {
     setTimeout(() => {
-      setVisisble('visible')
-    }, 3000)
+      setVisisble("visible");
+    }, 3000);
   }, [visible]);
 
   useEffect(() => {
@@ -26,7 +27,6 @@ export default function MainLayout({ children }) {
     return () => clearTimeout(timer);
   }, []);
 
-
   return (
     <DrawerProvider>
       {showFirstDiv ? (
@@ -35,10 +35,15 @@ export default function MainLayout({ children }) {
     </div>
       ) : (
       <Box className={`z-10 h-screen flex flex-col ${visible}`}>
-        <Navbar />
+        <div className="hidden md:block">
+          <Navbear />
+        </div>
         <Sidebar />
-        <main >
-          {children}</main>
+        <main>{children}</main>
+        <div className="block md:hidden">
+          <TabMobile/>
+        </div>
+        <Sidebar />
       </Box>
       )}
     </DrawerProvider>
