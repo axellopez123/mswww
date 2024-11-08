@@ -1,7 +1,7 @@
 import { cn } from "../lib/utils";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
-
+import ThemeToggleButton from "./ThemeToggleButton";
 export default function FloatingDock ({
   items,
   desktopClassName,
@@ -24,12 +24,15 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden md:flex h-16 gap-10 items-end rounded-2xl px-4 pb-3 bg-gray-50 dark:bg-neutral-900",
+        "mx-auto hidden md:flex h-16 gap-10 items-end rounded-2xl px-4 pb-3",
         className
       )}>
       {items.map((item) => (
         <IconContainer mouseX={mouseX} key={item.title} {...item} />
       ))}
+      <div className="mb-1">
+      <ThemeToggleButton/>
+      </div>
     </motion.div>)
   );
 };
@@ -42,39 +45,7 @@ function IconContainer({
 }) {
   let ref = useRef(null);
 
-  let distance = useTransform(mouseX, (val) => {
-    let bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
 
-    return val - bounds.x - bounds.width / 2;
-  });
-
-  let widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  let heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-
-  let widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
-  let heightTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
-
-  let width = useSpring(widthTransform, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-  let height = useSpring(heightTransform, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-
-  let widthIcon = useSpring(widthTransformIcon, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-  let heightIcon = useSpring(heightTransformIcon, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
 
   const [hovered, setHovered] = useState(false);
 
@@ -82,10 +53,9 @@ function IconContainer({
     (<a href={href}>
       <motion.div
         ref={ref}
-        style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="rounded-full bg-red-200 dark:bg-neutral-800 flex items-center justify-center relative px-16">
+        className="rounded-full bg-green-300/40 dark:bg-neutral-800 flex items-center justify-center relative px-6 py-2 hover:scale-105 transition duration-150 ease-in-out delay-50">
         {/* <AnimatePresence>
           {hovered && (
             <motion.div
@@ -98,7 +68,6 @@ function IconContainer({
           )}
         </AnimatePresence> */}
         <motion.div
-          style={{ width: widthIcon, height: heightIcon }}
           className="flex items-center justify-center">
           {icon}
         </motion.div>

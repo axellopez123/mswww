@@ -71,15 +71,6 @@ export function Navbear() {
       ),
       href: "#",
     },
-    {
-      title:"Theme",
-      icon: (
-        <MenuItem setActive={setActive} active={active} item={<ThemeToggleButton />}>
-        
-        </MenuItem>
-      ),
-      href: "#",
-    },
   ];
 
   return (

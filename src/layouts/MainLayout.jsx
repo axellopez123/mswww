@@ -8,6 +8,7 @@ import Logoindex from "../components/Logoindex";
 import './MainLayout.css'; // Optional: add styles for layout
 import { Navbear } from '../components/Navbear';
 import TabMobile from '../components/tabsMobile';
+import { NavbarMobile } from '../components/NavbarMobile';
 export default function MainLayout({ children }) {
   const [visible, setVisisble] = useState("invisible");
   const [showFirstDiv, setShowFirstDiv] = useState(true);
@@ -41,6 +42,7 @@ export default function MainLayout({ children }) {
         <Sidebar />
         <main>{children}</main>
         <div className="block md:hidden">
+          <NavbarMobile/>
           <TabMobile/>
         </div>
         <Sidebar />

@@ -84,7 +84,7 @@ const ThemeToggleButton = () => {
     <MaterialUISwitch
     checked={isDarkMode}
     onClick={toggleTheme}
-    sx={{ m: 1 }} defaultChecked />
+    defaultChecked />
   );
 };
 
