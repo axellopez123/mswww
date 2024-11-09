@@ -35,7 +35,7 @@ export default function MainLayout({ children }) {
       <Logoindex />
     </div>
       ) : (
-      <Box className={`z-10 h-screen flex flex-col ${visible}`}>
+      <Box className={`z-10 bg-black h-screen flex flex-col ${visible}`}>
         <div className="hidden md:block">
           <Navbear />
         </div>
