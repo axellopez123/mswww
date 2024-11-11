@@ -55,7 +55,7 @@ function IconContainer({
         ref={ref}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="rounded-full bg-green-400/70 border-2 border-white/20 border-double shadow-lg shadow-green-600 flex items-center justify-center relative px-6 py-2 hover:scale-105 transition duration-150 ease-in-out delay-50">
+        className="rounded-full bg-green-600/70 hover:bg-green-500/80 border-2 border-white/20 border-double shadow-lg shadow-green-600 hover:shadow-green-500 flex items-center justify-center relative px-6 py-2 hover:scale-105 transition duration-150 ease-in-out delay-50">
         {/* <AnimatePresence>
           {hovered && (
             <motion.div
