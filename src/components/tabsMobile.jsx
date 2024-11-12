@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import BackgroundGradient from './BackgroundGradient';
 const TabMobile = () => {
   const [activeTab, setActiveTab] = useState("home");
 
@@ -17,7 +18,9 @@ const TabMobile = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 shadow-2xl">
-      <div className='border flex justify-around  backdrop-blur-xl bg-white/10 border-white/20 p-3'>
+          <BackgroundGradient>
+
+      <div className='flex justify-around  backdrop-blur-xl bg-white/10 border-white/20 p-3'>
       {tabs.map((tab) => (
         <TabItem
           key={tab.id}
@@ -27,6 +30,7 @@ const TabMobile = () => {
         />
       ))}
       </div>
+      </BackgroundGradient>
     </div>
   );
 };

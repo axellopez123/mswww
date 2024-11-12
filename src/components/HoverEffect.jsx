@@ -2,6 +2,7 @@ import { cn } from "../lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import EvervaultCard from "./EvervaultCard";
+import BackgroundGradient from "./BackgroundGradient";
 export default function HoverEffect ({
   items,
   className
@@ -10,7 +11,7 @@ export default function HoverEffect ({
 
   return (
     (<div
-      className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  py-16 gap-8 px-56", className)}>
+      className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  py-16 gap-8 md:px-10", className)}>
       {items.map((item, idx) => (
         <a
           href={item?.link}
@@ -52,15 +53,19 @@ const Card = ({
   item
 }) => {
   return (
-    (<div
+    (
+      <BackgroundGradient>
+    <div
       className={cn(
-        "rounded-2xl h-full w-full p-4 overflow-hidden bg-green-700/50 border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
+        "rounded-2xl h-full w-full overflow-hidden bg-green-700/50 border-2 border-white/20 border-double shadow-lg shadow-green-600 relative z-20",
         className
       )}>
       <div className="relative z-50">
         <EvervaultCard text={title} item={item} />
       </div>
-    </div>)
+    </div>
+    </BackgroundGradient>
+  )
   );
 };
 const CardTitle = ({

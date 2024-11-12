@@ -4,7 +4,7 @@ import { HoveredLink, Menu, MenuItem, ProductItem } from "./Menu";
 import { cn } from "../lib/utils";
 import FloatingDock from "./FloatingDock";
 import ThemeToggleButton from "./ThemeToggleButton";
-
+import BackgroundGradient from "./BackgroundGradient";
 export function Navbear() {
   const [active, setActive] = useState(null);
    
@@ -86,7 +86,7 @@ function Navbar({ className, active, setActive, links }) {
     <div
       className={cn("fixed top-10 inset-x-0 w-11/12 mx-auto z-50", className)}
     >
-      
+    <BackgroundGradient>
       <Menu setActive={setActive}>
           <div id="logo" className="flex items-center">
 <p className="font-[helvetica] font-bold stroke-neutral-200 dark:stroke-neutral-800 fill-transparent text-4xl">MSWWW</p>
@@ -95,6 +95,7 @@ function Navbar({ className, active, setActive, links }) {
         <FloatingDock items={links} />
           </div>
       </Menu>
+    </BackgroundGradient>
     </div>
   );
 }

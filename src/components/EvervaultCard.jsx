@@ -11,8 +11,8 @@ export default function EvervaultCard ({
 }) {
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
-
-  const [randomString, setRandomString] = useState([]);
+  const icons =  generateRandomString(1500);
+  const [randomString, setRandomString] = useState(icons);
 
   useEffect(() => {
     let str = generateRandomString(1500);
@@ -35,14 +35,14 @@ export default function EvervaultCard ({
   return (
     (<div
       className={cn(
-        "p-0.5  bg-transparent aspect-square  flex items-center justify-center w-full h-full relative",
+        "bg-transparent aspect-square  flex items-center justify-center w-full h-full relative",
         className
       )}>
       <div
         onMouseMove={onMouseMove}
-        className="group/card rounded-3xl w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full">
+        className="group/card w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full">
         <CardPattern mouseX={mouseX} mouseY={mouseY} randomString={randomString} />
-        <div className="relative z-10 flex items-center justify-center w-full h-full">
+        <div className="relative z-10 flex items-center justify-center w-full h-full p-16">
           <div
             className="relative h-11/12 w-full  rounded-full flex items-center justify-center">
             <div
@@ -71,10 +71,10 @@ function CardPattern({
       <div
         className="absolute inset-0 rounded-2xl  [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
       <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500 to-blue-700 opacity-0  group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
+        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500 to-blue-700  group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
         style={style} />
       <motion.div
-        className="absolute inset-0 rounded-2xl opacity-0 mix-blend-overlay  group-hover/card:opacity-100"
+        className="absolute inset-0 rounded-2xl mix-blend-overlay group-hover/card:opacity-100"
         style={style}>
         <span
           className="absolute inset-x-0 text-3xl h-full break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500">
