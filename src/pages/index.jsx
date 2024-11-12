@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import GridComponent from "../components/GridComponent";
 import HoverEffect from "../components/HoverEffect";
+import { Contact } from "../components/Contact";
 export default function Home() {
   useEffect(() => {
 
@@ -53,6 +54,7 @@ export default function Home() {
       
         <GridComponent />
         <HoverEffect items={projects}/>
+        <Contact/>
       </div>
   );
 }
