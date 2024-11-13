@@ -94,7 +94,7 @@ function Navbar({ className, active, setActive, links }) {
           <div id="logo" className="flex items-center">
 <p className="font-[helvetica] font-bold stroke-neutral-200 dark:stroke-neutral-800 fill-transparent text-4xl">MSWWW</p>
           </div>
-          <div id="menu" className="pr-16">
+          <div id="menu" className="">
         <FloatingDock items={links} />
           </div>
       </Menu>

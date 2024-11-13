@@ -33,12 +33,12 @@ const FloatingDockDesktop = ({
         
 
       {items.map((item) => (
-        <IconContainer mouseX={mouseX} key={item.title} {...item} />
+        <IconContainer mouseX={mouseX} key={item.title} effect={true} {...item} />
       ))}
       <div className="mb-1">
       <ThemeToggleButton/>
       </div>
-      <IconContainer mouseX={mouseX} key="Pide Info" title="Info" icon={<h4 className="text-xl font-bold text-black dark:text-white">❓</h4>} emoji={<h4 className="text-xl font-bold text-black dark:text-white px-1">❓</h4>}/>
+      <IconContainer mouseX={mouseX} key="Pide Info" title="Info" icon={<h4 className="text-xl font-bold text-black dark:text-white">❓</h4>} emoji={<h4 className="text-xl font-bold text-black dark:text-white px-1">❓</h4>} effect={false}/>
     </motion.div>)
   );
 };
@@ -48,7 +48,8 @@ function IconContainer({
   title,
   icon,
   href,
-  emoji
+  emoji,
+  effect,
 }) {
   let ref = useRef(null);
 
@@ -76,8 +77,10 @@ function IconContainer({
         </AnimatePresence> */}
         <motion.div
           className="flex items-center justify-center cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-shadow text-xl font-extrabold">
-            {hovered && <TypewriterEffect words={[{text: title}]} className="inline text-white" />}
+            {hovered && effect && <TypewriterEffect words={[{text: title}]} className="inline text-white" />}
+            {!effect && title}
           {emoji}
+          {icon}
         </motion.div>
       </motion.div>
     </a>)
