@@ -51,25 +51,6 @@ export default function MainLayout({ children }) {
       </Box>
 
     </DrawerProvider>
-    /*
-    <DrawerProvider>
 
-      <Box className={`${fadeOut ? 'fade-out' : ''} ${showFirstDiv ? 'block' : 'hidden'}`}>
-        <Logoindex />
-      </Box>
-
-      <Box className={` h-screen flex flex-col ${visible} ${showFirstDiv ? 'hidden' : 'block'}`}>
-        <div className="hidden md:block">
-          <Navbear />
-        </div>
-        <Sidebar />
-        <main>{children}</main>
-        <div className="block md:hidden">
-          <TabMobile />
-        </div>
-        <Sidebar />
-      </Box>
-
-    </DrawerProvider>*/
   );
 }
