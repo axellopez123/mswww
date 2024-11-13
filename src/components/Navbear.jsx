@@ -4,7 +4,7 @@ import { HoveredLink, Menu, MenuItem, ProductItem } from "./Menu";
 import { cn } from "../lib/utils";
 import FloatingDock from "./FloatingDock";
 import ThemeToggleButton from "./ThemeToggleButton";
-
+import BackgroundGradient from "./BackgroundGradient";
 export function Navbear() {
   const [active, setActive] = useState(null);
    
@@ -12,7 +12,7 @@ export function Navbear() {
     {
       title: "Home",
       icon: (
-        <MenuItem setActive={setActive} active={active} item="Joyitas">
+        <MenuItem setActive={setActive} active={active} item="Joyitas💎">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/web-dev">Web Development</HoveredLink>
             <HoveredLink href="/interface-design">Interface Design</HoveredLink>
@@ -26,7 +26,7 @@ export function Navbear() {
     {
       title: "Products",
       icon: (
-        <MenuItem setActive={setActive} active={active} item="Servicios">
+        <MenuItem setActive={setActive} active={active} item="Servicios✨">
           <div className="  text-sm grid grid-cols-2 gap-10 p-4">
             <ProductItem
               title="Algochurn"
@@ -60,22 +60,13 @@ export function Navbear() {
     {
       title: "Aceternity UI",
       icon: (
-        <MenuItem setActive={setActive} active={active} item="Contacto">
+        <MenuItem setActive={setActive} active={active} item="Contacto☎">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/hobby">Hobby</HoveredLink>
             <HoveredLink href="/individual">Individual</HoveredLink>
             <HoveredLink href="/team">Team</HoveredLink>
             <HoveredLink href="/enterprise">Enterprise</HoveredLink>
           </div>
-        </MenuItem>
-      ),
-      href: "#",
-    },
-    {
-      title:"Theme",
-      icon: (
-        <MenuItem setActive={setActive} active={active} item={<ThemeToggleButton />}>
-        
         </MenuItem>
       ),
       href: "#",
@@ -95,7 +86,7 @@ function Navbar({ className, active, setActive, links }) {
     <div
       className={cn("fixed top-10 inset-x-0 w-11/12 mx-auto z-50", className)}
     >
-      
+    <BackgroundGradient>
       <Menu setActive={setActive}>
           <div id="logo" className="flex items-center">
 <p className="font-[helvetica] font-bold stroke-neutral-200 dark:stroke-neutral-800 fill-transparent text-4xl">MSWWW</p>
@@ -104,6 +95,7 @@ function Navbar({ className, active, setActive, links }) {
         <FloatingDock items={links} />
           </div>
       </Menu>
+    </BackgroundGradient>
     </div>
   );
 }

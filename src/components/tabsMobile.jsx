@@ -2,16 +2,14 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-
+import BackgroundGradient from './BackgroundGradient';
 const TabMobile = () => {
   const [activeTab, setActiveTab] = useState("home");
 
   const tabs = [
-    { id: "home", icon: "a", label: "Home" },
-    { id: "search", icon: "a", label: "Search" },
-    { id: "notifications", icon: "a", label: "Notifications" },
-    { id: "settings", icon: "a", label: "Settings" },
-    { id: "profile", icon: "a", label: "Profile" },
+    { id: "servicios", icon: <i class='bx bx-cloud-drizzle'></i>, label: "Servicios" },
+    { id: "joyitas", icon: <i class='bx bxl-sketch'></i>, label: "Joyitas" },
+    { id: "contacto", icon: <i class='bx bxs-message'></i>, label: "Contacto" },
   ];
 
   const handleTabClick = (tabId) => {
@@ -19,7 +17,10 @@ const TabMobile = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 flex justify-around bg-gray-800 py-2">
+    <div className="fixed bottom-0 left-0 right-0 shadow-2xl">
+          <BackgroundGradient>
+
+      <div className='flex justify-around  backdrop-blur-xl bg-white/10 border-white/20 p-3'>
       {tabs.map((tab) => (
         <TabItem
           key={tab.id}
@@ -28,6 +29,8 @@ const TabMobile = () => {
           onClick={() => handleTabClick(tab.id)}
         />
       ))}
+      </div>
+      </BackgroundGradient>
     </div>
   );
 };
@@ -47,12 +50,12 @@ const TabItem = ({ tab, isActive, onClick }) => {
       }}
     >
       <motion.div
-        className={`p-3 rounded-full ${isActive ? "bg-yellow-500" : "bg-gray-700"}`}
+        className={`px-3 pt-3 pb-1 z-10 text-3xl rounded-full ${isActive ? "bg-green-500/70 border-2 border-white/20 border-double shadow-lg shadow-green-600" : "bg-blue-500/80 border-2 border-white/20 border-double shadow-lg shadow-blue-500"}`}
         style={{ scale: isActive ? 1.2 : 1 }}
       >
         {tab.icon}
       </motion.div>
-      <span className={`mt-1 text-xs ${isActive ? "font-bold" : ""}`}>
+      <span className={`antialiased mt-3 text-sm z-40 font-bold ${isActive ? "font-extrabold" : ""}`}>
         {tab.label}
       </span>
     </motion.div>

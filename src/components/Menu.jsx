@@ -21,7 +21,7 @@ function MenuItem ({
     (<div onMouseEnter={() => setActive(item)} className="relative">
       <motion.div
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-xl font-extrabold">
+        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-shadow text-xl font-extrabold">
         {item}
       </motion.div>
       {active !== null && (

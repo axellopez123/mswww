@@ -63,12 +63,10 @@ function Header ()  {
     (<VortexProps
       className=" rounded p-6  w-1/2  md:w-5/6 "  >
       <h1 className="sm:text-5xl xs:text-xl md:text-8xl font-bold dark:text-white">
-        The Ultimate <br /> development studio
+        Impulsa tu empresa <br /> a otro nivel
       </h1>
-      <p className="max-w-2xl text-base md:text-4xl mt-8 dark:text-neutral-200">
-        We build beautiful products with the latest technologies and frameworks.
-        We are a team of passionate developers and designers that love to build
-        amazing products.
+      <p className="max-w-3xl text-base md:text-4xl mt-8 dark:text-neutral-200">
+      Destaca en el mercado digital, confiando en nuestros expertos para llevar tu empresa al nivel que siempre has deseado. 
       </p>
     </VortexProps>)
   );
