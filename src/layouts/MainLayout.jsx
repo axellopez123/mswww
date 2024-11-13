@@ -8,6 +8,8 @@ import Logoindex from "../components/Logoindex";
 import './MainLayout.css'; // Optional: add styles for layout
 import { Navbear } from '../components/Navbear';
 import TabMobile from '../components/tabsMobile';
+import { VortexProps } from '../components/VortexProps';
+
 export default function MainLayout({ children }) {
   const [visible, setVisisble] = useState("invisible");
   const [showFirstDiv, setShowFirstDiv] = useState(true);
@@ -28,24 +30,44 @@ export default function MainLayout({ children }) {
   }, []);
 
   return (
-    <DrawerProvider>
-      {showFirstDiv ? (
-      <div className={fadeOut ? 'fade-out' : ''}>
-      <Logoindex />
-    </div>
-      ) : (
-      <Box className={`z-10 h-screen flex flex-col ${visible}`}>
+<DrawerProvider>
+
+      <Box className={`${fadeOut ? 'fade-out' : ''} ${showFirstDiv ? 'block' : 'hidden'}`}>
+        <Logoindex />
+      </Box>
+
+      <Box className={` h-screen flex flex-col ${visible} ${showFirstDiv ? 'hidden' : 'block'}`}>
         <div className="hidden md:block">
           <Navbear />
         </div>
         <Sidebar />
         <main>{children}</main>
         <div className="block md:hidden">
-          <TabMobile/>
+          <TabMobile />
         </div>
         <Sidebar />
       </Box>
-      )}
+
     </DrawerProvider>
+    /*
+    <DrawerProvider>
+
+      <Box className={`${fadeOut ? 'fade-out' : ''} ${showFirstDiv ? 'block' : 'hidden'}`}>
+        <Logoindex />
+      </Box>
+
+      <Box className={` h-screen flex flex-col ${visible} ${showFirstDiv ? 'hidden' : 'block'}`}>
+        <div className="hidden md:block">
+          <Navbear />
+        </div>
+        <Sidebar />
+        <main>{children}</main>
+        <div className="block md:hidden">
+          <TabMobile />
+        </div>
+        <Sidebar />
+      </Box>
+
+    </DrawerProvider>*/
   );
 }

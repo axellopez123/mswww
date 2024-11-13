@@ -67,7 +67,7 @@ function VortexProps ({
   return (
     (<div
       className={cn(
-        "relative flex items-center justify-center h-screen w-screen  overflow-hidden ",
+        "relative flex items-center justify-center h-screen w-screen  overflow-hidden dark:bg-black",
         containerClassName
       )}>
       <svg className="hidden">

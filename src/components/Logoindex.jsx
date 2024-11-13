@@ -4,6 +4,6 @@ import Holag from '../components/Holag';
 
 export default function Logoindex() {
     return (
-        <Holag />
+        <Holag/>
     );
 }
