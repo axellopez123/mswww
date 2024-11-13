@@ -2,6 +2,9 @@ import { cn } from "../lib/utils";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import ThemeToggleButton from "./ThemeToggleButton";
+import { MenuItem } from "./Menu";
+import { TypewriterEffect, TypewriterEffectSmooth } from "./TypewriterEffect";
+
 export default function FloatingDock ({
   items,
   desktopClassName,
@@ -24,15 +27,18 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden md:flex h-16 gap-10 items-end rounded-2xl px-4 pb-3",
+        "mx-auto hidden md:flex h-16 gap-10 items-end rounded-2xl px-4 pb-2",
         className
       )}>
+        
+
       {items.map((item) => (
         <IconContainer mouseX={mouseX} key={item.title} {...item} />
       ))}
       <div className="mb-1">
       <ThemeToggleButton/>
       </div>
+      <IconContainer mouseX={mouseX} key="Pide Info" title="Info" icon={<h4 className="text-xl font-bold text-black dark:text-white">❓</h4>} emoji={<h4 className="text-xl font-bold text-black dark:text-white px-1">❓</h4>}/>
     </motion.div>)
   );
 };
@@ -41,7 +47,8 @@ function IconContainer({
   mouseX,
   title,
   icon,
-  href
+  href,
+  emoji
 }) {
   let ref = useRef(null);
 
@@ -55,7 +62,7 @@ function IconContainer({
         ref={ref}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="rounded-full bg-green-600/70 hover:bg-green-500/80 border-2 border-white/20 border-double shadow-lg shadow-green-600 hover:shadow-green-500 flex items-center justify-center relative px-6 py-2 hover:scale-105 transition duration-150 ease-in-out delay-50">
+        className="rounded-full bg-green-600/70 hover:bg-green-500/80 border-2 border-white/20 border-double shadow-lg shadow-green-600 hover:shadow-green-500 flex items-center justify-center relative px-3 py-3 hover:scale-105 transition duration-150 ease-in-out delay-50">
         {/* <AnimatePresence>
           {hovered && (
             <motion.div
@@ -68,8 +75,9 @@ function IconContainer({
           )}
         </AnimatePresence> */}
         <motion.div
-          className="flex items-center justify-center">
-          {icon}
+          className="flex items-center justify-center cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-shadow text-xl font-extrabold">
+            {hovered && <TypewriterEffect words={[{text: title}]} className="inline text-white" />}
+          {emoji}
         </motion.div>
       </motion.div>
     </a>)

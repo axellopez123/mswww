@@ -4,11 +4,11 @@ import { cn } from "../lib/utils";
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { useEffect } from "react";
 
-export const TypewriterEffect = ({
+function TypewriterEffect ({
   words,
   className,
   cursorClassName
-}) => {
+}) {
   // split text inside of words into array of characters
   const wordsArray = words.map((word) => {
     return {
@@ -27,7 +27,7 @@ export const TypewriterEffect = ({
         width: "fit-content",
       }, {
         duration: 0.3,
-        delay: stagger(0.1),
+        delay: stagger(0.05),
         ease: "easeInOut",
       });
     }
@@ -56,7 +56,7 @@ export const TypewriterEffect = ({
   return (
     (<div
       className={cn(
-        "text-base sm:text-2xl md:text-5xl lg:text-7xl font-bold text-center",
+        "",
         className
       )}>
       {renderWords()}
@@ -73,14 +73,14 @@ export const TypewriterEffect = ({
           repeatType: "reverse",
         }}
         className={cn(
-          "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-blue-500",
+          "inline-block rounded-sm w-[4px] h-full bg-red-500",
           cursorClassName
         )}></motion.span>
     </div>)
   );
 };
 
-export default function TypewriterEffectSmooth  ({
+function TypewriterEffectSmooth ({
   words,
   className,
   cursorClassName
@@ -155,3 +155,5 @@ export default function TypewriterEffectSmooth  ({
     </div>)
   );
 };
+
+export{TypewriterEffect, TypewriterEffectSmooth}
