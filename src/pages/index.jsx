@@ -50,7 +50,7 @@ export default function Home() {
     },
   ];
   return (
-    <div>
+    <div className="bg-white dark:bg-black">
       
         <GridComponent />
         <HoverEffect items={projects}/>

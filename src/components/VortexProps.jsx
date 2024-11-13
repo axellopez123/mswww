@@ -141,6 +141,7 @@ function VortexProps ({
             )}></div>
         )}
       </div>
+      <span class="absolute bottom-0 left-0 w-full h-16 blur-2xl bg-transparent shadow-2xl shadow-zinc-800"></span>
     </div>)
   );
 };

@@ -22,7 +22,7 @@ export default function HoverEffect ({
           <AnimatePresence>
             {hoveredIndex === idx && (
               <motion.span
-                className="absolute inset-0 h-full w-full block  rounded-3xl"
+                className="absolute inset-0 h-full w-full block  rounded-3xl bg-green-700/50"
                 layoutId="hoverBackground"
                 initial={{ opacity: 0 }}
                 animate={{

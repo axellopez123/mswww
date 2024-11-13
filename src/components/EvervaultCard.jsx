@@ -48,8 +48,8 @@ export default function EvervaultCard ({
             <div
               className="absolute w-full h-full bg-green-300/[0.8] dark:bg-black/[0.8] blur-sm rounded-full" />
               <div className="absolute">
-                <p className="dark:text-white text-black text-center text-5xl font-extrabold antialiased z-20">{text}</p>
-                <p className="dark:text-white text-black text-center text-lg font-bold z-20">{item.description}</p>
+                <p className="dark:text-stone-800/90 text-center text-5xl font-extrabold antialiased z-20">{text}</p>
+                <p className="dark:text-stone-800/90 text-center text-2xl font-extrabold z-20">{item.description}</p>
               </div>
           </div>
         </div>
