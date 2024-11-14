@@ -15,14 +15,15 @@ function MenuItem ({
   setActive,
   active,
   item,
-  children
+  children,
+  emoji,
 }) {
   return (
     (<div onMouseEnter={() => setActive(item)} className="relative">
       <motion.div
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-shadow text-xl font-extrabold">
-        {item}
+        {emoji}
       </motion.div>
       {active !== null && (
         <motion.div
@@ -60,7 +61,7 @@ function Menu ({
     (<nav
       // resets the state
       onMouseLeave={() => setActive(null)}
-      className="relative border dark:border-white/[0.2] backdrop-blur-xl bg-white/30 border-white/20 rounded-xl p-6 shadow-lg flex justify-between space-x-4 px-8 py-2">
+      className="relative border dark:border-white/[0.2] bg-white/30 border-white/20 rounded-xl p-6 shadow-lg flex justify-between space-x-4 px-8 py-2">
       {children}
     </nav>)
   );

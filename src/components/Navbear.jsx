@@ -12,7 +12,7 @@ export function Navbear() {
     {
       title: "Joyitas",
       icon: (
-        <MenuItem setActive={setActive} active={active} item="Joyitas">
+        <MenuItem setActive={setActive} active={active} item="Joyitas" emoji="💎">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/web-dev">Web Development</HoveredLink>
             <HoveredLink href="/interface-design">Interface Design</HoveredLink>
@@ -27,7 +27,7 @@ export function Navbear() {
     {
       title: "Servicios",
       icon: (
-        <MenuItem setActive={setActive} active={active} item="Servicios">
+        <MenuItem setActive={setActive} active={active} item="Servicios" emoji="✨">
           <div className="  text-sm grid grid-cols-2 gap-10 p-4">
             <ProductItem
               title="Algochurn"
@@ -62,7 +62,7 @@ export function Navbear() {
     {
       title: "Contacto",
       icon: (
-        <MenuItem setActive={setActive} active={active} item="Contacto">
+        <MenuItem setActive={setActive} active={active} item="Contacto" emoji="☎">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/hobby">Hobby</HoveredLink>
             <HoveredLink href="/individual">Individual</HoveredLink>
