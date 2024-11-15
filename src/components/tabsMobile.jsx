@@ -9,7 +9,7 @@ const TabMobile = () => {
   const tabs = [
     { id: "servicios", icon: "✨", label: "Servicios" },
     { id: "joyitas", icon: "💎", label: "Joyitas" },
-    { id: "contacto", icon: "☎", label: "Contacto" },
+    { id: "contacto", icon: "📞", label: "Contacto" },
   ];
 
   const handleTabClick = (tabId) => {
@@ -50,7 +50,7 @@ const TabItem = ({ tab, isActive, onClick }) => {
       }}
     >
       <motion.div
-        className={`px-3 py-4 z-10 text-3xl rounded-full ${isActive ? "bg-green-500/70 border-2 border-white/20 border-double shadow-lg shadow-green-600" : "bg-blue-500/80 border-2 border-white/20 border-double shadow-lg shadow-blue-500"}`}
+        className={`px-4 py-4 z-10 text-3xl rounded-full ${isActive ? "bg-green-500/70 border-2 border-white/20 border-double shadow-lg shadow-green-600" : "bg-blue-500/80 border-2 border-white/20 border-double shadow-lg shadow-blue-500"}`}
         style={{ scale: isActive ? 1.2 : 1 }}
       >
         {tab.icon}
