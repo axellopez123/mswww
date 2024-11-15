@@ -21,6 +21,7 @@ export function Contact() {
   return (
     <div className="flex flex-col md:flex-row w-full h-full dark:bg-black">
       <div className="flex-1">
+        <div className="px-6"><p className="text-xl font-extrabold">Un par de papus invocados por el destino para ayudar botsitos</p></div>
         <div className="flex flex-col md:flex-row h-full">
           <div className="w-full h-full flex items-center">
             <div className="flex-1 flex flex-col items-center">
@@ -31,9 +32,14 @@ export function Contact() {
                       src={Avatar}
                       height="1000"
                       width="1000"
-                      className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl hover_scale-105"
+                      className="h-60 w-full object-cover rounded-full md:rounded-xl group-hover/card:shadow-xl hover_scale-105"
                       alt="thumbnail"
                     />
+                  </CardItem>
+                  <CardItem translateZ="100" className="w-full mt-4">
+                    <p className="text-center text-3xl">Rodolfo Rodriguez</p>
+                    <p className="text-center text-lg">Master del codigo</p>
+                    <p className="text-center">Since 2015</p>
                   </CardItem>
                 </CardBody>
               </CardContainer>
@@ -46,9 +52,14 @@ export function Contact() {
                       src={Avatar}
                       height="1000"
                       width="1000"
-                      className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl hover:scale-105"
+                      className="h-60 w-full object-cover rounded-full md:rounded-xl group-hover/card:shadow-xl hover:scale-105"
                       alt="thumbnail"
                     />
+                  </CardItem>
+                  <CardItem translateZ="100" className="w-full mt-4">
+                    <p className="text-center text-3xl">Axel<br/> López</p>
+                    <p className="text-center text-lg">Master del codigo</p>
+                    <p className="text-center">Since 2015</p>
                   </CardItem>
                 </CardBody>
               </CardContainer>
@@ -56,9 +67,9 @@ export function Contact() {
           </div>
         </div>
       </div>
-      <div className="flex-none bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-full w-[3px]" />
+      <div className="my-3 flex-none bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent md:my-8 h-1 w-full md:h-full md:w-[3px]" />
       <div className="flex-1 w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-transparent dark:bg-black">
-        <form className="my-8" onSubmit={handleSubmit}>
+        <form className="" onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
             <LabelInputContainer>
               <Label htmlFor="firstname">Nombre</Label>
