@@ -92,8 +92,8 @@ function Navbar({ className, active, setActive, links }) {
     >
     <div>
       <Menu setActive={setActive}>
-          <div id="logo" className="flex items-center">
-            <p className="font-[helvetica] font-bold stroke-neutral-200 dark:stroke-neutral-800 fill-transparent text-black dark:text-white text-4xl">ARWAX</p>
+          <div id="logo" className="flex items-center backdrop-blur-lg px-5 rounded-2xl">
+            <p className="font-[helvetica] font-bold stroke-neutral-200 dark:stroke-neutral-800 fill-transparent dark:text-white text-black  text-4xl">ARWAX</p>
             
           </div>
           <div id="menu" className="">
