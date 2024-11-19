@@ -43,11 +43,11 @@ export default function Logo ({
           r="25%">
           {hovered && (
             <>
-              <stop offset="0%" stopColor={"#A02334"} />
-              <stop offset="25%" stopColor={"#FEEC37"} />
-              <stop offset="50%" stopColor={"#FF8F00"} />
-              <stop offset="75%" stopColor={"#FF0000"} />
-              <stop offset="100%" stopColor={"#15F5BA"} />
+              <stop offset="0%" stopColor={"#00ccb1"} />
+              <stop offset="25%" stopColor={"#7b61ff"} />
+              <stop offset="50%" stopColor={"#ffc414"} />
+              <stop offset="75%" stopColor={"#1ca0fb"} />
+              <stop offset="100%" stopColor={"#141316"} />
             </>
           )}
         </linearGradient>
@@ -88,7 +88,7 @@ export default function Logo ({
         dominantBaseline="middle"
         strokeWidth="2.3"
         
-        className="font-[helvetica] font-bold text-7xl  stroke-neutral-200 dark:stroke-neutral-800 "
+        className="font-[helvetica] font-bold text-7xl  stroke-neutral-200"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,

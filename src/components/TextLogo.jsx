@@ -28,7 +28,7 @@ export default function TextLogo ({
           return (
             (<motion.span
               key={word + idx}
-              className="dark:text-black text-neutral-700 opacity-0  "
+              className="dark:text-black text-white-700 opacity-0  "
               style={{
                 filter: filter ? "blur(10px)" : "none",
               }}>
@@ -44,7 +44,7 @@ export default function TextLogo ({
     (<div className={cn("font-bold", className)}>
       <div className="mt-4">
         <div
-          className=" dark:text-black text-neutral-700 text-6xl leading-snug tracking-wide">
+          className=" dark:text-white text-neutral-700 text-4xl md:text-6xl leading-snug text-center tracking-wide">
           {renderWords()}
         </div>
       </div>

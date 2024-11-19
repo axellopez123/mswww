@@ -28,7 +28,7 @@ function HeroParallax({
       ref={ref}
       className=" h-[250vh] top-0 py-0 overflow-hidden  antialiased relative 
       flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]">
-      <div className="flex items-center justify-center h-screem w-screem ">
+      <div className="flex items-center justify-center h-screem w-screem w-screen">
       <Header /></div>  
       <motion.div
         style={{
@@ -61,11 +61,11 @@ function HeroParallax({
 function Header ()  {
   return (
     (<VortexProps
-      className=" rounded p-6  w-1/2  md:w-5/6 "  >
-      <h1 className="sm:text-5xl xs:text-xl md:text-8xl font-bold dark:text-white">
+      className=" rounded md:p-6 w-11/12"  >
+      <h1 className="text-5xl md:text-8xl font-bold dark:text-white">
         Impulsa tu empresa <br /> a otro nivel
       </h1>
-      <p className="max-w-3xl text-base md:text-4xl mt-8 dark:text-neutral-200">
+      <p className="max-w-3xl text-base text-xl md:text-4xl mt-8 dark:text-neutral-200 font-bold">
       Destaca en el mercado digital, confiando en nuestros expertos para llevar tu empresa al nivel que siempre has deseado. 
       </p>
     </VortexProps>)

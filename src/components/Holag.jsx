@@ -11,9 +11,9 @@ export default function Holag() {
     return (
         <VortexProps className="w-full h-full ">
             <div className="w-full h-full rounded-[22px] flex justify-center items-center">
-                <div className="w-2/4">
-                    <Logo className="text-black dark:text-white " text="MSW" />
-                    <TextLogo words={words} className="flex justify-center items-center " />
+                <div className="w-screen px-4 md:px-0 md:w-2/4">
+                    <Logo className="text-white " text="ARWAX" />
+                    <TextLogo words={words} className="flex justify-center items-center" />
                 </div>
             </div>
         </VortexProps>
