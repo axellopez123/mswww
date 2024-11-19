@@ -19,7 +19,7 @@ export function Contact() {
     console.log("Form submitted");
   };
   return (
-    <div className="flex flex-col md:flex-row w-full h-full dark:bg-black">
+    <div className=" flex flex-col md:flex-row w-full h-full dark:bg-black mt-16">
       <div className="flex-1">
         <div className="flex flex-col md:flex-row h-full">
           <div className="w-full h-full flex items-center">
