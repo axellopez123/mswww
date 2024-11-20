@@ -1,6 +1,5 @@
 // src/layouts/MainLayout.jsx
 import React, { useEffect, useState } from 'react';
-import { DrawerProvider } from '../contexts/DrawerContext';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Box from "@mui/material/Box";
@@ -31,8 +30,7 @@ export default function MainLayout({ children }) {
   }, []);
 
   return (
-<DrawerProvider>
-
+<>
       <Box className={`${fadeOut ? 'fade-out' : ''} ${showFirstDiv ? 'block' : 'hidden'}`}>
         <Logoindex />
       </Box>
@@ -49,8 +47,7 @@ export default function MainLayout({ children }) {
         </div>
         <Sidebar />
       </Box>
-
-    </DrawerProvider>
+</>
 
   );
 }

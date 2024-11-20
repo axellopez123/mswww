@@ -2,7 +2,7 @@
 import React from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { VortexProps } from "./VortexProps";
-
+import { useDrawerContext } from "../contexts/DrawerContext";
 function HeroParallax({
   products
 }) {
@@ -76,6 +76,11 @@ function ProductCard ({
   product,
   translate
 }) {
+  const { trackEvent } = useDrawerContext();
+
+  const handleClick = () => {
+    trackEvent({ type: "click", target: "Promo Banner" });
+  };
   return (
     (<motion.div
       style={{
@@ -86,14 +91,14 @@ function ProductCard ({
       }}
       key={product.title}
       className="group/product h-96 w-[30rem] relative flex-shrink-0 py-40">
-      <a href={product.link} className="block group-hover/product:shadow-2xl ">
+      <div onClick={handleClick} className="block group-hover/product:shadow-2xl ">
         <img
           src={product.thumbnail}
           height="600"
           width="600"
           className="object-cover object-left-top absolute h-full w-full inset-0"
           alt={product.title} />
-      </a>
+      </div>
       <div
         className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none "></div>
       <h2
