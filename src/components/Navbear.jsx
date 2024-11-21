@@ -88,7 +88,7 @@ export function Navbear() {
 function Navbar({ className, active, setActive, links }) {
   return (
     <div
-      className={cn("fixed top-10 inset-x-0 w-11/12 mx-auto z-50", className)}
+      className={cn("fixed top-10 inset-x-0 w-11/12 mx-auto backdrop-blur-lg z-50", className)}
     >
     <div>
       <Menu setActive={setActive}>

@@ -5,6 +5,8 @@ import { Label } from "./Label";
 import { cn } from "../lib/utils";
 import { TextArea } from "./TextArea";
 import Avatar from "../img/avatar-dev.png";
+import img_r from "../img/rodo.webp"
+import img_a from "../img/papuAlexwebp.webp"
 import "./Contact.css";
 import { CardBody, CardContainer, CardItem } from "./3DAvatar";
 import {
@@ -19,7 +21,7 @@ export function Contact() {
     console.log("Form submitted");
   };
   return (
-    <div className=" flex flex-col md:flex-row w-full h-full dark:bg-black mt-16">
+    <div className=" flex flex-col md:flex-row w-full h-full dark:bg-black mt-16 pb-16">
       <div className="flex-1">
         <div className="px-6"><p className="text-xl font-extrabold">Un par de papus invocados por el destino para ayudar botsitos</p></div>
         <div className="flex flex-col md:flex-row h-full">
@@ -29,7 +31,7 @@ export function Contact() {
                 <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-white rounded-xl">
                   <CardItem translateZ="100" className="w-full mt-4 flex justify-center">
                     <img
-                      src={Avatar}
+                      src={img_r}
                       height="1000"
                       width="1000"
                       className="h-auto w-11/12 md:w-full object-cover rounded-full md:rounded-xl group-hover/card:shadow-xl hover_scale-105"
@@ -49,7 +51,7 @@ export function Contact() {
                 <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-white rounded-xl">
                   <CardItem translateZ="100" className="w-full mt-4 flex justify-center">
                     <img
-                      src={Avatar}
+                      src={img_a}
                       height="1000"
                       width="1000"
                       className="h-auto w-11/12 md:w-full object-cover rounded-full md:rounded-xl group-hover/card:shadow-xl hover:scale-105"
@@ -76,16 +78,16 @@ export function Contact() {
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
             <LabelInputContainer>
               <Label htmlFor="firstname">Nombre</Label>
-              <Input id="firstname" placeholder="Tyler" type="text" />
+              <Input id="firstname" type="text" />
             </LabelInputContainer>
             <LabelInputContainer>
               <Label htmlFor="lastname">Apellido(s)</Label>
-              <Input id="lastname" placeholder="Durden" type="text" />
+              <Input id="lastname" type="text" />
             </LabelInputContainer>
           </div>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Correo electronico</Label>
-            <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+            <Input id="email" type="email" />
           </LabelInputContainer>
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
             <LabelInputContainer>
@@ -94,7 +96,7 @@ export function Contact() {
             </LabelInputContainer>
             <LabelInputContainer>
               <Label htmlFor="lastname">Website</Label>
-              <Input id="lastname" placeholder="Durden" type="text" />
+              <Input id="lastname"  type="text" />
             </LabelInputContainer>
           </div>
           <LabelInputContainer className="mb-4">
@@ -111,7 +113,7 @@ export function Contact() {
             className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
             type="submit"
           >
-            Pedir información &rarr;
+            Enviar &rarr;
             <BottomGradient />
           </button>
         </form>

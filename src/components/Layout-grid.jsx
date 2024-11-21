@@ -31,7 +31,7 @@ function Layout_grid({
                     <motion.a
                         href="#grid-info"
                         onClick={() => handleClick(card)}
-                        className={cn(card.className, "relative overflow-hidden ", selected?.id === card.id
+                        className={cn(card.className, "relative overflow-hidden pt-24", selected?.id === card.id
                             ? " rounded-lg cursor-pointer absolute inset-0 h- w-full md:w-11/12 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
                             : lastSelected?.id === card.id
                                 ? "z-40  rounded-xl h-full w-full"
@@ -66,15 +66,15 @@ function Layout_grid({
                         </div>
 
                         {selected?.id === card.id && <SelectedCard selected={selected} />}
-                        <ImageComponent card={card} />
+                        
                     </motion.a>
                 </div>
             ))}
             <motion.div
                 onClick={handleOutsideClick}
                 className={cn(
-                    "absolute h-full w-full left-0 top-0 bg-black opacity-0 z-10",
-                    selected?.id ? "pointer-events-auto" : "pointer-events-none"
+                    "absolute h-full w-full left-0 top-0 bg-black opacity-0 z-10 ",
+                    selected?.id ? "pointer-events-auto" : "pointer-events-none "
                 )}
                 animate={{ opacity: selected?.id ? 0.3 : 0 }} />
         </div>)
@@ -89,7 +89,6 @@ const Card = ({
     card,
     s
 }) => {
-    console.log(card)
     return (
         (
             

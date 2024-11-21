@@ -85,7 +85,13 @@ const SkeletonFour = () => {
       content: <SkeletonOne />,
       className: "md:col-span-2",
       thumbnail: "",
-      gbc: "bg-pink-500"
+      gbc: "bg-pink-500",
+      claves: [{icono: "",texto: "Identificación de procesos clave"},
+      {icono: "",texto: "Evaluación de herramientas tecnológicas"},
+      {icono: "",texto: "Integración de sistemas"},
+      {icono: "",texto: "Capacitación y adaptación"},
+      {icono: "",texto: "Monitoreo y optimización continua"},
+      {icono: "",texto: "Gestión del cambio"}]
     },
     {
       title: "Pagínas Web",
@@ -96,7 +102,13 @@ const SkeletonFour = () => {
       content: <SkeletonTwo />,
       className: "md:col-span-1",
       thumbnail: "",
-      gbc: "bg-blue-500"
+      gbc: "bg-blue-500",
+      claves: [{icono: "",texto: "Identificación de procesos clave"},
+      {icono: "",texto: "Evaluación de herramientas tecnológicas"},
+      {icono: "",texto: "Integración de sistemas"},
+      {icono: "",texto: "Capacitación y adaptación"},
+      {icono: "",texto: "Monitoreo y optimización continua"},
+      {icono: "",texto: "Gestión del cambio"}]
     },
     {
       title: "Migraciones",
@@ -107,18 +119,30 @@ const SkeletonFour = () => {
       content: <SkeletonThree />,
       className: "md:col-span-1",
       thumbnail: "",
-      gbc: "bg-red-500"
+      gbc: "bg-red-500",
+      claves: [{icono: "",texto: "Identificación de procesos clave"},
+      {icono: "",texto: "Evaluación de herramientas tecnológicas"},
+      {icono: "",texto: "Integración de sistemas"},
+      {icono: "",texto: "Capacitación y adaptación"},
+      {icono: "",texto: "Monitoreo y optimización continua"},
+      {icono: "",texto: "Gestión del cambio"}]
     },
     {
       title: "Automatizaciones",
       description:
-        "A technology company that focuses on building products that advance Facebook's mission of bringing the world closer together.",
+        "Reemplaza las tareas repetitivas, aumentando la eficiencia, reduciendo errores y liberando recursos para actividades más estratégicas. Es la clave para mantenerse competitivo en un mundo digitalizado.",
       link: "https://meta.com",
       id: 4,
       content: <SkeletonFour />,
       className: "md:col-span-2",
       thumbnail: "",
-      gbc: "bg-blue-300"
+      gbc: "bg-green-700",
+      claves: [{icono: "",texto: "Identificación de procesos clave"},
+      {icono: "",texto: "Evaluación de herramientas tecnológicas"},
+      {icono: "",texto: "Integración de sistemas"},
+      {icono: "",texto: "Capacitación y adaptación"},
+      {icono: "",texto: "Monitoreo y optimización continua"},
+      {icono: "",texto: "Gestión del cambio"}]
     },/*
     {
       title: "Amazon",
