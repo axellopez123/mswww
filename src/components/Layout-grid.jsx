@@ -59,9 +59,7 @@ function Layout_grid({
                                 )}
                             </AnimatePresence>
                             <Card title={card.title} card={card} s={selected} />
-
                         </div>
-
                         {selected?.id === card.id && <SelectedCard selected={selected} />}
                     </motion.a>
                 </div>

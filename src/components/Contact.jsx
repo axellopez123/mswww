@@ -50,18 +50,20 @@ export function Contact() {
               <CardContainer className="inter-var">
                 <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-white rounded-xl">
                   <CardItem translateZ="100" className="w-full mt-4 flex justify-center">
+                  <div className="w-72 h-72 relative rounded-xl overflow-hidden shadow-md">
+
                     <img
                       src={img_a}
                       height="1000"
                       width="1000"
-                      className="h-auto w-11/12 md:w-full object-cover rounded-full md:rounded-xl group-hover/card:shadow-xl hover:scale-105"
+                      className="object-cover w-full h-full transition-transform duration-300 group-hover/card:shadow-xl hover:scale-105"
                       alt="thumbnail"
                     />
+                    </div>
                   </CardItem>
                   <CardItem translateZ="100" className="w-full mt-4">
-                    <div className="flex flex-col md:flex-row text-center">
-                    <span className="flex-1 text-black dark:text-white text-3xl">Axel</span>
-                    <span className="flex-1 text-black dark:text-white text-3xl">López</span>
+                    <div className="text-center">
+                      <span className="text-black dark:text-white text-3xl">Axel López</span>
                     </div>
                     <p className="text-center text-black dark:text-white text-lg">Master del codigo</p>
                     <p className="text-center text-black dark:text-white">Since 2015</p>
