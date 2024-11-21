@@ -63,11 +63,6 @@ function Layout_grid({
                         </div>
 
                         {selected?.id === card.id && <SelectedCard selected={selected} />}
-<<<<<<< Updated upstream
-                        
-=======
-                        {/* <ImageComponent card={card} /> */}
->>>>>>> Stashed changes
                     </motion.a>
                 </div>
             ))}
