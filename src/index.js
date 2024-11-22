@@ -8,16 +8,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import NavigationTracker from './components/NavigationTracker';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <DrawerProvider>
-    <Router>
-    <NavigationTracker />
-
-    <App />
-    </Router>
-
-        </DrawerProvider>
-  </React.StrictMode>
+      <Router>
+        <NavigationTracker />
+        <App />
+      </Router>
+    </DrawerProvider>
 );
 
 reportWebVitals();
