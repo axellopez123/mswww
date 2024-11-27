@@ -77,7 +77,7 @@ const SkeletonFour = () => {
 
   const projects = [
     {
-      title: "Cloud Solutions",
+      title: "Cómputo en la Nube",
       description:
         "Almacena tu información en la nube y obtenla desde cualquier parte con acceso internet.",
       link: "https://stripe.com",
@@ -86,12 +86,11 @@ const SkeletonFour = () => {
       className: "md:col-span-2",
       thumbnail: "",
       gbc: "bg-pink-500",
-      claves: [{icono: "",texto: "Identificación de procesos clave"},
-      {icono: "",texto: "Evaluación de herramientas tecnológicas"},
-      {icono: "",texto: "Integración de sistemas"},
-      {icono: "",texto: "Capacitación y adaptación"},
-      {icono: "",texto: "Monitoreo y optimización continua"},
-      {icono: "",texto: "Gestión del cambio"}]
+      claves: [{icono: "",texto: "Consultoría en la nube"},
+      {icono: "",texto: "Base de datos en la nube"},
+      {icono: "",texto: "Optimización de servidores"},
+      {icono: "",texto: "Migración de servidores a la nube"},
+      {icono: "",texto: "Infraestructura con las mejores soluciones de cómputo en la nube"}]
     },
     {
       title: "Pagínas Web",

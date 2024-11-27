@@ -42,22 +42,22 @@ export default function EvervaultCard({
   return (
     (<div
       className={cn(
-        `bg-transparent aspect-square  flex items-center justify-center w-full h-64 relative `,
+        `bg-transparent aspect-square  flex items-center justify-center w-full h-64 relative`,
         className
       )}>
       <div
         onMouseMove={onMouseMove}
         className={`group/card w-full relative overflow-hidden bg-transparent flex items-center justify-center  ${s?.id ? "h-screen backdrop-blur-lg" : "h-full"} `}>
         <CardPattern mouseX={mouseX} mouseY={mouseY} randomString={randomString} s={s} />
-        <div className={`relative z-10 flex items-center justify-center w-full h-full p-16 dark:text-white hover:text-black ${s?.id ? `grid grid-cols-2 gap-4  ` : ""} `} >
+        <div className={`relative z-10 flex items-center justify-center w-full h-full p-16 dark:text-white hover:text-black ${s?.id ? `grid grid-cols-2 gap-4 ` : ""} `} >
           <div
-            className="relative h-11/12 w-full  rounded-full flex items-center justify-center">
+            className="relative h-11/12  w-full  rounded-full flex items-center justify-center">
             {s?.id ? (
-              <div className={`pt-50 mt-72`}>
-                <p className=" text-center text-5xl font-extrabold antialiased z-20">{text}</p><br/><br/>
+              <div className={`pt-50 mt-72 lg:pt-0 lg:mt-40`}>
+                <p className=" text-center lg:mt-8 text-5xl lg:text-5xl font-extrabold antialiased z-20">{text}</p><br/><br/>
                 {item.claves.map((a) => (
                   <div>
-                  <p className=" text-center text-3xl mt-4 font-semibold z-20">{a.texto}</p></div>
+                  <p className=" text-center text-3xl lg:text-2xl mt-4 font-semibold z-20">{a.texto}</p></div>
                   ))}
               </div>
             ) : (
@@ -83,10 +83,6 @@ export default function EvervaultCard({
                   <LabelInputContainer>
                     <Label htmlFor="firstname">Telefono</Label>
                     <Input id="phone" placeholder="33 777 12345" type="text" />
-                  </LabelInputContainer>
-                  <LabelInputContainer>
-                    <Label htmlFor="lastname">Website</Label>
-                    <Input id="webclient" type="text" />
                   </LabelInputContainer>
                 </div>
                 <LabelInputContainer className="mb-4">

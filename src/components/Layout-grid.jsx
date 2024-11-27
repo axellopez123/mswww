@@ -29,7 +29,7 @@ function Layout_grid({
             {cards["cards"].map((card, i) => (
                 <div key={i} className={cn(card.className, "")}>
                     <motion.a
-                        href="#grid-info"
+                        
                         onClick={() => handleClick(card)}
                         className={cn(card.className, "relative overflow-hidden pt-24", selected?.id === card.id
                             ? " rounded-lg cursor-pointer absolute inset-0 h- w-full md:w-11/12 m-auto z-50 flex justify-center items-center flex-wrap flex-col"

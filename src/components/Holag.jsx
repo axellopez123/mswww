@@ -6,7 +6,7 @@ import Logo from "./Logo";
 import { VortexProps } from "./VortexProps";
 
 export default function Holag() {
-    const words = `Optimiza tu vida`;
+    const words = `Optimiza tu negocio`;
     
     return (
         <VortexProps className="w-full h-full ">
