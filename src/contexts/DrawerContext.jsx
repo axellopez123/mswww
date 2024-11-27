@@ -1,5 +1,5 @@
 // src/contexts/DrawerContext.jsx
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 
 const DrawerContext = createContext();
 
@@ -11,11 +11,10 @@ export const DrawerProvider = ({ children }) => {
     setDrawerOpen(!isDrawerOpen);
   };
 
-  const trackEvent = (event) => {
-    console.log(event);
-    
+  const trackEvent = useCallback((event) => {
     setEvents((prev) => [...prev, { ...event, timestamp: new Date().toISOString() }]);
-  };
+  }, []);
+
 
 
   return (

@@ -4,21 +4,57 @@ import { Input } from "./Input";
 import { Label } from "./Label";
 import { cn } from "../lib/utils";
 import { TextArea } from "./TextArea";
-import Avatar from "../img/avatar-dev.png";
 import img_r from "../img/rodo.webp"
 import img_a from "../img/papuAlexwebp.webp"
 import "./Contact.css";
+import axios from "axios";
+
 import { CardBody, CardContainer, CardItem } from "./3DAvatar";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
-} from "@tabler/icons-react";
 
 export function Contact() {
-  const handleSubmit = (e) => {
+  const getClientIP = async () => {
+    const response = await fetch("https://api.ipify.org?format=json");
+    const data = await response.json();
+    return data.ip;
+  };
+  
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
+
+    const url = "http://localhost:8000/api/bots/";
+  
+    const data = {
+      ip_address: getClientIP(),
+      events: {
+        page_views: [
+          { page: "/home", time_spent: 60 },
+          { page: "/products", time_spent: 45 },
+        ],
+        clicks: [
+          { button: "subscribe", timestamp: "2024-11-21T10:00:00Z" },
+        ],
+      },
+      name: "John Doe",
+      phone: "1234567890",
+      website: "https://example.com",
+      message: "Interesado en su servicio",
+      email: "johndoe@example.com",
+      user_agent: navigator.userAgent,
+      referrer: document.referrer,
+      session_duration: 300,
+    };
+  
+    try {
+      const response = await axios.post(url, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("Datos enviados exitosamente:", response.data);
+    } catch (error) {
+      console.error("Error al enviar datos:", error.response?.data || error.message);
+    }
   };
   return (
     <div className=" flex flex-col md:flex-row w-full h-full dark:bg-black mt-16 pb-16">
@@ -28,15 +64,18 @@ export function Contact() {
           <div className="w-full h-full flex items-center">
             <div className="flex-1 flex flex-col items-center">
               <CardContainer className="inter-var">
-                <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-white rounded-xl">
-                  <CardItem translateZ="100" className="w-full mt-4 flex justify-center">
+                <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-gray-600 dark:shadow-white rounded-xl">
+                  <CardItem translateZ="100" className="w-full flex justify-center">
+                  <div className="md:w-72 md:h-72 relative rounded-xl overflow-hidden shadow-md">
+
                     <img
                       src={img_r}
                       height="1000"
                       width="1000"
-                      className="h-auto w-11/12 md:w-full object-cover rounded-full md:rounded-xl group-hover/card:shadow-xl hover_scale-105"
+                      className="object-cover w-full h-full transition-transform duration-300 group-hover/card:shadow-xl hover:scale-105"
                       alt="thumbnail"
                     />
+                    </div>
                   </CardItem>
                   <CardItem translateZ="100" className="w-full mt-4">
                     <p className="text-center text-black dark:text-white text-3xl">Rodolfo Rodriguez</p>
@@ -47,24 +86,26 @@ export function Contact() {
               </CardContainer>
             </div>
             <div className="flex-1 flex flex-col items-center">
-              <CardContainer className="inter-var">
-                <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-white rounded-xl">
-                  <CardItem translateZ="100" className="w-full mt-4 flex justify-center">
+            <CardContainer className="inter-var">
+                <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-gray-600 dark:shadow-white rounded-xl">
+                  <CardItem translateZ="100" className="w-full flex justify-center">
+                  <div className="md:w-72 md:h-72 relative rounded-xl overflow-hidden shadow-md">
+
                     <img
                       src={img_a}
                       height="1000"
                       width="1000"
-                      className="h-auto w-11/12 md:w-full object-cover rounded-full md:rounded-xl group-hover/card:shadow-xl hover:scale-105"
+                      className="object-cover w-full h-full transition-transform duration-300 group-hover/card:shadow-xl hover:scale-105"
                       alt="thumbnail"
                     />
+                    </div>
                   </CardItem>
                   <CardItem translateZ="100" className="w-full mt-4">
-                    <div className="flex flex-col md:flex-row text-center">
-                    <span className="flex-1 text-black dark:text-white text-3xl">Axel</span>
-                    <span className="flex-1 text-black dark:text-white text-3xl">López</span>
+                    <div className="px-7 md:px-16">
+                    <p className="text-center text-black dark:text-white text-3xl">Axel López</p>
                     </div>
-                    <p className="text-center text-black dark:text-white text-lg">Master del codigo</p>
-                    <p className="text-center text-black dark:text-white">Since 2015</p>
+                    <p className="text-center text-black dark:text-white mt-2 text-lg">Master del codigo</p>
+                    <p className="text-center text-black dark:text-white mt-2">Since 2015</p>
                   </CardItem>
                 </CardBody>
               </CardContainer>
@@ -121,6 +162,8 @@ export function Contact() {
     </div>
   );
 }
+
+
 
 const BottomGradient = () => {
   return (

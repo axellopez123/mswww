@@ -76,10 +76,11 @@ function ProductCard ({
   product,
   translate
 }) {
-  const { trackEvent } = useDrawerContext();
+  const { events, trackEvent } = useDrawerContext();
 
   const handleClick = () => {
     trackEvent({ type: "click", target: "Promo Banner" });
+    console.log(events);
   };
   return (
     (<motion.div
