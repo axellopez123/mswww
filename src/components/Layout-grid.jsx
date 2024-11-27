@@ -25,21 +25,21 @@ function Layout_grid({
 
     return (
         (<div
-            className="w-full h-full p-10 grid grid-cols-1 md:grid-cols-3   gap-4 relative" id="grid-info">
+            className="w-full h-full md:p-3 grid grid-cols-1 md:grid-cols-3    relative" id="grid-info">
             {cards["cards"].map((card, i) => (
                 <div key={i} className={cn(card.className, "")}>
                     <motion.a
                         
                         onClick={() => handleClick(card)}
-                        className={cn(card.className, "relative overflow-hidden pt-24", selected?.id === card.id
-                            ? " rounded-lg cursor-pointer absolute inset-0 h- w-full md:w-11/12 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
+                        className={cn(card.className, " overflow-hidden ", selected?.id === card.id
+                            ? " rounded-lg cursor-pointer absolute inset-0  w-full md:w-full m-auto z-50 flex justify-center items-center flex-wrap flex-col"
                             : lastSelected?.id === card.id
                                 ? "z-40  rounded-xl h-full w-full"
                                 : " rounded-xl h-full w-full")}
                         layoutId={`card-${card.id}`}>
                         <div
                         id={card.id}
-                            className="relative group  block p-2 h-full w-full"
+                            className="relative group  block p-2 h-full w-full backdrop-blur-lg"
                             onMouseEnter={() => setHoveredIndex(i)}
                             onMouseLeave={() => setHoveredIndex(null)}>
                             <AnimatePresence>
@@ -88,7 +88,7 @@ const Card = ({
             
                 <div
                     className={cn(
-                        `rounded-2xl h-full w-full  overflow-hidden bg-gray-500/30 border-2 border-white/20 border-double shadow-lg shadow-gray-600 ${s?.id ? "relative" : ""}  z-20`,
+                        `rounded-2xl h-full w-full overflow-hidden bg-gray-500/30 border-2 border-white/20 border-double shadow-lg shadow-gray-600 ${s?.id ? "relative" : ""}  z-20`,
                         className
                     )}>
                     <div className="relative z-50 ">

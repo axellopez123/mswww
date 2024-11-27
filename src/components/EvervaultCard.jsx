@@ -42,18 +42,17 @@ export default function EvervaultCard({
   return (
     (<div
       className={cn(
-        `bg-transparent aspect-square  flex items-center justify-center w-full h-64 relative`,
+        `bg-transparent aspect-square  flex items-center justify-center w-full h-64 relative  `,
         className
       )}>
       <div
         onMouseMove={onMouseMove}
-        className={`group/card w-full relative overflow-hidden bg-transparent flex items-center justify-center  ${s?.id ? "h-screen backdrop-blur-lg" : "h-full"} `}>
+        className={` group/card w-full absolute overflow-hidden bg-transparent flex items-center justify-center  ${s?.id ? "  backdrop-blur-lg top-10" : "h-full"} `}>
         <CardPattern mouseX={mouseX} mouseY={mouseY} randomString={randomString} s={s} />
-        <div className={`relative z-10 flex items-center justify-center w-full h-full p-16 dark:text-white hover:text-black ${s?.id ? `grid grid-cols-2 gap-4 ` : ""} `} >
-          <div
-            className="relative h-11/12  w-full  rounded-full flex items-center justify-center">
+        <div className={`relative z-10 flex items-center justify-center w-full h-full dark:text-white hover:text-black ${s?.id ? `grid grid-cols-2 gap-4 ` : ""} `} >
+          
             {s?.id ? (
-              <div className={`pt-50 mt-72 lg:pt-0 lg:mt-40`}>
+              <div className={`lg:pt-0 `}>
                 <p className=" text-center lg:mt-8 text-5xl lg:text-5xl font-extrabold antialiased z-20">{text}</p><br/><br/>
                 {item.claves.map((a) => (
                   <div>
@@ -66,8 +65,8 @@ export default function EvervaultCard({
                 <p className="text-center text-2xl font-semibold z-20">{item.description}</p>
               </div>
             )}
-          </div>
-          <div class={`  ${s?.id ? "relative top-28" : "absolute hidden"}  `}>
+          
+          <div class={`  ${s?.id ? "relative " : "absolute hidden"}  `}>
             <div className="flex-1 w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-transparent dark:bg-white/20 ">
               <form className="my-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
