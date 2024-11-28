@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "./Input";
 import { Label } from "./Label";
 import { cn } from "../lib/utils";
@@ -12,41 +12,39 @@ import axios from "axios";
 import { CardBody, CardContainer, CardItem } from "./3DAvatar";
 
 export function Contact() {
+  const [customer, setCustomer] = useState({ip_address:"",events:"",name:"",phone:"",website:"",message:"",email:"",user_agent:"",referrer:"",session_duration:"420"})
+
   const getClientIP = async () => {
-    const response = await fetch("https://api.ipify.org?format=json");
-    const data = await response.json();
-    return data.ip;
+    try {
+      const response = await fetch("https://api.ipify.org?format=json");
+      const data = await response.json();
+      setCustomer((prevCustomer) => ({ ...prevCustomer, ip_address: data.ip }));
+    } catch (error) {
+      console.error("Error obteniendo la IP:", error);
+    }
   };
-  
+
+  // useEffect para obtener la IP al montar el componente
+  useEffect(() => {
+    getClientIP();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCustomer((prevCustomer) => ({
+      ...prevCustomer,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:8000/api/bots/";
+    const url = "http://62.72.1.252:8000/api/bots/";
   
-    const data = {
-      ip_address: getClientIP(),
-      events: {
-        page_views: [
-          { page: "/home", time_spent: 60 },
-          { page: "/products", time_spent: 45 },
-        ],
-        clicks: [
-          { button: "subscribe", timestamp: "2024-11-21T10:00:00Z" },
-        ],
-      },
-      name: "John Doe",
-      phone: "1234567890",
-      website: "https://example.com",
-      message: "Interesado en su servicio",
-      email: "johndoe@example.com",
-      user_agent: navigator.userAgent,
-      referrer: document.referrer,
-      session_duration: 300,
-    };
   
     try {
-      const response = await axios.post(url, data, {
+      const response = await axios.post(url, customer, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -119,7 +117,7 @@ export function Contact() {
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
             <LabelInputContainer>
               <Label htmlFor="firstname">Nombre</Label>
-              <Input id="firstname" type="text" />
+              <Input id="firstname" name="name" type="text" value={customer.name} onChange={handleChange} />
             </LabelInputContainer>
             <LabelInputContainer>
               <Label htmlFor="lastname">Apellido(s)</Label>
@@ -128,16 +126,16 @@ export function Contact() {
           </div>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Correo electronico</Label>
-            <Input id="email" type="email" />
+            <Input id="email" name="email" type="email" value={customer.email} onChange={handleChange} />
           </LabelInputContainer>
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
             <LabelInputContainer>
               <Label htmlFor="firstname">Telefono</Label>
-              <Input id="firstname" placeholder="33 777 12345" type="text" />
+              <Input id="firstname" name="phone" type="text" value={customer.phone} onChange={handleChange} />
             </LabelInputContainer>
             <LabelInputContainer>
               <Label htmlFor="lastname">Website</Label>
-              <Input id="lastname"  type="text" />
+              <Input id="lastname" name="website" type="text" value={customer.website} onChange={handleChange}/>
             </LabelInputContainer>
           </div>
           <LabelInputContainer className="mb-4">
@@ -145,8 +143,11 @@ export function Contact() {
             <TextArea
               id="message"
               placeholder="Escribe aquí tu mensaje..."
+              name="message"
               type="text"
               className=""
+              value={customer.message}
+              onChange={handleChange}
             />
           </LabelInputContainer>
 
