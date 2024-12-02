@@ -8,12 +8,13 @@ import img_r from "../img/rodo.webp"
 import img_a from "../img/papuAlexwebp.webp"
 import "./Contact.css";
 import axios from "axios";
+import { useDrawerContext } from "../contexts/DrawerContext";
 
 import { CardBody, CardContainer, CardItem } from "./3DAvatar";
 
 export function Contact() {
-  const [customer, setCustomer] = useState({ip_address:"",events:"",name:"",phone:"",website:"",message:"",email:"",user_agent:"",referrer:"",session_duration:"420"})
-
+  const [customer, setCustomer] = useState({ip_address:"",events:[],name:"",phone:"",website:"",message:"",email:"",user_agent:"",referrer:"",session_duration:"420"})
+  const { events, trackEvent } = useDrawerContext();
   const getClientIP = async () => {
     try {
       const response = await fetch("https://api.ipify.org?format=json");
@@ -27,7 +28,13 @@ export function Contact() {
   // useEffect para obtener la IP al montar el componente
   useEffect(() => {
     getClientIP();
-  }, []);
+    console.log(events);
+    
+    setCustomer((prevCustomer) => ({
+      ...prevCustomer,
+      events: events, 
+    }));
+    }, [events]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,13 +47,13 @@ export function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = "http://62.72.1.252:8000/api/bots/";
+    const url = "https://api.arwax.pro/api/bot/";
   
   
     try {
       const response = await axios.post(url, customer, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       console.log("Datos enviados exitosamente:", response.data);
