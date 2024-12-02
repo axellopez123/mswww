@@ -126,10 +126,6 @@ export function Contact() {
               <Label htmlFor="firstname">Nombre</Label>
               <Input id="firstname" name="name" type="text" value={customer.name} onChange={handleChange} />
             </LabelInputContainer>
-            <LabelInputContainer>
-              <Label htmlFor="lastname">Apellido(s)</Label>
-              <Input id="lastname" type="text" />
-            </LabelInputContainer>
           </div>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Correo electronico</Label>
