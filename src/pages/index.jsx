@@ -79,7 +79,7 @@ const SkeletonFour = () => {
     {
       title: "Cómputo en la Nube",
       description:
-        "Almacena tu información en la nube y obtenla desde cualquier parte con acceso internet.",
+        "Almacena tu información desde cualquier parte del mundo con acceso a internet y con una estructura robusta y con alta velocidad",
       link: "https://stripe.com",
       id: 1,
       content: <SkeletonOne />,
@@ -95,7 +95,7 @@ const SkeletonFour = () => {
     {
       title: "Pagínas Web",
       description:
-        "Publica tu empresa en cualquier dispositivo con la mejor tecnología y diseño.",
+        "Publica tu empresa en cualquier dispositivo captando la atención de tus clientes con la mejor experiencia UX y el mayor rendimiento.",
       link: "https://netflix.com",
       id: 2,
       content: <SkeletonTwo />,
@@ -112,7 +112,7 @@ const SkeletonFour = () => {
     {
       title: "Migraciones",
       description:
-        "A multinational technology company that specializes in Internet-related services and products.",
+        "Pasa tu sistema clásico a uno moderno y eficiente con las mejores tecnologías de vanguardia de ultima generación.",
       link: "https://google.com",
       id: 3,
       content: <SkeletonThree />,
@@ -129,7 +129,9 @@ const SkeletonFour = () => {
     {
       title: "Automatizaciones",
       description:
-        "Reemplaza las tareas repetitivas, aumentando la eficiencia, reduciendo errores y liberando recursos para actividades más estratégicas. Es la clave para mantenerse competitivo en un mundo digitalizado.",
+        // "Reemplaza las tareas repetitivas aumentando la eficiencia, reduciendo errores y liberando recursos para actividades más estratégicas. Es la clave para mantenerse competitivo en un mundo digitalizado.",
+        "Optimiza el flujo de trabajo reduciendo errores dando reemplazo a tareas repetitivas con procesos automatizados inteligentes.",
+
       link: "https://meta.com",
       id: 4,
       content: <SkeletonFour />,

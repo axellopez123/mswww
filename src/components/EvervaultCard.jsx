@@ -11,7 +11,11 @@ export default function EvervaultCard({
   text,
   className,
   item,
-  s
+  selected,
+  setSelected,
+  lastSelected,
+  handleOnClose,
+  setLastSelected
 }) {
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
@@ -22,6 +26,10 @@ export default function EvervaultCard({
     let str = generateRandomString(160);
     setRandomString(str);
   }, []);
+
+  useEffect(() => {
+    setLastSelected(selected);
+  }, [selected,setLastSelected]);
 
   function onMouseMove({
     currentTarget,
@@ -47,11 +55,11 @@ export default function EvervaultCard({
       )}>
       <div
         onMouseMove={onMouseMove}
-        className={` group/card w-full absolute overflow-hidden bg-transparent flex items-center justify-center  ${s?.id ? "  backdrop-blur-lg top-10" : "h-full"} `}>
-        <CardPattern mouseX={mouseX} mouseY={mouseY} randomString={randomString} s={s} />
-        <div className={`relative z-10 flex items-center justify-center w-full h-full dark:text-white hover:text-black ${s?.id ? `grid grid-cols-2 gap-4 ` : ""} `} >
+        className={` group/card w-full absolute overflow-hidden bg-transparent flex items-center justify-center  ${selected?.id ? "  backdrop-blur-lg top-10" : "h-full"} `}>
+        <CardPattern mouseX={mouseX} mouseY={mouseY} randomString={randomString} selected={selected} />
+        <div className={`relative z-10 flex items-center justify-center w-full h-full dark:text-white hover:text-black ${selected?.id ? `grid grid-cols-2 gap-4 ` : ""} `} >
           
-            {s?.id ? (
+            {selected?.id ? (
               <div className={`lg:pt-0 `}>
                 <p className=" text-center lg:mt-8 text-5xl lg:text-5xl font-extrabold antialiased z-20">{text}</p><br/><br/>
                 {item.claves.map((a) => (
@@ -60,13 +68,16 @@ export default function EvervaultCard({
                   ))}
               </div>
             ) : (
-              <div className={`absolute  ${s?.id ? "rounded-sm" : ""}`}>
-                <p className=" text-center text-5xl font-extrabold antialiased z-20">{text}</p>
-                <p className="text-center text-2xl font-semibold z-20">{item.description}</p>
+              <div className={`absolute  ${selected?.id ? "rounded-sm" : ""}`}>
+                <p className=" text-center text-3xl md:text-5xl font-extrabold antialiased z-20">{text}</p>
+                <p className="text-center text-ms md:text-2xl font-semibold z-20 px-2 md:px-0">{item.description}</p>
               </div>
             )}
           
-          <div class={`  ${s?.id ? "relative " : "absolute hidden"}  `}>
+          <div class={`  ${selected?.id ? "relative " : "absolute hidden"}  `}>
+            <div>
+              <button className="absolute text-7xl top-2 right-2" onClick={handleOnClose}>x</button>
+            </div>
             <div className="flex-1 w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-transparent dark:bg-white/20 ">
               <form className="my-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
@@ -116,7 +127,7 @@ export default function EvervaultCard({
 function CardPattern({
   mouseX,
   mouseY,
-  randomString, s
+  randomString, selected
 }) {
   let maskImage = useMotionTemplate`radial-gradient(250px at ${mouseX}px ${mouseY}px, white, transparent)`;
   let style = { maskImage, WebkitMaskImage: maskImage };
@@ -131,7 +142,7 @@ function CardPattern({
         className="absolute inset-0 rounded-2xl mix-blend-overlay group-hover/card:opacity-100"
         style={style}>
         <span
-          className={`absolute inset-x-0 h-full break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500 ${s?.id ? "text-8xl " : "text-6xl "}`}>
+          className={`absolute inset-x-0 h-full break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500 ${selected?.id ? "text-8xl " : "text-6xl "}`}>
           {randomString}
         </span>
       </motion.div>

@@ -62,7 +62,7 @@ export function Contact() {
     }
   };
   return (
-    <div className=" flex flex-col md:flex-row w-full h-full dark:bg-black mt-16 pb-16">
+    <div className=" flex flex-col md:flex-row w-full h-full dark:bg-black mt-16 pb-32">
       <div className="flex-1">
         <div className="px-6"><p className="text-xl font-extrabold">Un par de papus invocados por el destino para ayudar botsitos</p></div>
         <div className="flex flex-col md:flex-row h-full">
@@ -109,8 +109,8 @@ export function Contact() {
                     <div className="px-7 md:px-16">
                     <p className="text-center text-black dark:text-white text-3xl">Axel López</p>
                     </div>
-                    <p className="text-center text-black dark:text-white mt-2 text-lg">Master del codigo</p>
-                    <p className="text-center text-black dark:text-white mt-2">Since 2015</p>
+                    <p className="text-center text-black dark:text-white text-lg">Master del codigo</p>
+                    <p className="text-center text-black dark:text-white">Since 2015</p>
                   </CardItem>
                 </CardBody>
               </CardContainer>
