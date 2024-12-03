@@ -39,7 +39,7 @@ function HeroParallax({
           opacity,
         }}
         className="">
-          <div className="flex justify-center items-center my-4">
+          <div className="flex justify-center items-center mb-12">
             <p className="text-3xl md:text-5xl font-bold dark:text-white">Joyitas💎</p>
           </div>
         <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
@@ -52,11 +52,11 @@ function HeroParallax({
             <ProductCard product={product} translate={translateXReverse} key={product.title} />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
+        {/* <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
           {thirdRow.map((product) => (
             <ProductCard product={product} translate={translateX} key={product.title} />
           ))}
-        </motion.div>
+        </motion.div> */}
       </motion.div>
     </div>)
   );

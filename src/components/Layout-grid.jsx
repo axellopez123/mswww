@@ -27,73 +27,72 @@ function Layout_grid({ cards, className }) {
   }, [selected, lastSelected]);
 
   return (
-    <div
-      className="w-full h-full md:p-3 grid grid-cols-1 md:grid-cols-3    relative"
-      id="servicios"
-    >
-      <div className="col-span-3 flex justify-center items-center my-4"><p className="text-3xl md:text-5xl font-bold dark:text-white">Servicios✨</p></div>
-      {cards["cards"].map((card, i) => (
-        <div key={i} className={cn(card.className, "")}>
-          <motion.a
-            onClick={() => handleClick(card)}
-            className={cn(
-              card.className,
-              "overflow-hidden",
-              selected?.id === card.id
-                ? "rounded-lg cursor-pointer absolute inset-0 w-full md:w-full m-auto z-50 flex justify-center items-center flex-wrap flex-col"
-                : lastSelected?.id === card.id
-                ? "z-40 rounded-xl h-full w-full"
-                : "rounded-xl h-full w-full"
-            )}
-            layoutId={`card-${card.id}`}
-          >
-            <div
-              id={card.id}
-              className="relative group  block p-2 h-full w-full backdrop-blur-lg"
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
+    <div id="servicios">
+      <div className="flex justify-center items-center mb12-4"><p className="text-3xl md:text-5xl font-bold dark:text-white">Servicios✨</p></div>
+      <div className="w-full h-full md:p-3 grid grid-cols-1 md:grid-cols-3 relative">
+        {cards["cards"].map((card, i) => (
+          <div key={i} className={cn(card.className, "")}>
+            <motion.a
+              onClick={() => handleClick(card)}
+              className={cn(
+                card.className,
+                "overflow-hidden",
+                selected?.id === card.id
+                  ? "rounded-lg cursor-pointer absolute inset-0 w-full md:w-full m-auto z-50 flex justify-center items-center flex-wrap flex-col"
+                  : lastSelected?.id === card.id
+                  ? "z-40 rounded-xl h-full w-full"
+                  : "rounded-xl h-full w-full"
+              )}
+              layoutId={`card-${card.id}`}
             >
-              <AnimatePresence>
-                {hoveredIndex === i && (
-                  <motion.span
-                    className={`absolute inset-0 h-full w-full block rounded-3xl  ${card.gbc} `}
-                    layoutId="hoverBackground"
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: 1,
-                      transition: { duration: 0.5 },
-                    }}
-                    exit={{
-                      opacity: 0,
-                      transition: { duration: 0.5, delay: 0.0 },
-                    }}
-                  />
-                )}
-              </AnimatePresence>
-              <Card
-                title={card.title}
-                card={card}
-                selected={selected}
-                setSelected={setSelected}
-                lastSelected={lastSelected}
-                setLastSelected={setLastSelected}
-                handleOnClose={handleOnClose}
-              />
-            </div>
-            {selected?.id === card.id && <SelectedCard selected={selected} />}
-          </motion.a>
-        </div>
-      ))}
-      <motion.div
-        onClick={handleOnClose}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: selected?.id ? 0.3 : 0 }}
-        transition={{ duration: 0.5 }}
-        className={cn(
-          "absolute h-full w-full bg-black",
-          selected?.id ? "pointer-events-auto" : "pointer-events-none"
-        )}
-      />
+              <div
+                id={card.id}
+                className="relative group  block p-2 h-full w-full backdrop-blur-lg"
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <AnimatePresence>
+                  {hoveredIndex === i && (
+                    <motion.span
+                      className={`absolute inset-0 h-full w-full block rounded-3xl  ${card.gbc} `}
+                      layoutId="hoverBackground"
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: 1,
+                        transition: { duration: 0.5 },
+                      }}
+                      exit={{
+                        opacity: 0,
+                        transition: { duration: 0.5, delay: 0.0 },
+                      }}
+                    />
+                  )}
+                </AnimatePresence>
+                <Card
+                  title={card.title}
+                  card={card}
+                  selected={selected}
+                  setSelected={setSelected}
+                  lastSelected={lastSelected}
+                  setLastSelected={setLastSelected}
+                  handleOnClose={handleOnClose}
+                />
+              </div>
+              {selected?.id === card.id && <SelectedCard selected={selected} />}
+            </motion.a>
+          </div>
+        ))}
+        <motion.div
+          onClick={handleOnClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: selected?.id ? 0.3 : 0 }}
+          transition={{ duration: 0.5 }}
+          className={cn(
+            "absolute h-full w-full bg-black",
+            selected?.id ? "pointer-events-auto" : "pointer-events-none"
+          )}
+        />
+      </div>
     </div>
   );
 }
