@@ -16,21 +16,21 @@ function Layout_grid({ cards, className }) {
   };
 
   const handleOnClose = () => {
-    console.log("1-* Selected:", selected, "Last Selected:", lastSelected);
+    console.log("Cerrando la tarjeta...");
+
     setLastSelected(selected);
     setSelected(null);
-    console.log("2-* Selected:", selected, "Last Selected:", lastSelected);
   };
 
   useEffect(() => {
-    console.log("Selected:", selected, "Last Selected:", lastSelected);
   }, [selected, lastSelected]);
 
   return (
     <div id="servicios">
-      <div className="flex justify-center items-center mb12-4"><p className="text-3xl md:text-5xl font-bold dark:text-white">Servicios✨</p></div>
+      <div className="flex justify-center items-center mb-12"><p className="text-3xl md:text-5xl font-bold dark:text-white">Servicios✨</p></div>
       <div className="w-full h-full md:p-3 grid grid-cols-1 md:grid-cols-3 relative">
         {cards["cards"].map((card, i) => (
+          <>
           <div key={i} className={cn(card.className, "")}>
             <motion.a
               onClick={() => handleClick(card)}
@@ -78,11 +78,23 @@ function Layout_grid({ cards, className }) {
                   handleOnClose={handleOnClose}
                 />
               </div>
-              {selected?.id === card.id && <SelectedCard selected={selected} />}
+              {/* {selected?.id === card.id && <SelectedCard selected={selected} />} */}
             </motion.a>
           </div>
+          {selected && (
+            <motion.button
+              onClick={handleOnClose}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="absolute bg-red-500/50 top-5 right-5 text-white p-4 rounded-full shadow-lg z-50"
+            >
+              <i class='bx bx-x bx-tada text-3xl font-extrabold px-1' ></i>
+            </motion.button>
+          )}
+          </>
         ))}
-        <motion.div
+        {/* <motion.div
           onClick={handleOnClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: selected?.id ? 0.3 : 0 }}
@@ -91,7 +103,8 @@ function Layout_grid({ cards, className }) {
             "absolute h-full w-full bg-black",
             selected?.id ? "pointer-events-auto" : "pointer-events-none"
           )}
-        />
+        /> */}
+        
       </div>
     </div>
   );
@@ -108,6 +121,8 @@ const Card = ({
   handleOnClose,
   setLastSelected,
 }) => {
+  const isSelected = selected?.id === card.id;
+
   return (
     <div
       className={cn(
@@ -117,16 +132,27 @@ const Card = ({
         className
       )}
     >
-      <div className="relative z-50 ">
+      <div className="relative">
         <EvervaultCard
           text={title}
-          item={selected?.id ? card : card}
+          item={isSelected?.id ? card : card}
           selected={selected}
           handleOnClose={handleOnClose}
           setLastSelected={setLastSelected}
           setSelected={setSelected}
           lastSelected={lastSelected}
         />
+         {/* {isSelected && (
+          <motion.button
+            onClick={handleOnClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="absolute top-5 right-5 bg-red-500 text-white p-4 rounded-full shadow-lg z-50"
+          >
+            Cerrar
+          </motion.button>
+        )} */}
       </div>
     </div>
   );

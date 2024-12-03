@@ -87,6 +87,7 @@ function IconContainer({
             {hovered && effect && <TypewriterEffect words={[{text: title}]} className="inline text-white" />}
             {!effect && title}
           {icon}
+          
         </motion.div>
       </motion.div>
     </Link>)

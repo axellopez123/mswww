@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -7,73 +7,76 @@ import GridComponent from "../components/GridComponent";
 import HoverEffect from "../components/HoverEffect";
 import { Contact } from "../components/Contact";
 import { Layout_grid } from "../components/Layout-grid";
-
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { Link } from "react-scroll";
 
 export default function Home() {
-  useEffect(() => {
+  useEffect(() => {}, []);
 
-  }, []);
+  const SkeletonOne = () => {
+    return (
+      <div>
+        <p className="font-bold md:text-4xl text-xl text-white">
+          House in the woods
+        </p>
+        <p className="font-normal text-base text-white"></p>
+        <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+          A serene and tranquil retreat, this house in the woods offers a
+          peaceful escape from the hustle and bustle of city life.
+        </p>
+      </div>
+    );
+  };
 
-   
-const SkeletonOne = () => {
-  return (
-    <div>
-      <p className="font-bold md:text-4xl text-xl text-white">
-        House in the woods
-      </p>
-      <p className="font-normal text-base text-white"></p>
-      <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-        A serene and tranquil retreat, this house in the woods offers a peaceful
-        escape from the hustle and bustle of city life.
-      </p>
-    </div>
-  );
-};
- 
-const SkeletonTwo = () => {
-  return (
-    <div>
-      <p className="font-bold md:text-4xl text-xl text-white">
-        House above the clouds
-      </p>
-      <p className="font-normal text-base text-white"></p>
-      <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-        Perched high above the world, this house offers breathtaking views and a
-        unique living experience. It&apos;s a place where the sky meets home,
-        and tranquility is a way of life.
-      </p>
-    </div>
-  );
-};
-const SkeletonThree = () => {
-  return (
-    <div>
-      <p className="font-bold md:text-4xl text-xl text-white">
-        Greens all over
-      </p>
-      <p className="font-normal text-base text-white"></p>
-      <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-        A house surrounded by greenery and nature&apos;s beauty. It&apos;s the
-        perfect place to relax, unwind, and enjoy life.
-      </p>
-    </div>
-  );
-};
-const SkeletonFour = () => {
-  return (
-    <div>
-      <p className="font-bold md:text-4xl text-xl text-white">
-        Rivers are serene
-      </p>
-      <p className="font-normal text-base text-white"></p>
-      <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-        A house by the river is a place of peace and tranquility. It&apos;s the
-        perfect place to relax, unwind, and enjoy life.
-      </p>
-    </div>
-  );
-};
- 
+  const SkeletonTwo = () => {
+    return (
+      <div>
+        <p className="font-bold md:text-4xl text-xl text-white">
+          House above the clouds
+        </p>
+        <p className="font-normal text-base text-white"></p>
+        <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+          Perched high above the world, this house offers breathtaking views and
+          a unique living experience. It&apos;s a place where the sky meets
+          home, and tranquility is a way of life.
+        </p>
+      </div>
+    );
+  };
+  const SkeletonThree = () => {
+    return (
+      <div>
+        <p className="font-bold md:text-4xl text-xl text-white">
+          Greens all over
+        </p>
+        <p className="font-normal text-base text-white"></p>
+        <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+          A house surrounded by greenery and nature&apos;s beauty. It&apos;s the
+          perfect place to relax, unwind, and enjoy life.
+        </p>
+      </div>
+    );
+  };
+  const SkeletonFour = () => {
+    return (
+      <div>
+        <p className="font-bold md:text-4xl text-xl text-white">
+          Rivers are serene
+        </p>
+        <p className="font-normal text-base text-white"></p>
+        <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
+          A house by the river is a place of peace and tranquility. It&apos;s
+          the perfect place to relax, unwind, and enjoy life.
+        </p>
+      </div>
+    );
+  };
 
   const projects = [
     {
@@ -86,11 +89,17 @@ const SkeletonFour = () => {
       className: "md:col-span-2",
       thumbnail: "",
       gbc: "bg-pink-500",
-      claves: [{icono: "",texto: "Consultoría en la nube"},
-      {icono: "",texto: "Base de datos en la nube"},
-      {icono: "",texto: "Optimización de servidores"},
-      {icono: "",texto: "Migración de servidores a la nube"},
-      {icono: "",texto: "Infraestructura con las mejores soluciones de cómputo en la nube"}]
+      claves: [
+        { icono: "", texto: "Consultoría en la nube" },
+        { icono: "", texto: "Base de datos en la nube" },
+        { icono: "", texto: "Optimización de servidores" },
+        { icono: "", texto: "Migración de servidores a la nube" },
+        {
+          icono: "",
+          texto:
+            "Infraestructura con las mejores soluciones de cómputo en la nube",
+        },
+      ],
     },
     {
       title: "Pagínas Web",
@@ -102,12 +111,14 @@ const SkeletonFour = () => {
       className: "md:col-span-1",
       thumbnail: "",
       gbc: "bg-blue-500",
-      claves: [{icono: "",texto: "Identificación de procesos clave"},
-      {icono: "",texto: "Evaluación de herramientas tecnológicas"},
-      {icono: "",texto: "Integración de sistemas"},
-      {icono: "",texto: "Capacitación y adaptación"},
-      {icono: "",texto: "Monitoreo y optimización continua"},
-      {icono: "",texto: "Gestión del cambio"}]
+      claves: [
+        { icono: "", texto: "Identificación de procesos clave" },
+        { icono: "", texto: "Evaluación de herramientas tecnológicas" },
+        { icono: "", texto: "Integración de sistemas" },
+        { icono: "", texto: "Capacitación y adaptación" },
+        { icono: "", texto: "Monitoreo y optimización continua" },
+        { icono: "", texto: "Gestión del cambio" },
+      ],
     },
     {
       title: "Migraciones",
@@ -119,12 +130,14 @@ const SkeletonFour = () => {
       className: "md:col-span-1",
       thumbnail: "",
       gbc: "bg-red-500",
-      claves: [{icono: "",texto: "Identificación de procesos clave"},
-      {icono: "",texto: "Evaluación de herramientas tecnológicas"},
-      {icono: "",texto: "Integración de sistemas"},
-      {icono: "",texto: "Capacitación y adaptación"},
-      {icono: "",texto: "Monitoreo y optimización continua"},
-      {icono: "",texto: "Gestión del cambio"}]
+      claves: [
+        { icono: "", texto: "Identificación de procesos clave" },
+        { icono: "", texto: "Evaluación de herramientas tecnológicas" },
+        { icono: "", texto: "Integración de sistemas" },
+        { icono: "", texto: "Capacitación y adaptación" },
+        { icono: "", texto: "Monitoreo y optimización continua" },
+        { icono: "", texto: "Gestión del cambio" },
+      ],
     },
     {
       title: "Automatizaciones",
@@ -138,13 +151,15 @@ const SkeletonFour = () => {
       className: "md:col-span-2",
       thumbnail: "",
       gbc: "bg-green-700",
-      claves: [{icono: "",texto: "Identificación de procesos clave"},
-      {icono: "",texto: "Evaluación de herramientas tecnológicas"},
-      {icono: "",texto: "Integración de sistemas"},
-      {icono: "",texto: "Capacitación y adaptación"},
-      {icono: "",texto: "Monitoreo y optimización continua"},
-      {icono: "",texto: "Gestión del cambio"}]
-    },/*
+      claves: [
+        { icono: "", texto: "Identificación de procesos clave" },
+        { icono: "", texto: "Evaluación de herramientas tecnológicas" },
+        { icono: "", texto: "Integración de sistemas" },
+        { icono: "", texto: "Capacitación y adaptación" },
+        { icono: "", texto: "Monitoreo y optimización continua" },
+        { icono: "", texto: "Gestión del cambio" },
+      ],
+    } /*
     {
       title: "Amazon",
       description:
@@ -164,27 +179,69 @@ const SkeletonFour = () => {
       content: <SkeletonOne />,
       className: "md:col-span-1",
       thumbnail: ""
-    },*/
+    },*/,
   ];
+  const [visible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
 
-  
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Desplazamiento suave
+    });
+  };
+
   return (
     <div className="bg-white dark:bg-black">
-        <GridComponent />
-        
-        <LayoutGridDemo cards={projects}/>
-        <Contact/>
-      </div>
-  );
-}
- function LayoutGridDemo(cards) {
-  return (
-    <div className="h-screem w-full">
-      <Layout_grid cards={cards}/>
+      <GridComponent />
+
+      <LayoutGridDemo cards={projects} />
+      <Contact />
+      {visible && (
+        <div className="hidden md:block fixed bottom-5 right-5">
+          <Link
+            onClick={scrollToTop}
+            smooth={true}
+            duration={500}
+            className="cursor-pointer transition-colors"
+          >
+            <motion.div className="rounded-full bg-green-600/70 hover:bg-green-500/80 border-2 border-white/20 border-double shadow-lg shadow-green-600 hover:shadow-green-500 flex items-center justify-center relative px-3 py-3 hover:scale-110 transition duration-150 ease-in-out delay-0">
+              {/* <AnimatePresence>
+          {hovered && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, x: "-50%" }}
+              animate={{ opacity: 1, y: 0, x: "-50%" }}
+              exit={{ opacity: 0, y: 2, x: "-50%" }}
+              className="px-16 py-0.5 whitespace-pre rounded-md bg-gray-100 border dark:bg-neutral-800 dark:border-neutral-900 dark:text-white border-gray-200 text-neutral-700 absolute left-1/2 -translate-x-1/2 -top-8 w-fit text-xs">
+              {title}
+            </motion.div>
+          )}
+        </AnimatePresence> */}
+              <motion.div className="flex items-center justify-center cursor-pointer text-black dark:text-white text-shadow text-xl font-extrabold px-1">
+                ☝🏼
+              </motion.div>
+            </motion.div>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
-
-
-
-
+function LayoutGridDemo(cards) {
+  return (
+    <div className="h-screem w-full">
+      <Layout_grid cards={cards} />
+    </div>
+  );
+}

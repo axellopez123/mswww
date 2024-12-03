@@ -60,11 +60,11 @@ export default function EvervaultCard({
         <div className={`relative z-10 flex items-center justify-center w-full h-full dark:text-white hover:text-black ${selected?.id ? `grid grid-cols-2 gap-4 ` : ""} `} >
           
             {selected?.id ? (
-              <div className={`lg:pt-0 `}>
-                <p className=" text-center lg:mt-8 text-5xl lg:text-5xl font-extrabold antialiased z-20">{text}</p><br/><br/>
+              <div className={`col-span-2 md:col-span-1 lg:pt-0 `}>
+                <p className=" text-center lg:mt-8  text-3xl md:text-5xl lg:text-5xl font-extrabold antialiased z-20">{text}</p><br/><br/>
                 {item.claves.map((a) => (
                   <div>
-                  <p className=" text-center text-3xl lg:text-2xl mt-4 font-semibold z-20">{a.texto}</p></div>
+                  <p className=" text-center text-lg md:text-3xl lg:text-2xl mt-4 font-semibold z-20">{a.texto}</p></div>
                   ))}
               </div>
             ) : (
@@ -74,10 +74,10 @@ export default function EvervaultCard({
               </div>
             )}
           
-          <div class={`  ${selected?.id ? "relative " : "absolute hidden"}  `}>
-            <div>
+          <div class={`col-span-2 md:col-span-1  ${selected?.id ? "relative " : "absolute hidden"}  `}>
+            {/* <div>
               <button className="absolute text-7xl top-2 right-2" onClick={handleOnClose}>x</button>
-            </div>
+            </div> */}
             <div className="flex-1 w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-transparent dark:bg-white/20 ">
               <form className="my-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">

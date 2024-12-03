@@ -24,6 +24,7 @@ export function Navbear() {
       ),
       href: "#",
       emoji:"💎",
+      target:"joyitas",
     },
     {
       title: "Servicios",
@@ -59,6 +60,7 @@ export function Navbear() {
       ),
       href: "#",
       emoji:"✨",
+      target:"servicios",
     },
     {
       title: "Contacto",
@@ -74,6 +76,7 @@ export function Navbear() {
       ),
       href: "#",
       emoji:"☎",
+      target:"contacto",
     },
   ];
 
