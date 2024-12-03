@@ -25,6 +25,7 @@ function HeroParallax({
   const translateY = useSpring(useTransform(scrollYProgress, [0, 0.2], [-700, 100]), springConfig);
   return (
     (<div
+    id="joyitas"
       ref={ref}
       className=" h-[250vh] top-0 py-0 overflow-hidden  antialiased relative 
       flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]">
@@ -38,6 +39,9 @@ function HeroParallax({
           opacity,
         }}
         className="">
+          <div className="flex justify-center items-center my-4">
+            <p className="text-3xl md:text-5xl font-bold dark:text-white">Joyitas💎</p>
+          </div>
         <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
           {firstRow.map((product) => (
             <ProductCard product={product} translate={translateX} key={product.title} />

@@ -31,6 +31,7 @@ module.exports = {
         'menu': '0px 25px 50px -12px rgba(0, 0, 0, 0.25)',
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
         'text': '5px 5px 8px rgba(0, 0, 0, 0.2)',
+        glow: '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -123,6 +124,7 @@ module.exports = {
         third: "moveInCircle 40s linear infinite",
         fourth: "moveHorizontal 40s ease infinite",
         fifth: "moveInCircle 20s ease infinite",
+        glow: 'glow 1.5s infinite',
       },
     },
   },

@@ -29,8 +29,9 @@ function Layout_grid({ cards, className }) {
   return (
     <div
       className="w-full h-full md:p-3 grid grid-cols-1 md:grid-cols-3    relative"
-      id="grid-info"
+      id="servicios"
     >
+      <div className="col-span-3 flex justify-center items-center my-4"><p className="text-3xl md:text-5xl font-bold dark:text-white">Servicios✨</p></div>
       {cards["cards"].map((card, i) => (
         <div key={i} className={cn(card.className, "")}>
           <motion.a

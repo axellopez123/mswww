@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import ThemeToggleButton from "./ThemeToggleButton";
 import { MenuItem } from "./Menu";
 import { TypewriterEffect, TypewriterEffectSmooth } from "./TypewriterEffect";
+import { Link } from "react-scroll";
 
 export default function FloatingDock ({
   items,
@@ -33,7 +34,7 @@ const FloatingDockDesktop = ({
         
 
       {items.map((item) => (
-        <IconContainer mouseX={mouseX} key={item.title} effect={true} {...item} />
+        <IconContainer mouseX={mouseX} key={item.title} effect={true} {...item} target={item.target}/>
       ))}
       <div className="mb-1">
       <ThemeToggleButton/>
@@ -47,7 +48,7 @@ function IconContainer({
   mouseX,
   title,
   icon,
-  href,
+  target,
   emoji,
   effect,
 }) {
@@ -58,7 +59,13 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    (<a href={href}>
+    (
+      <Link
+      to={target}
+      smooth={true}
+      duration={500}
+      className="cursor-pointer transition-colors"
+    >
       <motion.div
         ref={ref}
         onMouseEnter={() => setHovered(true)}
@@ -82,6 +89,6 @@ function IconContainer({
           {icon}
         </motion.div>
       </motion.div>
-    </a>)
+    </Link>)
   );
 }
