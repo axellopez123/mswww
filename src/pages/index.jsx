@@ -97,7 +97,7 @@ export default function Home() {
         {
           icono: "",
           texto:
-            "Infraestructura con las mejores soluciones de cómputo en la nube",
+            "Infraestructura con las mejores soluciones en la nube",
         },
       ],
     },

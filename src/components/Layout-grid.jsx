@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "../lib/utils";
 import EvervaultCard from "./EvervaultCard";
 import BackgroundGradient from "./BackgroundGradient";
+import { Link, scroller } from "react-scroll"; // Importa react-scroll
 
 function Layout_grid({ cards, className }) {
   const [selected, setSelected] = useState(null);
@@ -13,6 +14,14 @@ function Layout_grid({ cards, className }) {
   const handleClick = (card) => {
     setLastSelected(selected);
     setSelected(card);
+
+    scroller.scrollTo(`card-${card.id}`, {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart",
+      offset: 0, // Ajusta la posición del scroll si es necesario
+    });
+
   };
 
   const handleOnClose = () => {
@@ -87,9 +96,9 @@ function Layout_grid({ cards, className }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="absolute bg-red-500/50 top-5 right-5 text-white p-4 rounded-full shadow-lg z-50"
+              className="absolute bg-red-500/50 top-5 right-5 text-white py-1 md:py-4 px-2 md:px-5 rounded-full shadow-lg z-50"
             >
-              <i class='bx bx-x bx-tada text-3xl font-extrabold px-1' ></i>
+              <i class='bx bx-x bx-tada text-lg md:text-3xl font-extrabold' ></i>
             </motion.button>
           )}
           </>
@@ -203,7 +212,7 @@ const SelectedCard = ({ selected }) => {
           duration: 0.3,
           ease: "easeInOut",
         }}
-        className="relative px-8 pb-4 z-[70]"
+        className="relative px-8 z-[70]"
       >
         {selected?.content}
       </motion.div>

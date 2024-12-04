@@ -60,11 +60,21 @@ export default function EvervaultCard({
         <div className={`relative z-10 flex items-center justify-center w-full h-full dark:text-white hover:text-black ${selected?.id ? `grid grid-cols-2 gap-4 ` : ""} `} >
           
             {selected?.id ? (
-              <div className={`col-span-2 md:col-span-1 lg:pt-0 `}>
-                <p className=" text-center lg:mt-8  text-3xl md:text-5xl lg:text-5xl font-extrabold antialiased z-20">{text}</p><br/><br/>
-                {item.claves.map((a) => (
-                  <div>
-                  <p className=" text-center text-lg md:text-3xl lg:text-2xl mt-4 font-semibold z-20">{a.texto}</p></div>
+              <div className={`col-span-2 md:col-span-1 px-20`}>
+                <p className=" text-center text-3xl md:text-5xl lg:text-5xl font-extrabold antialiased z-20">{text}</p><br/><br/>
+                {item.claves.map((a, i) => (
+                  // <div>
+                  //   <p className=" text-center text-lg md:text-3xl lg:text-2xl mt-4 font-semibold z-20">{a.texto}</p>
+                  // </div>
+                   <li
+                   key={i}
+                   className="flex items-center p-4 rounded-lg shadow hover:shadow-lg transition-shadow backdrop-hue-rotate-180	my-1"
+                 >
+                   <i class='bx bx-check bx-tada text-green-500 text-2xl mr-4'></i>
+                   <span className="text-xl font-medium text-gray-800 dark:text-gray-200">
+                     {a.texto}
+                   </span>
+                 </li>
                   ))}
               </div>
             ) : (
