@@ -21,7 +21,7 @@ const Modelo3D = ({ modeloUrl }) => {
 
   return (
     <Canvas
-      style={{ width: "100%", height: "100%" }}
+      style={{ position:"absolute", width: "100%", height: "100%" }}
       camera={{
         position: [10, 9, 10], // Subir la cámara en el eje Y (segundo valor)
         fov: 75,

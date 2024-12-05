@@ -7,6 +7,7 @@ import { Input } from "./Input";
 import { Label } from "./Label";
 import { TextArea } from "./TextArea";
 import Modelo3D from "./Modelo3D";
+import { Link } from "react-scroll";
 
 export default function EvervaultCard({
   text,
@@ -16,7 +17,7 @@ export default function EvervaultCard({
   setSelected,
   lastSelected,
   handleOnClose,
-  setLastSelected
+  setLastSelected,
 }) {
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
@@ -30,13 +31,9 @@ export default function EvervaultCard({
 
   useEffect(() => {
     setLastSelected(selected);
-  }, [selected,setLastSelected]);
+  }, [selected, setLastSelected]);
 
-  function onMouseMove({
-    currentTarget,
-    clientX,
-    clientY,
-  }) {
+  function onMouseMove({ currentTarget, clientX, clientY }) {
     let { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
@@ -49,49 +46,86 @@ export default function EvervaultCard({
     console.log("Form submitted");
   };
   return (
-    (<div
+    <div
       className={cn(
         `bg-transparent aspect-square  flex items-center justify-center w-full h-64 relative  `,
         className
-      )}>
+      )}
+    >
       <div
         onMouseMove={onMouseMove}
-        className={` group/card w-full absolute overflow-hidden bg-transparent flex items-center justify-center  ${selected?.id ? "  backdrop-blur-lg top-10" : "h-full"} `}>
-        <CardPattern mouseX={mouseX} mouseY={mouseY} randomString={randomString} selected={selected} />
-        <div className={`relative z-10 flex items-center justify-center w-full h-full dark:text-white hover:text-black ${selected?.id ? `grid grid-cols-2 gap-4 ` : ""} `} >
-          
-            {selected?.id ? (
-              <div className={`col-span-2 md:col-span-1 px-20`}>
-                <p className=" text-center text-3xl md:text-5xl lg:text-5xl font-extrabold antialiased z-20">{text}</p><br/><br/>
-                {item.claves.map((a, i) => (
-                  // <div>
-                  //   <p className=" text-center text-lg md:text-3xl lg:text-2xl mt-4 font-semibold z-20">{a.texto}</p>
-                  // </div>
-                   <li
-                   key={i}
-                   className="flex items-center p-4 rounded-lg shadow hover:shadow-lg transition-shadow backdrop-hue-rotate-180	my-1"
-                 >
-                   <i class='bx bx-check bx-tada text-green-500 text-2xl mr-4'></i>
-                   <span className="text-xl font-medium text-gray-800 dark:text-gray-200">
-                     {a.texto}
-                   </span>
-                 </li>
-                  ))}
-              </div>
-            ) : (
-              <div className={`absolute  ${selected?.id ? "rounded-sm" : ""}`}>
-                <p className=" text-center text-3xl md:text-5xl font-extrabold antialiased z-20">{text}</p>
-                <p className="text-center text-ms md:text-2xl font-semibold z-20 px-2 md:px-0">{item.description}</p>
-              </div>
-            )}
-          
-          <div class={`col-span-2 h-full md:col-span-1  ${selected?.id ? " " : "hidden"}  `}>
+        className={` group/card w-full absolute overflow-hidden bg-transparent flex items-center justify-center  ${
+          selected?.id ? "  backdrop-blur-lg top-10" : "h-full"
+        } `}
+      >
+        <CardPattern
+          mouseX={mouseX}
+          mouseY={mouseY}
+          randomString={randomString}
+          selected={selected}
+        />
+        <div
+          className={`relative z-10 flex items-center justify-center w-full h-full dark:text-white hover:text-black ${
+            selected?.id ? `grid grid-cols-2 gap-4 ` : ""
+          } `}
+        >
+          {selected?.id ? (
+            <div className={`col-span-2 md:col-span-1 px-20`}>
+              <p className=" text-center text-3xl md:text-5xl lg:text-5xl font-extrabold antialiased z-20">
+                {text}
+              </p>
+              <br />
+              <br />
+              {item.claves.map((a, i) => (
+                // <div>
+                //   <p className=" text-center text-lg md:text-3xl lg:text-2xl mt-4 font-semibold z-20">{a.texto}</p>
+                // </div>
+                <li
+                  key={i}
+                  className="flex items-center p-4 rounded-lg shadow hover:shadow-lg transition-shadow backdrop-hue-rotate-180	my-1"
+                >
+                  <i class="bx bx-check bx-tada text-green-500 text-2xl mr-4"></i>
+                  <span className="text-xl font-medium text-gray-800 dark:text-gray-200">
+                    {a.texto}
+                  </span>
+                </li>
+              ))}
+            </div>
+          ) : (
+            <div className={`absolute  ${selected?.id ? "rounded-sm" : ""}`}>
+              <p className=" text-center text-3xl md:text-5xl font-extrabold antialiased z-20">
+                {text}
+              </p>
+              <p className="text-center text-ms md:text-2xl font-semibold z-20 px-2 md:px-0">
+                {item.description}
+              </p>
+            </div>
+          )}
+
+          <div
+            class={`col-span-2 h-full md:col-span-1  ${
+              selected?.id ? " " : "hidden"
+            }  `}
+          >
             {/* <div>
               <button className="absolute text-7xl top-2 right-2" onClick={handleOnClose}>x</button>
             </div> */}
-            <div className="flex-1 w-full h-full mx-auto rounded-none md:rounded-2xl shadow-input bg-red-500">
-            <Modelo3D modeloUrl="/moon.glb" />
-{/* <form className="my-8" onSubmit={handleSubmit}>
+            <div className="flex-1 w-full h-full rounded-none md:rounded-2xl shadow-input relative flex justify-center">
+              <Modelo3D modeloUrl="/moon.glb" />
+              <Link
+      to={"contacto"}
+      smooth={true}
+      duration={500}
+      className="cursor-pointer transition-colors"
+    >
+              <button className="absolute p-1 flex items-center justify-center bottom-8 rounded-md">
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-md" />
+                <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
+                  Cotiza ya!
+                </div>
+              </button>
+              </Link>
+              {/* <form className="my-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
                   <LabelInputContainer>
                     <Label htmlFor="firstname" >Nombre</Label>
@@ -126,43 +160,46 @@ export default function EvervaultCard({
                 </button>
               </form>  */}
             </div>
-
-
-
           </div>
         </div>
       </div>
-    </div >)
-  );
-};
-
-function CardPattern({
-  mouseX,
-  mouseY,
-  randomString, selected
-}) {
-  let maskImage = useMotionTemplate`radial-gradient(250px at ${mouseX}px ${mouseY}px, white, transparent)`;
-  let style = { maskImage, WebkitMaskImage: maskImage };
-  return (
-    (<div className="pointer-events-none">
-      <div
-        className="absolute inset-0 rounded-2xl  [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
-      <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-500 to-blue-700  group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
-        style={style} />
-      <motion.div
-        className="absolute inset-0 rounded-2xl mix-blend-overlay group-hover/card:opacity-100"
-        style={style}>
-        <span
-          className={`absolute inset-x-0 h-full break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500 ${selected?.id ? "text-8xl " : "text-6xl "}`}>
-          {randomString}
-        </span>
-      </motion.div>
-    </div>)
+    </div>
   );
 }
 
-const characters = [<i class='bx bxl-docker'></i>, <i class='bx bxl-aws' ></i>, <i class='bx bx-bluetooth'></i>, <i class='bx bx-data' ></i>, <i class='bx bx-cloud' ></i>];
+function CardPattern({ mouseX, mouseY, randomString, selected }) {
+  let maskImage = useMotionTemplate`radial-gradient(250px at ${mouseX}px ${mouseY}px, white, transparent)`;
+  let style = { maskImage, WebkitMaskImage: maskImage };
+  return (
+    <div className="pointer-events-none">
+      <div className="absolute inset-0 rounded-2xl  [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
+      <motion.div
+        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-500 to-blue-700  group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
+        style={style}
+      />
+      <motion.div
+        className="absolute inset-0 rounded-2xl mix-blend-overlay group-hover/card:opacity-100"
+        style={style}
+      >
+        <span
+          className={`absolute inset-x-0 h-full break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500 ${
+            selected?.id ? "text-8xl " : "text-6xl "
+          }`}
+        >
+          {randomString}
+        </span>
+      </motion.div>
+    </div>
+  );
+}
+
+const characters = [
+  <i class="bx bxl-docker"></i>,
+  <i class="bx bxl-aws"></i>,
+  <i class="bx bx-bluetooth"></i>,
+  <i class="bx bx-data"></i>,
+  <i class="bx bx-cloud"></i>,
+];
 export const generateRandomString = (length) => {
   let result = [];
   for (let i = 0; i < length; i++) {
