@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef  } from "react";
 import { Input } from "./Input";
 import { Label } from "./Label";
 import { cn } from "../lib/utils";
@@ -9,6 +9,7 @@ import img_a from "../img/papuAlexwebp.webp";
 import "./Contact.css";
 import axios from "axios";
 import { useDrawerContext } from "../contexts/DrawerContext";
+import * as THREE from "three";
 
 import { CardBody, CardContainer, CardItem } from "./3DAvatar";
 
@@ -39,12 +40,11 @@ export function Contact() {
   // useEffect para obtener la IP al montar el componente
   useEffect(() => {
     getClientIP();
-    console.log(events);
-
     setCustomer((prevCustomer) => ({
       ...prevCustomer,
       events: events,
     }));
+
   }, [events]);
 
   const handleChange = (e) => {

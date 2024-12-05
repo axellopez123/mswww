@@ -1,11 +1,12 @@
 "use client";
 import { useMotionValue } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useMotionTemplate, motion } from "framer-motion";
 import { cn } from "../lib/utils";
 import { Input } from "./Input";
 import { Label } from "./Label";
 import { TextArea } from "./TextArea";
+import Modelo3D from "./Modelo3D";
 
 export default function EvervaultCard({
   text,
@@ -84,12 +85,13 @@ export default function EvervaultCard({
               </div>
             )}
           
-          <div class={`col-span-2 md:col-span-1  ${selected?.id ? "relative " : "absolute hidden"}  `}>
+          <div class={`col-span-2 h-full md:col-span-1  ${selected?.id ? " " : "hidden"}  `}>
             {/* <div>
               <button className="absolute text-7xl top-2 right-2" onClick={handleOnClose}>x</button>
             </div> */}
-            <div className="flex-1 w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-transparent dark:bg-white/20 ">
-              <form className="my-8" onSubmit={handleSubmit}>
+            <div className="flex-1 w-full h-full mx-auto rounded-none md:rounded-2xl shadow-input bg-red-500">
+            <Modelo3D modeloUrl="/moon.glb" />
+{/* <form className="my-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
                   <LabelInputContainer>
                     <Label htmlFor="firstname" >Nombre</Label>
@@ -122,7 +124,7 @@ export default function EvervaultCard({
                   Enviar &rarr;
                   <BottomGradient />
                 </button>
-              </form>
+              </form>  */}
             </div>
 
 
