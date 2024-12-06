@@ -48,7 +48,7 @@ export default function EvervaultCard({
   return (
     <div
       className={cn(
-        `bg-transparent aspect-square  flex items-center justify-center w-full h-64 relative  `,
+        `bg-transparent aspect-square  flex items-center justify-center w-full h-64 relative`,
         className
       )}
     >
@@ -120,7 +120,7 @@ export default function EvervaultCard({
     >
               <button className="absolute p-1 flex items-center justify-center bottom-8 rounded-md">
                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-md" />
-                <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
+                <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent font-semibold">
                   Cotiza ya!
                 </div>
               </button>

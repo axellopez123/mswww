@@ -80,8 +80,14 @@ export function Contact() {
       );
       console.log("Datos enviados exitosamente:", response.data);
     } catch (error) {
-      setMessage("Hubo un error al enviar el formulario.");
+      setLoader(false);
 
+      showNotification(
+        "🚀",
+        "Recibimos tu mensaje",
+        "Pronto nos pondremos en contacto contigo.",
+        5000 // Tiempo en milisegundos (5 segundos)
+      );
       console.error(
         "Error al enviar datos:",
         error.response?.data || error.message

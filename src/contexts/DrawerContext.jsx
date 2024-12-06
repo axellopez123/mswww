@@ -1,5 +1,5 @@
 // src/contexts/DrawerContext.jsx
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useState, useEffect  } from "react";
 
 const DrawerContext = createContext();
 
@@ -24,11 +24,13 @@ export const DrawerProvider = ({ children }) => {
     ]);
   }, []);
 
-  const showNotification = (icon, title, message, time = 3000) => {
-    setNotification({ icon, title, message, time });
-    console.log(notification);
-    
-    setTimeout(() => setNotification({ icon: "", title: "", message: "", time: 0 }), time);
+  const showNotification = (emoji, title, message, duration) => {
+    setNotification({ emoji, title, message });
+
+    // Ocultar la notificación después del tiempo establecido
+    setTimeout(() => {
+      setNotification(null);
+    }, duration);
   };
 
   return (
