@@ -1,5 +1,11 @@
 // src/contexts/DrawerContext.jsx
-import React, { createContext, useCallback, useContext, useState, useEffect  } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 
 const DrawerContext = createContext();
 
@@ -7,7 +13,7 @@ export const DrawerProvider = ({ children }) => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [events, setEvents] = useState([]);
   const [notification, setNotification] = useState({
-    icon: "",
+    emoji: "",
     title: "",
     message: "",
     time: 0,
@@ -27,19 +33,19 @@ export const DrawerProvider = ({ children }) => {
   const showNotification = (emoji, title, message, duration) => {
     // Configurar la notificación
     setNotification({ emoji, title, message, duration });
-  
+
     // Configurar el ocultamiento de la notificación después del tiempo establecido
     setTimeout(() => {
-      setNotification(null);
+      setNotification({ emoji: "", title: "", message: "", time: 0 });
     }, duration);
   };
 
   useEffect(() => {
     if (notification) {
-      console.log('Notificación mostrada:', notification);
+      console.log("Notificación mostrada:", notification);
     }
-  }, [notification]); 
-  
+  }, [notification]);
+
   return (
     <DrawerContext.Provider
       value={{

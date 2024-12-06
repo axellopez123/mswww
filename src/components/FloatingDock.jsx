@@ -60,6 +60,7 @@ const FloatingDockDesktop = ({ items, className }) => {
           </h4>
         }
         effect={false}
+        target={"contacto"}
       />
     </motion.div>
   );

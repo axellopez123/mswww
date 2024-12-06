@@ -62,7 +62,10 @@ export function Contact() {
 
     setLoader(true);
     setMessage("");
-
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Desplazamiento suave
+    });
     const url = "https://api.arwax.pro/api/bot/";
 
     try {
@@ -72,6 +75,7 @@ export function Contact() {
         },
       });
       setLoader(false);
+      
       showNotification(
         "🚀",
         "Recibimos tu mensaje",
@@ -230,7 +234,7 @@ export function Contact() {
               <Label htmlFor="message">Mensaje</Label>
               <TextArea
                 id="message"
-                placeholder="Escribe aquí tu mensaje..."
+                placeholder=""
                 name="message"
                 type="text"
                 className=""

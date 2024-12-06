@@ -16,7 +16,6 @@ import {
 } from "framer-motion";
 import { Link } from "react-scroll";
 import { useDrawerContext } from "../contexts/DrawerContext";
-import Notification from "../components/Notification";
 export default function Home() {
   const { notification } = useDrawerContext();
 
@@ -206,27 +205,35 @@ export default function Home() {
   };
 
   return (
-      <div className="bg-white dark:bg-black z-40">
-      {notification && (
-        <div className="fixed top-5 right-5 bg-green-500 text-white p-3 rounded-lg shadow-lg">
-          <p className="text-xl">{notification.emoji} {notification.title}</p>
-          <p>{notification.message}</p>
-        </div>
-      )}
-        <GridComponent />
+    <div className="bg-white dark:bg-black z-40">
+      {notification &&
+        notification.emoji &&
+        notification.title &&
+        notification.message && (
+          <div className="fixed top-0 left-0 h-screen w-screen bg-gray-600/50 text-white p-5 rounded-lg shadow-lg flex justify-center items-center z-50">
+            <div className="bg-gray-800 p-6 rounded-lg shadow-xl w-full text-center">
+              <div className="flex items-center justify-center space-x-3">
+                <span className="text-4xl">{notification.emoji}</span>
+                <p className="text-2xl font-semibold">{notification.title}</p>
+              </div>
+              <p className="mt-3 text-lg">{notification.message}</p>
+            </div>
+          </div>
+        )}
+      <GridComponent />
 
-        <LayoutGridDemo cards={projects} />
-        <Contact />
-        {visible && (
-          <div className="hidden md:block fixed bottom-5 right-5">
-            <Link
-              onClick={scrollToTop}
-              smooth={true}
-              duration={500}
-              className="cursor-pointer transition-colors"
-            >
-              <motion.div className="rounded-full bg-green-600/70 hover:bg-green-500/80 border-2 border-white/20 border-double shadow-lg shadow-green-600 hover:shadow-green-500 flex items-center justify-center relative px-3 py-3 hover:scale-110 transition duration-150 ease-in-out delay-0">
-                {/* <AnimatePresence>
+      <LayoutGridDemo cards={projects} />
+      <Contact />
+      {visible && (
+        <div className="hidden md:block fixed bottom-5 right-5">
+          <Link
+            onClick={scrollToTop}
+            smooth={true}
+            duration={500}
+            className="cursor-pointer transition-colors"
+          >
+            <motion.div className="rounded-full bg-green-600/70 hover:bg-green-500/80 border-2 border-white/20 border-double shadow-lg shadow-green-600 hover:shadow-green-500 flex items-center justify-center relative px-3 py-3 hover:scale-110 transition duration-150 ease-in-out delay-0">
+              {/* <AnimatePresence>
           {hovered && (
             <motion.div
               initial={{ opacity: 0, y: 10, x: "-50%" }}
@@ -237,14 +244,14 @@ export default function Home() {
             </motion.div>
           )}
         </AnimatePresence> */}
-                <motion.div className="flex items-center justify-center cursor-pointer text-black dark:text-white text-shadow text-xl font-extrabold px-1">
-                  ☝🏼
-                </motion.div>
+              <motion.div className="flex items-center justify-center cursor-pointer text-black dark:text-white text-shadow text-xl font-extrabold px-1">
+                ☝🏼
               </motion.div>
-            </Link>
-          </div>
-        )}
-      </div>
+            </motion.div>
+          </Link>
+        </div>
+      )}
+    </div>
   );
 }
 function LayoutGridDemo(cards) {
