@@ -25,7 +25,10 @@ export const DrawerProvider = ({ children }) => {
   }, []);
 
   const showNotification = (emoji, title, message, duration) => {
-    setNotification({ emoji, title, message });
+    console.log(title);
+    
+    setNotification({ emoji, title, message, duration });
+console.log(notification);
 
     // Ocultar la notificación después del tiempo establecido
     setTimeout(() => {
