@@ -25,17 +25,21 @@ export const DrawerProvider = ({ children }) => {
   }, []);
 
   const showNotification = (emoji, title, message, duration) => {
-    console.log(title);
-    
+    // Configurar la notificación
     setNotification({ emoji, title, message, duration });
-console.log(notification);
-
-    // Ocultar la notificación después del tiempo establecido
+  
+    // Configurar el ocultamiento de la notificación después del tiempo establecido
     setTimeout(() => {
       setNotification(null);
     }, duration);
   };
 
+  useEffect(() => {
+    if (notification) {
+      console.log('Notificación mostrada:', notification);
+    }
+  }, [notification]); 
+  
   return (
     <DrawerContext.Provider
       value={{
