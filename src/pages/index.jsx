@@ -15,9 +15,11 @@ import {
   useTransform,
 } from "framer-motion";
 import { Link } from "react-scroll";
-
+import { useDrawerContext } from "../contexts/DrawerContext";
 export default function Home() {
-  useEffect(() => {}, []);
+  const { notification } = useDrawerContext();
+
+  useEffect(() => {}, [notification]);
 
   const SkeletonOne = () => {
     return (
@@ -181,6 +183,7 @@ export default function Home() {
       thumbnail: ""
     },*/,
   ];
+
   const [visible, setIsVisible] = useState(false);
   useEffect(() => {
     const toggleVisibility = () => {
@@ -203,6 +206,11 @@ export default function Home() {
   };
 
   return (
+    <>
+            {notification.icon && <div className="fixed top-0 left-0 w-full flex justify-center z-50">      <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex items-center space-x-2"><div>
+          <strong>{notification.title}</strong>
+          <p>{notification.message}</p>
+        </div></div></div>}
     <div className="bg-white dark:bg-black">
       <GridComponent />
 
@@ -236,12 +244,16 @@ export default function Home() {
         </div>
       )}
     </div>
+    {}
+    </>
   );
 }
 function LayoutGridDemo(cards) {
   return (
-    <div className="h-screem w-full">
+    <div className="h-screen w-full">
       <Layout_grid cards={cards} />
     </div>
   );
 }
+
+

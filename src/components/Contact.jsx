@@ -10,7 +10,6 @@ import "./Contact.css";
 import axios from "axios";
 import { useDrawerContext } from "../contexts/DrawerContext";
 import * as THREE from "three";
-
 import { CardBody, CardContainer, CardItem } from "./3DAvatar";
 
 export function Contact() {
@@ -26,7 +25,10 @@ export function Contact() {
     referrer: "",
     session_duration: "420",
   });
-  const { events, trackEvent } = useDrawerContext();
+  const [loader, setLoader] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const { events, trackEvent, showNotification } = useDrawerContext();
   const getClientIP = async () => {
     try {
       const response = await fetch("https://api.ipify.org?format=json");
@@ -58,6 +60,9 @@ export function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoader(true);
+    setMessage("");
+
     const url = "https://api.arwax.pro/api/bot/";
 
     try {
@@ -66,12 +71,23 @@ export function Contact() {
           "Content-Type": "application/json",
         },
       });
+      setLoader(false);
+      showNotification(
+        "🚀",
+        "Recibimos tu mensaje",
+        "Pronto nos pondremos en contacto contigo.",
+        5000 // Tiempo en milisegundos (5 segundos)
+      );
       console.log("Datos enviados exitosamente:", response.data);
     } catch (error) {
+      setMessage("Hubo un error al enviar el formulario.");
+
       console.error(
         "Error al enviar datos:",
         error.response?.data || error.message
       );
+    }finally {
+      setLoader(false);
     }
   };
   return (
@@ -158,6 +174,7 @@ export function Contact() {
         </div>
         <div className="mt-6 flex-none bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent md:my-8 h-1 w-full md:h-full md:w-[3px]" />
         <div className="flex-1 w-full rounded-none px-5 md:rounded-2xl shadow-input bg-transparent dark:bg-black ">
+          
           <form className="" onSubmit={handleSubmit}>
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
               <LabelInputContainer>
@@ -224,6 +241,7 @@ export function Contact() {
               <BottomGradient />
             </button>
           </form>
+          
         </div>
       </div>
     </div>
