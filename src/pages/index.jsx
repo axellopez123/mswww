@@ -205,7 +205,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white dark:bg-black z-40">
+    <div className="bg-slate-300/30 dark:bg-black z-40">
       {notification &&
         notification.emoji &&
         notification.title &&
@@ -256,7 +256,7 @@ export default function Home() {
 }
 function LayoutGridDemo(cards) {
   return (
-    <div className="h-screen w-full">
+    <div className="h-full md:h-screen w-full md:w-full">
       <Layout_grid cards={cards} />
     </div>
   );

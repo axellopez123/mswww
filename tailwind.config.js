@@ -24,6 +24,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily:{
+        exo: ['Exo', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+      },
       backgroundImage: {
         'hero-pattern': "url('/src/img/f.svg')",
       },

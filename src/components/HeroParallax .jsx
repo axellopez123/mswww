@@ -40,7 +40,7 @@ function HeroParallax({
         }}
         className="">
           <div className="flex justify-center items-center mb-12">
-            <p className="text-3xl md:text-5xl font-bold dark:text-white">Joyitas💎</p>
+            <p className="font-exo text-3xl md:text-5xl font-bold dark:text-white">Joyitas</p><i class='bx bxl-sketch text-cyan-400 hover:text-cyan-500 text-5xl'></i>
           </div>
         <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
           {firstRow.map((product) => (
@@ -69,7 +69,7 @@ function Header ()  {
       <h1 className="text-5xl md:text-8xl font-bold dark:text-white">
         Impulsa tu empresa <br /> a otro nivel
       </h1>
-      <p className="max-w-3xl text-base text-xl md:text-4xl mt-8 dark:text-neutral-200 font-bold">
+      <p className="max-w-3xl text-xl md:text-4xl mt-8 dark:text-neutral-200 font-bold">
       Destaca en el mercado digital, confiando en nuestros expertos para llevar tu empresa al nivel que siempre has deseado. 
       </p>
     </VortexProps>)

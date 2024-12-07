@@ -65,7 +65,7 @@ export default function EvervaultCard({
           selected={selected}
         />
         <div
-          className={`relative z-10 flex items-center justify-center w-full h-full dark:text-white hover:text-black ${
+          className={`relative z-10 flex items-center justify-center w-full h-full dark:text-black ${
             selected?.id ? `grid grid-cols-2 gap-4 ` : ""
           } `}
         >

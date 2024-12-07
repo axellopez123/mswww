@@ -61,7 +61,7 @@ function Menu ({
     (<nav
       // resets the state
       onMouseLeave={() => setActive(null)}
-      className="relative border dark:border-white/[0.2] bg-white/30 border-white/20 rounded-xl p-6 shadow-lg flex justify-between space-x-4 px-8 py-2">
+      className="relative border dark:border-white/[0.2] bg-white/30 border-white/20 rounded-xl shadow-lg flex justify-between space-x-4 px-8 pt-4 pb-3">
       {children}
     </nav>)
   );

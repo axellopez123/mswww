@@ -101,52 +101,20 @@ export function Contact() {
     }
   };
   return (
-    <div id="contacto">
-      <div className="flex justify-center items-center my-4">
-        <p className="text-3xl md:text-5xl font-bold dark:text-white">
-          Contacto☎
+    <div id="contacto" className="pb-32 pt-10 min-h-screen flex flex-col items-center justify-center bg-cyan-100 dark:bg-black">
+      <div className="flex justify-center items-center mb-2">
+        <p className="text-4xl md:text-5xl font-bold dark:text-white font-exo">
+          Hablemos
         </p>
       </div>
-      <div className="flex justify-center items-center my-4 px-0 md:px-32">
-        <p className="text-xl font-bold dark:text-white text-center">Obtén la ayuda de los Masters del Desarrollo y transforma tus necesidades en soluciones inteligentes diseñadas para superar cualquier desafío. 💡✨
-        Con nuestra experiencia, creamos herramientas tecnológicas a medida que potencian tus proyectos y te llevan al éxito. ¡Hablemos! 🚀</p>
+      <div className="flex justify-center items-center mb-2 md:mb-6 px-12 md:px-32">
+        <p className="font-inter text-2xl font-bold dark:text-white text-center">Transforma tus ideas en soluciones inteligentes con los Masters del Desarrollo. 🚀💡</p>
       </div>
-      <div className=" flex flex-col md:flex-row w-full h-full dark:bg-black px-0 md:px-32 mt-8 pb-32 md:pb-12">
+      <div className=" flex flex-col md:flex-row w-full h-full dark:bg-black px-0 md:px-32">
         <div className="flex-1">
           <div className="flex flex-col md:flex-row h-full">
-            <div className="w-full h-full flex items-center px-5">
-              <div className="flex-1 flex flex-col items-center">
-                <CardContainer className="inter-var">
-                  <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-gray-600 dark:shadow-white rounded-xl">
-                    <CardItem
-                      translateZ="100"
-                      className="w-full flex justify-center"
-                    >
-                      <div className="md:w-72 md:h-72 relative rounded-xl overflow-hidden shadow-md">
-                        <img
-                          src={img_r}
-                          height="1000"
-                          width="1000"
-                          className="object-cover w-full h-full transition-transform duration-300 group-hover/card:shadow-xl hover:scale-105"
-                          alt="thumbnail"
-                        />
-                      </div>
-                    </CardItem>
-                    <CardItem translateZ="100" className="w-full mt-4">
-                      <p className="text-center text-black dark:text-white text-3xl">
-                        Rodolfo Rodriguez
-                      </p>
-                      <p className="text-center text-black dark:text-white text-lg">
-                        Master del codigo
-                      </p>
-                      <p className="text-center text-black dark:text-white">
-                        Since 2015
-                      </p>
-                    </CardItem>
-                  </CardBody>
-                </CardContainer>
-              </div>
-              <div className="flex-1 flex flex-col items-center">
+            <div className="w-full h-full flex flex-row px-5 py-8">
+            <div className="flex-1 flex flex-col items-center">
                 <CardContainer className="inter-var">
                   <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-gray-600 dark:shadow-white rounded-xl">
                     <CardItem
@@ -179,14 +147,45 @@ export function Contact() {
                   </CardBody>
                 </CardContainer>
               </div>
+              <div className="flex-1">
+                <CardContainer className="inter-var">
+                  <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-gray-600 dark:shadow-white rounded-xl">
+                    <CardItem
+                      translateZ="100"
+                      className="w-full flex justify-center"
+                    >
+                      <div className="md:w-72 md:h-72 relative rounded-xl overflow-hidden shadow-md">
+                        <img
+                          src={img_r}
+                          height="1000"
+                          width="1000"
+                          className="object-cover w-full h-full transition-transform duration-300 group-hover/card:shadow-xl hover:scale-105"
+                          alt="thumbnail"
+                        />
+                      </div>
+                    </CardItem>
+                    <CardItem translateZ="100" className="w-full mt-4">
+                      <p className="text-center text-black dark:text-white text-3xl">
+                        Rodolfo Rodriguez
+                      </p>
+                      <p className="text-center text-black dark:text-white text-lg">
+                        Master del codigo
+                      </p>
+                      <p className="text-center text-black dark:text-white">
+                        Since 2015
+                      </p>
+                    </CardItem>
+                  </CardBody>
+                </CardContainer>
+              </div>
             </div>
           </div>
         </div>
-        <div className="mt-6 flex-none bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent md:my-8 h-1 w-full md:h-full md:w-[3px]" />
+        <div className="flex-none bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent h-1 w-full md:h-full md:w-[3px] mb-3 md:my-0" />
         <div className="flex-1 w-full rounded-none px-5 md:rounded-2xl shadow-input bg-transparent dark:bg-black ">
           
           <form className="" onSubmit={handleSubmit}>
-            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-2 md:mb-4">
               <LabelInputContainer>
                 <Label htmlFor="firstname">Nombre</Label>
                 <Input
@@ -198,7 +197,7 @@ export function Contact() {
                 />
               </LabelInputContainer>
             </div>
-            <LabelInputContainer className="mb-4">
+            <LabelInputContainer className="mb-2 md:mb-4">
               <Label htmlFor="email">Correo electronico</Label>
               <Input
                 id="email"
@@ -208,7 +207,7 @@ export function Contact() {
                 onChange={handleChange}
               />
             </LabelInputContainer>
-            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-2 md:mb-4">
               <LabelInputContainer>
                 <Label htmlFor="firstname">Telefono</Label>
                 <Input
