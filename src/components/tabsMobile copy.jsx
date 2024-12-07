@@ -45,20 +45,28 @@ const TabMobile = () => {
 
 const TabItem = ({ tab, isActive, onClick }) => {
   return (
-    <div
+    <motion.div
       className="flex flex-col items-center cursor-pointer text-white"
       onClick={onClick}
+      animate={{
+        y: isActive ? -10 : 0,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 20,
+      }}
     >
-      <div
-        className={`${isActive ? "" : ""}`}
+      <motion.div
+        className={`z-10 text-xl rounded-full ${isActive ? "bg-green-600/70 border-2 border-white/20 border-double shadow-lg shadow-green-600" : "bg-green-500/80 border-2 border-white/20 border-double shadow-lg shadow-green-500"}`}
         style={{ scale: isActive ? 1.2 : 1 }}
       >
         {tab.icon}
-      </div>
-      <span className={`antialiased text-sm font-bold ${isActive ? "text-blue-500" : "text-black"}`}>
+      </motion.div>
+      <span className={`antialiased mt-3 text-sm z-40 font-bold ${isActive ? "font-extrabold" : ""}`}>
         {tab.label}
       </span>
-    </div>
+    </motion.div>
   );
 };
 
