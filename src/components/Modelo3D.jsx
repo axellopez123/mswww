@@ -1,40 +1,54 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
-import * as THREE from 'three';
+import * as THREE from "three";
 
 const Modelo3D = ({ modeloUrl }) => {
-  // Carga del modelo 3D usando useGLTF
+  const canvasRef = useRef();
+
+  // Función para forzar un re-render del canvas después de que se monte
+  useEffect(() => {
+    const resizeCanvas = () => {
+      if (canvasRef.current) {
+        canvasRef.current.style.width = "100%";
+        canvasRef.current.style.height = "100%";
+      }
+    };
+    resizeCanvas();
+
+    // Escuchar cambios de tamaño en la ventana
+    window.addEventListener("resize", resizeCanvas);
+    return () => window.removeEventListener("resize", resizeCanvas);
+  }, []);
+
   const Modelo = () => {
     const { scene } = useGLTF(modeloUrl);
-    // Aplicar color/material a todas las partes del modelo
     scene.traverse((child) => {
       if (child.isMesh) {
         child.material = new THREE.MeshStandardMaterial({ color: "white" });
       }
     });
 
-    scene.scale.set(3, 3, 3); // Aumenta el tamaño del modelo
+    // Escala adaptativa para dispositivos móviles
+    const isMobile = window.innerWidth < 768;
+    scene.scale.set(isMobile ? 1.5 : 3, isMobile ? 1.5 : 3, isMobile ? 1.5 : 3);
 
-    return <primitive object={scene}/>;
+    return <primitive object={scene} />;
   };
 
   return (
     <Canvas
-      style={{ position:"absolute", width: "100%", height: "100%" }}
+      ref={canvasRef}
+      dpr={[1, 2]}
+      style={{ position: "absolute", top: 0,left: 0, width: "100%", height: "100%",}}
       camera={{
-        position: [10, 9, 10], // Subir la cámara en el eje Y (segundo valor)
+        position: [10, 10, 10], // Configurar la posición de la cámara
         fov: 75,
       }}
     >
-      {/* Luz ambiental */}
       <ambientLight intensity={0.5} />
-      {/* Luz direccional */}
       <directionalLight position={[10, 10, 10]} intensity={1} />
-      {/* Controles de cámara */}
-      <OrbitControls />
-      {/* Modelo 3D */}
-      
+      <OrbitControls enablePan enableZoom enableRotate touchZoom touchRotate />
       <Modelo />
     </Canvas>
   );

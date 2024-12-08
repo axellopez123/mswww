@@ -46,16 +46,19 @@ export default function EvervaultCard({
     console.log("Form submitted");
   };
   return (
-    <div
-      className={cn(
-        `bg-transparent aspect-square  flex items-center justify-center w-full h-64 relative`,
-        className
-      )}
-    >
+<div
+className={cn(
+  `bg-transparent flex items-center justify-center w-full relative`,
+  selected?.id ? "h-screen max-h-screen overflow-y-auto" : "h-64",
+  className
+)}
+
+>
+
       <div
         onMouseMove={onMouseMove}
-        className={` group/card w-full absolute overflow-hidden bg-transparent flex items-center justify-center  ${
-          selected?.id ? "  backdrop-blur-lg top-10" : "h-full"
+        className={` group/card w-full h-full absolute overflow-hidden bg-transparent flex items-center justify-center  ${
+          selected?.id ? "  backdrop-blur-lg" : ""
         } `}
       >
         <CardPattern
@@ -65,34 +68,34 @@ export default function EvervaultCard({
           selected={selected}
         />
         <div
-          className={`relative z-10 flex items-center justify-center w-full h-full dark:text-black ${
-            selected?.id ? `grid grid-cols-2 gap-4 ` : ""
+          className={`relative z-10 flex items-center justify-center w-full h-full dark:text-black flex-col md:flex-row ${
+            selected?.id ? ` ` : ""
           } `}
         >
           {selected?.id ? (
-            <div className={`col-span-2 md:col-span-1 px-20`}>
-              <p className=" text-center text-3xl md:text-5xl lg:text-5xl font-extrabold antialiased z-20">
+            <div className={`flex-1 md:px-20 h-full`}>
+              <p className=" text-center text-3xl md:text-5xl lg:text-5xl font-extrabold antialiased z-20 mb-2">
                 {text}
               </p>
-              <br />
-              <br />
               {item.claves.map((a, i) => (
                 // <div>
                 //   <p className=" text-center text-lg md:text-3xl lg:text-2xl mt-4 font-semibold z-20">{a.texto}</p>
                 // </div>
                 <li
                   key={i}
-                  className="flex items-center p-4 rounded-lg shadow hover:shadow-lg transition-shadow backdrop-hue-rotate-180	my-1"
+                  className="flex items-center p-2 rounded-lg shadow hover:shadow-lg transition-shadow backdrop-hue-rotate-180	my-1"
                 >
-                  <i class="bx bx-check bx-tada text-green-500 text-2xl mr-4"></i>
-                  <span className="text-xl font-medium text-gray-800 dark:text-gray-200">
+                  <i class="bx bx-check bx-tada text-green-500 text-2xl mr-2"></i>
+                  <span className="text-md md:text-xl font-medium text-gray-800 dark:text-gray-200">
                     {a.texto}
                   </span>
                 </li>
               ))}
             </div>
           ) : (
-            <div className={`absolute  ${selected?.id ? "rounded-sm" : ""}`}>
+            <div
+              className={`flex-1 absolute  ${selected?.id ? "rounded-sm" : ""}`}
+            >
               <p className=" text-center text-3xl md:text-5xl font-extrabold antialiased z-20">
                 {text}
               </p>
@@ -103,27 +106,24 @@ export default function EvervaultCard({
           )}
 
           <div
-            class={`col-span-2 h-full md:col-span-1  ${
-              selected?.id ? " " : "hidden"
-            }  `}
+            class={`flex-1 h-full w-full ${selected?.id ? " " : "hidden"}  `}
           >
-            {/* <div>
-              <button className="absolute text-7xl top-2 right-2" onClick={handleOnClose}>x</button>
-            </div> */}
-            <div className="flex-1 w-full h-full rounded-none md:rounded-2xl shadow-input relative flex justify-center">
-              <Modelo3D modeloUrl="/moon.glb" />
+            <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center">
+              <div className="h-64 w-full">
+                <Modelo3D modeloUrl="/moon.glb" />
+              </div>
               <Link
-      to={"contacto"}
-      smooth={true}
-      duration={500}
-      className="cursor-pointer transition-colors"
-    >
-              <button className="absolute p-1 flex items-center justify-center bottom-8 rounded-md">
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-md" />
-                <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent font-semibold">
-                  Cotiza ya!
-                </div>
-              </button>
+                to={"contacto"}
+                smooth={true}
+                duration={500}
+                className="absolute cursor-pointer transition-colors bottom-5"
+              >
+                <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                    Comenzar
+                  </span>
+                </button>
               </Link>
               {/* <form className="my-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">

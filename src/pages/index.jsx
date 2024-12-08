@@ -256,7 +256,7 @@ export default function Home() {
 }
 function LayoutGridDemo(cards) {
   return (
-    <div className="h-full md:h-screen w-full md:w-full">
+    <div className="h-full w-full">
       <Layout_grid cards={cards} />
     </div>
   );
