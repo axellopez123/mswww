@@ -33,9 +33,9 @@ function Layout_grid({ cards, className }) {
   useEffect(() => {}, [selected, lastSelected]);
 
   return (
-    <div id="servicios" className="bg-red-800 pt-8 h-full">
-      <div className="flex justify-center items-center mb-6">
-        <p className="font-exo text-4xl md:text-5xl font-bold text-slate-800">
+    <div id="servicios" className="bg-red-800 h-screen">
+      <div className="flex justify-center items-center">
+        <p className="font-exo text-4xl md:text-5xl font-bold text-slate-800 z-40">
           Servicios
         </p>
         <svg
@@ -51,8 +51,8 @@ function Layout_grid({ cards, className }) {
           />
         </svg>
       </div>
-      <div className="w-full h-full md:p-3 grid grid-cols-1 md:grid-cols-3 relative bg-green-500">
-        {cards["cards"].map((card, i) => (
+      <div className="w-full h-5/6 grid grid-cols-1 md:grid-cols-3 relative bg-green-500 z-30">
+        {cards.map((card, i) => (
           <>
             <div key={i} className={cn(card.className, "")}>
               <motion.a
@@ -110,7 +110,7 @@ function Layout_grid({ cards, className }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute bg-red-500/50 top-5 right-5 text-white py-1 md:py-4 px-2 md:px-5 rounded-full shadow-lg z-50"
+                className="absolute bg-red-500/50 top-5 right-5 text-white rounded-full shadow-lg z-50"
               >
                 <i class="bx bx-x bx-tada text-lg md:text-3xl font-extrabold"></i>
               </motion.button>

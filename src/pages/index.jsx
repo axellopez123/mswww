@@ -222,7 +222,7 @@ export default function Home() {
         )}
       <GridComponent />
 
-      <LayoutGridDemo cards={projects} />
+      <Layout_grid cards={projects} />
       <Contact />
       {visible && (
         <div className="hidden md:block fixed bottom-5 right-5">
@@ -254,10 +254,4 @@ export default function Home() {
     </div>
   );
 }
-function LayoutGridDemo(cards) {
-  return (
-    <div className="h-full w-full">
-      <Layout_grid cards={cards} />
-    </div>
-  );
-}
+
