@@ -33,9 +33,9 @@ function Layout_grid({ cards, className }) {
   useEffect(() => {}, [selected, lastSelected]);
 
   return (
-    <div id="servicios" className="bg-red-800 h-screen">
+    <div id="servicios" className="h-screen">
       <div className="flex justify-center items-center">
-        <p className="font-exo text-4xl md:text-5xl font-bold text-slate-800 z-40">
+        <p className="font-exo text-4xl md:text-5xl font-bold text-slate-800 dark:text-white z-40">
           Servicios
         </p>
         <svg
