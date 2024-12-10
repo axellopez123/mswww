@@ -33,7 +33,7 @@ function Layout_grid({ cards, className }) {
   useEffect(() => {}, [selected, lastSelected]);
 
   return (
-    <div id="servicios" className="h-screen">
+    <div id="servicios" className="h-screen pt-32">
       <div className="flex justify-center items-center">
         <p className="font-exo text-4xl md:text-5xl font-bold text-slate-800 dark:text-white z-40">
           Servicios
@@ -51,7 +51,7 @@ function Layout_grid({ cards, className }) {
           />
         </svg>
       </div>
-      <div className="w-full h-5/6 grid grid-cols-1 md:grid-cols-3 relative bg-green-500 z-30">
+      <div className="w-full h-5/6 grid grid-cols-1 md:grid-cols-3 relative z-30">
         {cards.map((card, i) => (
           <>
             <div key={i} className={cn(card.className, "")}>
