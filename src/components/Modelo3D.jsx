@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
@@ -6,7 +6,7 @@ import * as THREE from "three";
 const Modelo3D = ({ modeloUrl }) => {
   const canvasRef = useRef();
 
-  // Función para forzar un re-render del canvas después de que se monte
+  // Manejar tamaño del canvas
   useEffect(() => {
     const resizeCanvas = () => {
       if (canvasRef.current) {
@@ -14,24 +14,30 @@ const Modelo3D = ({ modeloUrl }) => {
         canvasRef.current.style.height = "100%";
       }
     };
-    resizeCanvas();
 
-    // Escuchar cambios de tamaño en la ventana
+    resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
+
     return () => window.removeEventListener("resize", resizeCanvas);
   }, []);
 
+  // Detectar dispositivo móvil
+  const isMobile = useMemo(() => window.innerWidth < 768, [window.innerWidth]);
+
   const Modelo = () => {
     const { scene } = useGLTF(modeloUrl);
-    scene.traverse((child) => {
-      if (child.isMesh) {
-        child.material = new THREE.MeshStandardMaterial({ color: "white" });
-      }
-    });
 
-    // Escala adaptativa para dispositivos móviles
-    const isMobile = window.innerWidth < 768;
-    scene.scale.set(isMobile ? 1.5 : 3, isMobile ? 1.5 : 3, isMobile ? 1.5 : 3);
+    // Aplicar material y escala inicial
+    useEffect(() => {
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          child.material = new THREE.MeshStandardMaterial({ color: "white" });
+        }
+      });
+
+      const scale = isMobile ? 1.5 : 3;
+      scene.scale.set(scale, scale, scale);
+    }, [scene, isMobile]);
 
     return <primitive object={scene} />;
   };
@@ -40,15 +46,14 @@ const Modelo3D = ({ modeloUrl }) => {
     <Canvas
       ref={canvasRef}
       dpr={[1, 2]}
-      style={{ position: "absolute", top: 0,left: 0, width: "100%", height: "100%",}}
+      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
       camera={{
-        position: [10, 10, 10], // Configurar la posición de la cámara
+        position: [10, 10, 10],
         fov: 75,
       }}
     >
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 10]} intensity={1} />
-      <OrbitControls enablePan enableZoom enableRotate touchZoom touchRotate />
       <Modelo />
     </Canvas>
   );

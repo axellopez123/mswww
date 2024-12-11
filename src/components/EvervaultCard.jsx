@@ -31,6 +31,7 @@ export default function EvervaultCard({
 
   useEffect(() => {
     setLastSelected(selected);
+
   }, [selected, setLastSelected]);
 
   function onMouseMove({ currentTarget, clientX, clientY }) {
@@ -47,12 +48,11 @@ export default function EvervaultCard({
   };
   return (
 <div
-className={cn(
-  `bg-transparent flex items-center justify-center w-full relative`,
-  selected?.id ? "h-screen max-h-screen overflow-y-auto" : "h-64",
-  className
-)}
-
+  className={cn(
+    `bg-transparent flex items-center justify-center w-full relative`,
+    selected?.id === item.id ? "h-screen md:max-h-screen overflow-y-auto" : "h-80",
+    className
+  )}
 >
 
       <div
@@ -96,10 +96,10 @@ className={cn(
             <div
               className={`flex-1 absolute  ${selected?.id ? "rounded-sm" : ""}`}
             >
-              <p className=" text-center text-3xl md:text-5xl font-extrabold antialiased z-20">
+              <p className=" text-center text-5xl md:text-5xl font-extrabold antialiased z-20 px-3 md:px-0">
                 {text}
               </p>
-              <p className="text-center text-ms md:text-2xl font-semibold z-20 px-2 md:px-0">
+              <p className="text-center text-xl md:text-2xl font-bold z-20 px-2 md:px-0">
                 {item.description}
               </p>
             </div>
@@ -109,7 +109,7 @@ className={cn(
             class={`flex-1 h-full w-full ${selected?.id ? " " : "hidden"}  `}
           >
             <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center">
-              <div className="h-64 w-full">
+              <div className="h-72 w-full">
                 <Modelo3D modeloUrl="/moon.glb" />
               </div>
               <Link

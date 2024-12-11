@@ -12,10 +12,11 @@ function Layout_grid({ cards, className }) {
   let [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleClick = (card) => {
+    if(card.id == selected?.id)
+      return;
     setLastSelected(selected);
-    setSelected(card);
-
-    scroller.scrollTo(`card-${card.id}`, {
+    setSelected((prev) => (prev?.id === card.id ? null : card));
+    scroller.scrollTo(`servicios`, {
       duration: 800,
       delay: 0,
       smooth: "easeInOutQuart",
@@ -33,7 +34,7 @@ function Layout_grid({ cards, className }) {
   useEffect(() => {}, [selected, lastSelected]);
 
   return (
-    <div id="servicios" className="h-screen pt-32">
+    <div id="servicios" className="h-full pt-16 md:pt-36">
       <div className="flex justify-center items-center">
         <p className="font-exo text-4xl md:text-5xl font-bold text-slate-800 dark:text-white z-40">
           Servicios
@@ -54,14 +55,17 @@ function Layout_grid({ cards, className }) {
       <div className="w-full h-5/6 grid grid-cols-1 md:grid-cols-3 relative z-30">
         {cards.map((card, i) => (
           <>
-            <div key={i} className={cn(card.className, "")}>
+            <div
+              id={`card-${card.id}`} // Asegúrate de usar IDs únicos
+              className={cn(card.className, "")}
+            >
               <motion.a
                 onClick={() => handleClick(card)}
                 className={cn(
                   card.className,
                   "overflow-hidden",
                   selected?.id === card.id
-                    ? "rounded-lg cursor-pointer absolute inset-0 w-full md:w-full m-auto z-50 flex justify-center items-center flex-wrap flex-col"
+                    ? "rounded-lg cursor-pointer absolute inset-0 w-full m-auto z-50 flex justify-center items-center flex-wrap flex-col"
                     : lastSelected?.id === card.id
                     ? "z-40 rounded-xl h-full w-full"
                     : "rounded-xl h-full w-full"
@@ -104,15 +108,15 @@ function Layout_grid({ cards, className }) {
                 {/* {selected?.id === card.id && <SelectedCard selected={selected} />} */}
               </motion.a>
             </div>
-            {selected && (
+            {selected?.id === card.id && (
               <motion.button
                 onClick={handleOnClose}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute bg-red-500/50 top-5 right-5 text-white rounded-full shadow-lg z-50"
+                className="absolute bg-red-500/70 hover:bg-red-500 top-5 right-5 text-white rounded-full shadow-lg z-50"
               >
-                <i class="bx bx-x bx-tada text-lg md:text-3xl font-extrabold"></i>
+                <i class="bx bx-x bx-tada text-lg md:text-3xl font-extrabold px-1"></i>
               </motion.button>
             )}
           </>
@@ -154,7 +158,7 @@ const Card = ({
         className
       )}
     >
-      <div className="relative">
+      <div className="relative h-full">
         <EvervaultCard
           text={title}
           item={isSelected?.id ? card : card}
@@ -164,17 +168,6 @@ const Card = ({
           setSelected={setSelected}
           lastSelected={lastSelected}
         />
-        {/* {isSelected && (
-          <motion.button
-            onClick={handleOnClose}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="absolute top-5 right-5 bg-red-500 text-white p-4 rounded-full shadow-lg z-50"
-          >
-            Cerrar
-          </motion.button>
-        )} */}
       </div>
     </div>
   );
