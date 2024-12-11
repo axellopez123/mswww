@@ -141,7 +141,7 @@ export default function Home() {
       ],
     },
     {
-      title: "Automatizaciones",
+      title: "IA & Bots",
       description:
         // "Reemplaza las tareas repetitivas aumentando la eficiencia, reduciendo errores y liberando recursos para actividades más estratégicas. Es la clave para mantenerse competitivo en un mundo digitalizado.",
         "Optimiza el flujo de trabajo reduciendo errores dando reemplazo a tareas repetitivas con procesos automatizados inteligentes.",

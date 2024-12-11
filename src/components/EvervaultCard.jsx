@@ -73,8 +73,8 @@ export default function EvervaultCard({
           } `}
         >
           {selected?.id ? (
-            <div className={`flex-1 md:px-20 h-full`}>
-              <p className=" text-center text-3xl md:text-5xl lg:text-5xl font-extrabold antialiased z-20 mb-2">
+            <div className={`flex-1 md:px-16 md:pt-8 h-full`}>
+              <p className=" text-center text-3xl md:text-7xl lg:text-8xl font-extrabold antialiased z-20 mb-2 uppercase mb-10">
                 {text}
               </p>
               {item.claves.map((a, i) => (
@@ -83,10 +83,10 @@ export default function EvervaultCard({
                 // </div>
                 <li
                   key={i}
-                  className="flex items-center p-2 rounded-lg shadow hover:shadow-lg transition-shadow backdrop-hue-rotate-180	my-1"
+                  className="flex items-center p-2 rounded-lg shadow hover:shadow-xl transition-shadow backdrop-hue-rotate-180 backdrop-blur-lg	my-1"
                 >
                   <i class="bx bx-check bx-tada text-green-500 text-2xl mr-2"></i>
-                  <span className="text-md md:text-xl font-medium text-gray-800 dark:text-gray-200">
+                  <span className="text-md md:text-3xl text-gray-800 dark:text-gray-200 font-bold	">
                     {a.texto}
                   </span>
                 </li>
