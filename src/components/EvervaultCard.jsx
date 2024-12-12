@@ -109,7 +109,7 @@ export default function EvervaultCard({
             class={`flex-1 h-full w-full ${selected?.id ? " " : "hidden"}  `}
           >
             <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center">
-              <div className="h-72 w-full">
+              <div className="h-96 w-full">
                 <Modelo3D modeloUrl="/moon.glb" />
               </div>
               <Link
