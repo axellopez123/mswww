@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo } from "react";
+import React, { useRef, useEffect, useMemo, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
@@ -54,11 +54,10 @@ const Modelo3D = ({ modeloUrl }) => {
       }}
     >
       <Suspense fallback={CanvasLoader}>
-
-      </Suspense>
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 10]} intensity={1} />
       <Modelo />
+      </Suspense>
     </Canvas>
   );
 };
