@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
+import CanvasLoader from "./CanvasLoader";
 
 const Modelo3D = ({ modeloUrl }) => {
   const canvasRef = useRef();
@@ -48,10 +49,13 @@ const Modelo3D = ({ modeloUrl }) => {
       dpr={[1, 2]}
       style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
       camera={{
-        position: [10, 10, 10],
+        position: [0, 0, 30],
         fov: 75,
       }}
     >
+      <Suspense fallback={CanvasLoader}>
+
+      </Suspense>
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 10]} intensity={1} />
       <Modelo />
