@@ -6,7 +6,7 @@ import EvervaultCard from "./EvervaultCard";
 import BackgroundGradient from "./BackgroundGradient";
 import { Link, scroller } from "react-scroll"; // Importa react-scroll
 
-function Layout_grid({ cards, className }) {
+function LayoutGrid({ cards, className }) {
   const [selected, setSelected] = useState(null);
   const [lastSelected, setLastSelected] = useState(null);
   let [hoveredIndex, setHoveredIndex] = useState(null);
@@ -121,16 +121,6 @@ function Layout_grid({ cards, className }) {
             )}
           </>
         ))}
-        {/* <motion.div
-          onClick={handleOnClose}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: selected?.id ? 0.3 : 0 }}
-          transition={{ duration: 0.5 }}
-          className={cn(
-            "absolute h-full w-full bg-black",
-            selected?.id ? "pointer-events-auto" : "pointer-events-none"
-          )}
-        /> */}
       </div>
     </div>
   );
@@ -173,57 +163,4 @@ const Card = ({
   );
 };
 
-const ImageComponent = ({ card }) => {
-  return (
-    <motion.img
-      layoutId={`image-${card.id}-image`}
-      src={card.thumbnail}
-      height="500"
-      width="500"
-      className={cn(
-        "object-cover object-top absolute inset-0 h-full w-full transition duration-200"
-      )}
-      alt=""
-    />
-  );
-};
-
-const SelectedCard = ({ selected }) => {
-  return (
-    <div className="bg-transparent h-full w-5/6 flex flex-col justify-end rounded-lg shadow-2xl relative z-[60]">
-      <motion.div
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 0.6,
-        }}
-        className="absolute inset-0 h-full w-full bg-black opacity-60 z-10"
-      />
-      <motion.div
-        layoutId={`content-${selected?.id}`}
-        initial={{
-          opacity: 0,
-          y: 100,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        exit={{
-          opacity: 0,
-          y: 100,
-        }}
-        transition={{
-          duration: 0.3,
-          ease: "easeInOut",
-        }}
-        className="relative px-8 z-[70]"
-      >
-        {selected?.content}
-      </motion.div>
-    </div>
-  );
-};
-
-export { Layout_grid };
+export { LayoutGrid };
