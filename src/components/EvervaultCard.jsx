@@ -110,26 +110,15 @@ export default function EvervaultCard({
           >
             <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center h-full w-full">
               <div className="h-full w-full">
-                <Modelo3D
-                  modeloUrl="/moon.glb"
-                  color="red"
-                  scales={[
-                    {
-                      small: [0.15, 0.7, 0.3],
-                      mobile: [0.15, 0.7, 0.3],
-                      tablet: [0.15, 0.7, 0.3],
-                      laptop: [0.15, 0.7, 0.3],
-                      desktop: [0.15, 0.7, 0.3],
-                      else: [0.15, 0.7, 0.3],
-                    },
-                  ]}
-                />
+                {selected && 
+                <Modelo3D modelo={selected.modelo}/>
+              }
               </div>
               <Link
                 to={"contacto"}
                 smooth={true}
                 duration={500}
-                className="absolute cursor-pointer transition-colors bottom-10"
+                className="absolute cursor-pointer transition-colors"
               >
                 <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                   <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />

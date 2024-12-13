@@ -13,6 +13,7 @@ export function Model({
     else: [0.15, 0.7, 0.3],
   },
   rotation = [0, 0, 0],
+  color = "red",
   ...props
 }) {
   const [scale, setScale] = useState([0.15, 0.7, 0.3]);
@@ -23,6 +24,8 @@ export function Model({
   const isTablet = useMediaQuery({ minWidth: 769, maxWidth: 1024 }); // Tablets
   const isLaptop = useMediaQuery({ minWidth: 1025, maxWidth: 1440 }); // Laptops
   const isDesktop = useMediaQuery({ minWidth: 1441 }); // Pantallas de escritorio grandes
+console.log(scale);
+
 
   const useDeviceType = (isSmall, isMobile, isTablet, isLaptop, isDesktop) => {
     const deviceType = useMemo(() => {
@@ -50,6 +53,9 @@ export function Model({
     isLaptop,
     isDesktop
   );
+
+  console.log(whoDevice);
+
   // useEffect(() => {
   //   console.log(scale);
     
@@ -113,7 +119,7 @@ export function Model({
         position={[2.777, 2.131, 0]}
         scale={scale}
       >
-        <meshStandardMaterial color="red" roughness={0.5} metalness={0.7} />
+        <meshStandardMaterial color={"#1e83be"} roughness={1} metalness={0.0} />
       </mesh>
     </group>
   );

@@ -101,6 +101,20 @@ export default function Home() {
           texto: "Infraestructura con las mejores soluciones en la nube",
         },
       ],
+      modelo: {
+        url: "/moon.glb",
+        color: "white",
+        scales: {
+          small: [0.05, 0.05, 0.03],
+          mobile: [0.05, 0.05, 0.03],
+          tablet: [0.15, 0.7, 0.3],
+          laptop: [0.15, 0.7, 0.3],
+          desktop: [0.07, 0.5, 0.3],
+          else: [0.15, 0.7, 0.3],
+        },
+        rotation:[0.1, -Math.PI, 0],
+        position:[1, 1, 0],
+      },
     },
     {
       title: "Pagínas Web",
@@ -120,6 +134,20 @@ export default function Home() {
         { icono: "", texto: "Monitoreo y optimización continua" },
         { icono: "", texto: "Gestión del cambio" },
       ],
+      modelo: {
+        url: "/moon.glb",
+        color: "red",
+        scales: {
+          small: [0.15, 0.7, 0.3],
+          mobile: [0.15, 0.7, 0.3],
+          tablet: [0.15, 0.7, 0.3],
+          laptop: [0.15, 0.7, 0.3],
+          desktop: [0.07, 0.5, 0.3],
+          else: [0.15, 0.7, 0.3],
+        },
+        rotation:[0.1, -Math.PI, 0],
+        position:[0, 1, 0],
+      },
     },
     {
       title: "Migraciones",
@@ -139,6 +167,20 @@ export default function Home() {
         { icono: "", texto: "Monitoreo y optimización continua" },
         { icono: "", texto: "Gestión del cambio" },
       ],
+      modelo: {
+        url: "/moon.glb",
+        color: "red",
+        scales: {
+          small: [0.15, 0.7, 0.3],
+          mobile: [0.15, 0.7, 0.3],
+          tablet: [0.15, 0.7, 0.3],
+          laptop: [0.15, 0.7, 0.3],
+          desktop: [0.15, 0.7, 0.3],
+          else: [0.15, 0.7, 0.3],
+        },
+        rotation:[0.1, -Math.PI, 0],
+        position:[0, 1, 0],
+      },
     },
     {
       title: "IA & Bots",
@@ -160,27 +202,21 @@ export default function Home() {
         { icono: "", texto: "Monitoreo y optimización continua" },
         { icono: "", texto: "Gestión del cambio" },
       ],
-    } /*
-    {
-      title: "Amazon",
-      description:
-        "A multinational technology company focusing on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
-      link: "https://amazon.com",
-      id: 5,
-      content: <SkeletonOne />,
-      className: "md:col-span-2",
-      thumbnail: ""
+      modelo: {
+        url: "/moon.glb",
+        color: "red",
+        scales: {
+          small: [0.15, 0.7, 0.3],
+          mobile: [0.15, 0.7, 0.3],
+          tablet: [0.15, 0.7, 0.3],
+          laptop: [0.15, 0.7, 0.3],
+          desktop: [0.15, 0.7, 0.3],
+          else: [0.15, 0.7, 0.3],
+        },
+        rotation:[0.1, -Math.PI, 0],
+        position:[0, 1, 0],
+      },
     },
-    {
-      title: "Richard",
-      description:
-        "A multinational technology company that develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.",
-      link: "https://microsoft.com",
-      id: 6,
-      content: <SkeletonOne />,
-      className: "md:col-span-1",
-      thumbnail: ""
-    },*/,
   ];
 
   const [visible, setIsVisible] = useState(false);
@@ -254,4 +290,3 @@ export default function Home() {
     </div>
   );
 }
-
