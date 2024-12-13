@@ -41,7 +41,14 @@ const Modelo3D = ({ modeloUrl }) => {
         <HeroCamera>
           <Model
             url="/moon.glb"
-            scales={[0.15, 0.7, 0.3]}
+            scales = {{
+              small: [0.1, 0.1, 0.1],
+              mobile: [0.15, 0.15, 0.15],
+              tablet: [0.2, 0.2, 0.2],
+              laptop: [0.25, 0.25, 0.25],
+              desktop: [0.07, 0.3, 0.3],
+              else: [0.15, 0.7, 0.3],
+            }}     
             rotation={[0.1, -Math.PI, 0]}
             position={[0, 1, 0]}
           />

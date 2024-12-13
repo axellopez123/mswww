@@ -4,7 +4,14 @@ import { useMediaQuery } from "react-responsive";
 
 export function Model({
   url = "/moon.glb",
-  scales = [{}],
+  scales = {
+    small: [0.1, 0.1, 0.1],
+    mobile: [0.2, 0.2, 0.2],
+    tablet: [0.3, 0.3, 0.3],
+    laptop: [0.4, 0.4, 0.4],
+    desktop: [0.5, 0.5, 0.5],
+    else: [0.15, 0.7, 0.3],
+  },
   rotation = [0, 0, 0],
   ...props
 }) {
@@ -43,31 +50,58 @@ export function Model({
     isLaptop,
     isDesktop
   );
+  // useEffect(() => {
+  //   console.log(scale);
+    
+  //   setDevice(whoDevice);
+  //   switch (device) {
+  //     case "small":
+  //       setScale(scales.small);
+  //       break;
+  //     case "mobile":
+  //       setScale(scales.mobile);
+  //       break;
+  //     case "tablet":
+  //       setScale(scales.tablet);
+  //       break;
+  //     case "laptop":
+  //       setScale(scales.laptop);
+  //       break;
+  //     case "desktop":
+  //       setScale(scales.desktop);
+  //       break;
+  //     case "else":
+  //       setScale(scales.else);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }, [isSmall, isMobile, isTablet, isLaptop, isDesktop, device]);
+
   useEffect(() => {
     setDevice(whoDevice);
-    switch (device) {
+    switch (whoDevice) {
       case "small":
-        setScale(scales.small);
+        setScale(scales.small || [0.1, 0.1, 0.1]);
         break;
       case "mobile":
-        setScale(scales.mobile);
+        setScale(scales.mobile || [0.2, 0.2, 0.2]);
         break;
       case "tablet":
-        setScale(scales.tablet);
+        setScale(scales.tablet || [0.3, 0.3, 0.3]);
         break;
       case "laptop":
-        setScale(scales.laptop);
+        setScale(scales.laptop || [0.4, 0.4, 0.4]);
         break;
       case "desktop":
-        setScale(scales.desktop);
-        break;
-      case "else":
-        setScale(scales.else);
+        setScale(scales.desktop || [0.5, 0.5, 0.5]);
         break;
       default:
+        setScale(scales.else || [0.15, 0.7, 0.3]);
         break;
     }
-  }, [isSmall, isMobile, isTablet, isLaptop, isDesktop, device]);
+  }, [whoDevice, scales]);
+
   return (
     <group {...props} dispose={null} rotation={rotation}>
       <mesh
@@ -77,7 +111,7 @@ export function Model({
         material={nodes.Mball002.material}
         // material-color="blue" // Cambia el color del material
         position={[2.777, 2.131, 0]}
-        scale={[0.1, 0.7, 0.3]}
+        scale={scale}
       >
         <meshStandardMaterial color="red" roughness={0.5} metalness={0.7} />
       </mesh>
