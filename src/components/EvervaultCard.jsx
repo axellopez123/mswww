@@ -31,7 +31,6 @@ export default function EvervaultCard({
 
   useEffect(() => {
     setLastSelected(selected);
-
   }, [selected, setLastSelected]);
 
   function onMouseMove({ currentTarget, clientX, clientY }) {
@@ -47,14 +46,15 @@ export default function EvervaultCard({
     console.log("Form submitted");
   };
   return (
-<div
-  className={cn(
-    `bg-transparent flex items-center justify-center w-full relative`,
-    selected?.id === item.id ? "h-screen md:max-h-screen overflow-y-auto" : "h-80",
-    className
-  )}
->
-
+    <div
+      className={cn(
+        `bg-transparent flex items-center justify-center w-full relative`,
+        selected?.id === item.id
+          ? "h-screen md:max-h-screen overflow-y-auto"
+          : "h-80",
+        className
+      )}
+    >
       <div
         onMouseMove={onMouseMove}
         className={` group/card w-full h-full absolute overflow-hidden bg-transparent flex items-center justify-center  ${
@@ -110,7 +110,20 @@ export default function EvervaultCard({
           >
             <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center">
               <div className="h-96 w-full">
-                <Modelo3D modeloUrl="/moon.glb" />
+                <Modelo3D
+                  modeloUrl="/moon.glb"
+                  color="red"
+                  scales={[
+                    {
+                      small: [0.15, 0.7, 0.3],
+                      mobile: [0.15, 0.7, 0.3],
+                      tablet: [0.15, 0.7, 0.3],
+                      laptop: [0.15, 0.7, 0.3],
+                      desktop: [0.15, 0.7, 0.3],
+                      else: [0.15, 0.7, 0.3],
+                    },
+                  ]}
+                />
               </div>
               <Link
                 to={"contacto"}
