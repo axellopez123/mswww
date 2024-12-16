@@ -109,16 +109,16 @@ export default function EvervaultCard({
             class={`flex-1 h-full w-full ${selected?.id ? " " : "hidden"}  `}
           >
             <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center h-full w-full">
-              <div className="h-full w-full">
+              <div className="absolute top-0 left-0 h-full w-full">
                 {selected && 
                 <Modelo3D modelo={selected.modelo}/>
               }
               </div>
-              <Link
+              {/* <Link
                 to={"contacto"}
                 smooth={true}
                 duration={500}
-                className="absolute cursor-pointer transition-colors"
+                className="absolute cursor-pointer transition-colors top-36 md:top-96"
               >
                 <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                   <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
@@ -126,7 +126,7 @@ export default function EvervaultCard({
                     Comenzar
                   </span>
                 </button>
-              </Link>
+              </Link> */}
               {/* <form className="my-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
                   <LabelInputContainer>

@@ -134,7 +134,7 @@ function Navbar({ className, active, setActive, links }) {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 w-11/12 mx-auto backdrop-blur-lg z-50",
+        "fixed inset-x-0 w-11/12 mx-auto backdrop-blur-lg z-50 shadow-lg shadow-black rounded-xl",
         className
       )}
     >

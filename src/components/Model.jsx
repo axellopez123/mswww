@@ -56,34 +56,6 @@ console.log(scale);
 
   console.log(whoDevice);
 
-  // useEffect(() => {
-  //   console.log(scale);
-    
-  //   setDevice(whoDevice);
-  //   switch (device) {
-  //     case "small":
-  //       setScale(scales.small);
-  //       break;
-  //     case "mobile":
-  //       setScale(scales.mobile);
-  //       break;
-  //     case "tablet":
-  //       setScale(scales.tablet);
-  //       break;
-  //     case "laptop":
-  //       setScale(scales.laptop);
-  //       break;
-  //     case "desktop":
-  //       setScale(scales.desktop);
-  //       break;
-  //     case "else":
-  //       setScale(scales.else);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }, [isSmall, isMobile, isTablet, isLaptop, isDesktop, device]);
-
   useEffect(() => {
     setDevice(whoDevice);
     switch (whoDevice) {
@@ -119,7 +91,7 @@ console.log(scale);
         position={[2.777, 2.131, 0]}
         scale={scale}
       >
-        <meshStandardMaterial color={"#1e83be"} roughness={1} metalness={0.0} />
+        <meshStandardMaterial color={"#b2d9f0"} emissive={"#000000"} roughness={0.1} metalness={0.0} />
       </mesh>
     </group>
   );

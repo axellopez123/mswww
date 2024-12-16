@@ -26,19 +26,20 @@ const Modelo3D = ({  modelo }) => {
   return (
     <Canvas
       // ref={canvasRef}
-      // dpr={[1, 2]}
+      dpr={[1, 1.5]}
+  gl={{ antialias: false }}
       // style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
       // camera={{
       //   position: [0, 0, 30],
       //   fov: 75,
       // }}
-      className="absolute top-0 left-0 w-full h-full"
+      className="w-full h-full"
     >
-      <Suspense fallback={CanvasLoader}>
-        <PerspectiveCamera makeDefault position={[0, 0, 30]} />
+      <Suspense fallback={<CanvasLoader/>}>
+        <PerspectiveCamera makeDefault position={[0, 0, 10]} />
 
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 10]} intensity={1} />
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[5, 5, 5]} intensity={0.8} />
         <HeroCamera>
           <Model
             url={modelo.url}
@@ -47,6 +48,7 @@ const Modelo3D = ({  modelo }) => {
             position={modelo.position}
             color={modelo.color}
           />
+          
         </HeroCamera>
       </Suspense>
     </Canvas>
