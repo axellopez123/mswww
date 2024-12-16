@@ -1,11 +1,17 @@
 import React, { useRef, useEffect, useState, useMemo, Suspense } from "react";
 import { useThree, Object3DNode, Canvas, extend } from "@react-three/fiber";
-import { OrbitControls, useGLTF, PerspectiveCamera, PerformanceMonitor } from "@react-three/drei";
+import {
+  OrbitControls,
+  useGLTF,
+  PerspectiveCamera,
+  PerformanceMonitor,
+} from "@react-three/drei";
 import * as THREE from "three";
 import CanvasLoader from "./CanvasLoader";
 import { Model } from "./Model";
 import HeroCamera from "./HeroCamera";
-
+import { SceneConfig } from "../scripts/SceneConfig";
+import { Lights } from "../scripts/Lights";
 const WebGLRendererConfig = () => {
   const { gl, size } = useThree();
 
@@ -49,21 +55,13 @@ const Modelo3D = ({ modelo }) => {
       // }}
       className="w-full h-full"
     >
-      <PerformanceMonitor
-        onIncline={handleIncline}
-        onDecline={handleDecline}
-        flipflops={3} // Límite de ajustes para evitar "ping-pong"
-        onFallback={() => {
-          setDpr(1); // Configuración base si el rendimiento es bajo
-          setQuality("baseline");
-        }}
-      ></PerformanceMonitor>
+      <SceneConfig setDpr={setDpr} setQuality={setQuality} />
+
       <Suspense fallback={<CanvasLoader />}>
         <WebGLRendererConfig />
         <PerspectiveCamera makeDefault position={[0, 0, 10]} />
 
-        <ambientLight intensity={0.3} />
-        <directionalLight position={[5, 5, 5]} intensity={0.8} />
+        <Lights />
         <HeroCamera>
           <Model
             url={modelo.url}
