@@ -101,7 +101,7 @@ export function Contact() {
     }
   };
   return (
-    <div id="contacto" className="pb-32 pt-10 min-h-screen flex flex-col items-center justify-center bg-cyan-100 dark:bg-black">
+    <div id="contacto" className="pb-32 pt-10 min-h-screen flex flex-col items-center justify-center bg-slate-300/30 dark:bg-black">
       <div className="flex justify-center items-center mb-2">
         <p className="text-4xl md:text-5xl font-bold dark:text-white font-exo">
           Hablemos
