@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useMemo, Suspense } from "react";
+import React, { useRef, useEffect, useState, useMemo, Suspense } from "react";
 import { useThree, Object3DNode, Canvas, extend } from "@react-three/fiber";
-import { OrbitControls, useGLTF, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls, useGLTF, PerspectiveCamera, PerformanceMonitor } from "@react-three/drei";
 import * as THREE from "three";
 import CanvasLoader from "./CanvasLoader";
 import { Model } from "./Model";
@@ -11,7 +11,7 @@ const WebGLRendererConfig = () => {
 
   useEffect(() => {
     gl.setPixelRatio(window.devicePixelRatio || 1); // Mejor rendimiento en dispositivos de baja resolución
-    gl.setSize(size.width, size.height); 
+    gl.setSize(size.width, size.height);
     gl.setClearColor(0xffaaff, 0); // Fondo transparente con color personalizado
     gl.outputEncoding = THREE.SRGBColorSpace; // Mejor precisión en colores
     gl.toneMapping = THREE.ACESFilmicToneMapping; // Configuración para tonos de alto rango dinámico
@@ -24,29 +24,24 @@ const WebGLRendererConfig = () => {
   return null;
 };
 
-
 const Modelo3D = ({ modelo }) => {
-  const canvasRef = useRef();
+  const [dpr, setDpr] = useState(1.5); // DPR inicial
+  const [quality, setQuality] = useState("high"); // Control de calidad gráfica
 
-  useEffect(() => {
-    const resizeCanvas = () => {
-      if (canvasRef.current) {
-        canvasRef.current.style.width = "100%";
-        canvasRef.current.style.height = "100%";
-      }
-    };
+  const handleIncline = () => {
+    setDpr(2); // Aumentar resolución
+    setQuality("ultra"); // Ajustar calidad
+  };
 
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    return () => window.removeEventListener("resize", resizeCanvas);
-  }, []);
+  const handleDecline = () => {
+    setDpr(1); // Reducir resolución
+    setQuality("low"); // Ajustar calidad
+  };
 
   return (
     <Canvas
-      ref={canvasRef}
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true }} // Antialias activado para bordes suaves
+      dpr={dpr}
+      gl={{ antialias: quality !== "low", alpha: true }}
       // style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
       // camera={{
       //   position: [0, 0, 30],
@@ -54,8 +49,17 @@ const Modelo3D = ({ modelo }) => {
       // }}
       className="w-full h-full"
     >
+      <PerformanceMonitor
+        onIncline={handleIncline}
+        onDecline={handleDecline}
+        flipflops={3} // Límite de ajustes para evitar "ping-pong"
+        onFallback={() => {
+          setDpr(1); // Configuración base si el rendimiento es bajo
+          setQuality("baseline");
+        }}
+      ></PerformanceMonitor>
       <Suspense fallback={<CanvasLoader />}>
-      <WebGLRendererConfig/>
+        <WebGLRendererConfig />
         <PerspectiveCamera makeDefault position={[0, 0, 10]} />
 
         <ambientLight intensity={0.3} />
@@ -73,7 +77,5 @@ const Modelo3D = ({ modelo }) => {
     </Canvas>
   );
 };
-
-
 
 export default Modelo3D;

@@ -18,6 +18,7 @@ export function Model({
 }) {
   const [scale, setScale] = useState([0.15, 0.7, 0.3]);
   const [device, setDevice] = useState("mobile");
+  
   const { nodes, materials } = useGLTF(url);
   const isSmall = useMediaQuery({ maxWidth: 440 }); // Dispositivos muy pequeños (ejemplo: teléfonos compactos)
   const isMobile = useMediaQuery({ minWidth: 441, maxWidth: 768 }); // Teléfonos estándar
