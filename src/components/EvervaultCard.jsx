@@ -18,7 +18,9 @@ export default function EvervaultCard({
   lastSelected,
   handleOnClose,
   setLastSelected,
+  isCardFullyOpened,
 }) {
+  
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
   const icons = generateRandomString(160);
@@ -110,9 +112,9 @@ export default function EvervaultCard({
           >
             <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center h-full w-full">
               <div className="absolute top-0 left-0 h-full w-full">
-                {selected && 
-                <Modelo3D modelo={selected.modelo}/>
-              }
+                {isCardFullyOpened && selected && (
+                  <Modelo3D modelo={selected.modelo} />
+                )}
               </div>
               {/* <Link
                 to={"contacto"}

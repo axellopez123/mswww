@@ -10,7 +10,7 @@ const CanvasLoader = () => {
         flexDirection: 'column',
     }}><span className="canvas-
     
-    loader"><p>{progress != 0  ? `${progress.toFixed(2)}%` : 'Loading...'}</p></span></Html>
+    loader"><p>{progress !== 0  ? `${progress.toFixed(2)}%` : 'Loading...'}</p></span></Html>
   )
 }
 

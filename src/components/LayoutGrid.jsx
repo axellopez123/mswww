@@ -9,6 +9,7 @@ import { Link, scroller } from "react-scroll"; // Importa react-scroll
 function LayoutGrid({ cards, className }) {
   const [selected, setSelected] = useState(null);
   const [lastSelected, setLastSelected] = useState(null);
+  const [isCardFullyOpened, setIsCardFullyOpened] = useState(false); // Estado para el modelo 3D
   let [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleClick = (card) => {
@@ -16,6 +17,7 @@ function LayoutGrid({ cards, className }) {
       return;
     setLastSelected(selected);
     setSelected((prev) => (prev?.id === card.id ? null : card));
+    setIsCardFullyOpened(false); // Reinicia el estado al abrir otra card
     scroller.scrollTo(`servicios`, {
       duration: 800,
       delay: 0,
@@ -29,10 +31,17 @@ function LayoutGrid({ cards, className }) {
 
     setLastSelected(selected);
     setSelected(null);
+    setIsCardFullyOpened(false); // Oculta el modelo 3D al cerrar
   };
 
-  useEffect(() => {}, [selected, lastSelected]);
-
+  useEffect(() => {
+    if (selected?.id && selected.id === lastSelected?.id) {
+      setIsCardFullyOpened(true);
+    } else {
+      setIsCardFullyOpened(false);
+    }
+  }, [isCardFullyOpened, selected, lastSelected]);
+  
   return (
     <div id="servicios" className="h-full pt-16 md:pt-36">
       <div className="flex justify-center items-center">
@@ -59,7 +68,7 @@ function LayoutGrid({ cards, className }) {
               id={`card-${card.id}`} // Asegúrate de usar IDs únicos
               className={cn(card.className, "")}
             >
-              <motion.a
+              <motion.div
                 onClick={() => handleClick(card)}
                 className={cn(
                   card.className,
@@ -70,6 +79,14 @@ function LayoutGrid({ cards, className }) {
                     ? "z-40 rounded-xl h-full w-full"
                     : "rounded-xl h-full w-full"
                 )}
+                initial={selected?.id === card.id ? { scale: 0.8, opacity: 0 } : { scale: 1, opacity: 1 }}
+                animate={selected?.id === card.id ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                onAnimationComplete={() => {
+                  if (selected?.id === card.id) {
+                    console.log("GG: Card is fully opened");
+                  }                  
+                }}
                 layoutId={`card-${card.id}`}
               >
                 <div
@@ -103,10 +120,11 @@ function LayoutGrid({ cards, className }) {
                     lastSelected={lastSelected}
                     setLastSelected={setLastSelected}
                     handleOnClose={handleOnClose}
+                    isCardFullyOpened={isCardFullyOpened}
                   />
                 </div>
                 {/* {selected?.id === card.id && <SelectedCard selected={selected} />} */}
-              </motion.a>
+              </motion.div>
             </div>
             {selected?.id === card.id && (
               <motion.button
@@ -136,6 +154,7 @@ const Card = ({
   lastSelected,
   handleOnClose,
   setLastSelected,
+  isCardFullyOpened,
 }) => {
   const isSelected = selected?.id === card.id;
 
@@ -157,6 +176,7 @@ const Card = ({
           setLastSelected={setLastSelected}
           setSelected={setSelected}
           lastSelected={lastSelected}
+          isCardFullyOpened={isCardFullyOpened}
         />
       </div>
     </div>
