@@ -8,7 +8,7 @@ import { Label } from "./Label";
 import { TextArea } from "./TextArea";
 import Modelo3D from "./Modelo3D";
 import { Link } from "react-scroll";
-
+import Mod3D from "./Mod3D";
 export default function EvervaultCard({
   text,
   className,
@@ -113,7 +113,8 @@ export default function EvervaultCard({
             <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center h-full w-full">
               <div className="absolute top-0 left-0 h-full w-full">
                 {isCardFullyOpened && selected && (
-                  <Modelo3D modelo={selected.modelo} />
+                  // <Modelo3D modelo={selected.modelo} />
+                  <Mod3D></Mod3D>
                 )}
               </div>
               {/* <Link
