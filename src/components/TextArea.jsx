@@ -44,7 +44,7 @@ const TextArea = React.forwardRef(({ className, type, ...props }, ref) => {
         focus-visible:outline-none focus-visible:ring-[2px]  focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600
          disabled:cursor-not-allowed disabled:opacity-50
          dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
-         group-hover/input:shadow-none transition duration-400 border-2
+         group-hover/input:shadow-none transition duration-400 border-2 border-black dark:border-white
          `,
           className
         )}

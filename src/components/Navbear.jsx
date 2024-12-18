@@ -22,10 +22,8 @@ export function Navbear() {
           }
         >
           <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/web-dev">Web Development</HoveredLink>
-            <HoveredLink href="/interface-design">Interface Design</HoveredLink>
-            <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
-            <HoveredLink href="/branding">Branding</HoveredLink>
+            <HoveredLink href="/web-dev">Lulypop</HoveredLink>
+            <HoveredLink href="/interface-design">Inmobiliaria</HoveredLink>
           </div>
         </MenuItem>
       ),
@@ -57,28 +55,28 @@ export function Navbear() {
         >
           <div className="  text-sm grid grid-cols-2 gap-10 p-4">
             <ProductItem
-              title="Algochurn"
+              title="Cómputo en la Nube"
               href="https://algochurn.com"
-              src="https://assets.aceternity.com/demos/algochurn.webp"
-              description="Prepare for tech interviews like never before."
+              src="bx bx-cloud-light-rain text-7xl"
+              description="Accede a tu sistema desde cualquier parte del mundo."
             />
             <ProductItem
-              title="Tailwind Master Kit"
+              title="Pagínas Web"
               href="https://tailwindmasterkit.com"
-              src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
-              description="Production ready Tailwind css components for your next project"
+              src="bx bx-globe text-7xl"
+              description="Capta la atención de tus clientes con la mejor experiencia UI."
             />
             <ProductItem
-              title="Moonbeam"
+              title="Migraciones"
               href="https://gomoonbeam.com"
-              src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
-              description="Never write from scratch again. Go from idea to blog in minutes."
+              src="bx bx-analyse text-7xl"
+              description="Actualiza tu sistema con las tecnologia de ultima generación."
             />
             <ProductItem
-              title="Rogue"
+              title="IA & Bots"
               href="https://userogue.com"
-              src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
-              description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"
+              src="bx bx-bot text-7xl"
+              description="Optimiza el flujo de trabajo con procesos automatizados."
             />
           </div>
         </MenuItem>

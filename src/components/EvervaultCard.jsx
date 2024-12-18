@@ -75,7 +75,7 @@ export default function EvervaultCard({
           } `}
         >
           {selected?.id ? (
-            <div className={`flex-1 md:px-16 md:pt-8 h-full`}>
+            <div className={`flex-1 md:px-16 pt-10 md:pt-8 h-full`}>
               <p className=" text-center text-3xl md:text-7xl lg:text-8xl font-extrabold antialiased z-20 mb-2 uppercase mb-10">
                 {text}
               </p>
@@ -98,10 +98,10 @@ export default function EvervaultCard({
             <div
               className={`flex-1 absolute  ${selected?.id ? "rounded-sm" : ""}`}
             >
-              <p className=" text-center text-5xl md:text-5xl font-extrabold antialiased z-20 px-3 md:px-0">
+              <p className="text-black dark:text-white text-center text-5xl md:text-5xl font-extrabold antialiased z-20 px-3 md:px-0">
                 {text}
               </p>
-              <p className="text-center text-xl md:text-2xl font-bold z-20 px-2 md:px-0">
+              <p className="text-black dark:text-white text-center text-xl md:text-2xl font-bold z-20 px-2 md:px-0">
                 {item.description}
               </p>
             </div>

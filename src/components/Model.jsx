@@ -2,6 +2,7 @@ import React, { useRef, useMemo, useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
 import { useDeviceType } from "../scripts/useDeviceType";
+import { Link, scroller } from "react-scroll"; // Importa react-scroll
 
 export function Model({
   url = "/moon.glb",
@@ -17,8 +18,26 @@ export function Model({
   color = "red",
   ...props
 }) {
+  const [isLoaded, setIsLoaded] = useState(false);
   const deviceType = useDeviceType();
-  const { nodes, materials } = useGLTF(url);
+  const { nodes, materials, scene } = useGLTF(url);
+console.log(isLoaded);
+
+useEffect(() => {
+  if (scene) {
+    setIsLoaded(true);
+  }
+}, [scene]);
+
+// Hacer scroll cuando el modelo está cargado
+useEffect(() => {
+  if (isLoaded) {
+    window.scrollBy({
+      top: 50,
+      behavior: "smooth",
+    });
+  }
+}, [isLoaded]);
 
   const scale = useMemo(
     () => scales[deviceType] || scales.else,
@@ -26,7 +45,7 @@ export function Model({
   );
   console.log(scale);
   console.log(deviceType);
-  
+
   const Material = useMemo(
     () => (
       <meshStandardMaterial
