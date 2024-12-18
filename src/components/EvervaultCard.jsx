@@ -113,8 +113,8 @@ export default function EvervaultCard({
             <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center h-full w-full">
               <div className="absolute top-0 left-0 h-full w-full">
                 {isCardFullyOpened && selected && (
-                  // <Modelo3D modelo={selected.modelo} />
-                  <Mod3D></Mod3D>
+                  <Modelo3D modelo={selected.modelo} />
+                  // <Mod3D></Mod3D>
                 )}
               </div>
               {/* <Link

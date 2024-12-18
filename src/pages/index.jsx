@@ -45,7 +45,7 @@ export default function Home() {
         url: "/moon.glb",
         color: "white",
         scales: {
-          small: [0.05, 0.05, 0.03],
+          small: [0.1, 0.3, 0.03],
           mobile: [0.05, 0.05, 0.03],
           tablet: [0.15, 0.7, 0.3],
           laptop: [0.15, 0.7, 0.3],
