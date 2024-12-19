@@ -142,7 +142,7 @@ function Navbar({ className, active, setActive, links }) {
             id="logo"
             className="flex items-center backdrop-blur-lg px-5 rounded-2xl"
           >
-            <p className="font-[helvetica] font-bold stroke-neutral-200 dark:stroke-neutral-800 fill-transparent dark:text-white text-black  text-4xl">
+            <p className="font-[helvetica] font-bold stroke-neutral-200 dark:stroke-neutral-800 fill-transparent dark:text-white text-slate-600  text-4xl">
               ARWAX
             </p>
           </div>

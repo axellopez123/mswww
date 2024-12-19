@@ -90,7 +90,7 @@ function IconContainer({ mouseX, title, icon, target, emoji, effect }) {
         ref={ref}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="rounded-full border-2 border-white/20 border-double shadow-lg shadow-gray-500 hover:shadow-gray-700 dark:hover:shadow-white backdrop-blur-sm hover:border-white flex items-center justify-center relative px-1 py-1 hover:scale-110 transition duration-150 ease-in-out delay-0"
+        className="rounded-full border-2 border-white/20 border-double shadow-sm shadow-black hover:shadow-gray-700 dark:hover:shadow-white backdrop-blur-sm hover:border-white flex items-center justify-center relative px-1 py-1 hover:scale-110 transition duration-150 ease-in-out delay-0"
       >
         {/* <AnimatePresence>
           {hovered && (

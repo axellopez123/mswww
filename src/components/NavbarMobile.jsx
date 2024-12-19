@@ -33,7 +33,7 @@ export function NavbarMobile() {
 
         {/* Título centrado */}
         <div className="grow flex items-center justify-center">
-          <p className="font-bold text-3xl text-black dark:text-white">ARWAX</p>
+          <p className="font-bold text-3xl text-slate-600 dark:text-white">ARWAX</p>
         </div>
 
         {/* Botón de tema a la derecha */}

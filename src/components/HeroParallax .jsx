@@ -40,7 +40,7 @@ function HeroParallax({
         }}
         className="">
           <div className="flex justify-center items-center mb-12">
-            <p className="font-exo text-3xl md:text-5xl font-bold dark:text-white">Joyitas</p><i class='bx bxl-sketch text-cyan-400 hover:text-cyan-500 text-5xl'></i>
+            <p className="font-exo text-5xl md:text-7xl font-bold dark:text-white">Joyitas</p><i class='bx bxl-sketch text-cyan-400 hover:text-cyan-500 text-7xl md:text-9xl'></i>
           </div>
         <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
           {firstRow.map((product) => (

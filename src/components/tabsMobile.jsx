@@ -60,7 +60,7 @@ const TabMobile = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 shadow-2xl">
       <div>
-        <div className="z-40 flex justify-around bg-gradient-to-br from-gray-800 via-gray-600 to-gray-900 backdrop-blur-md bg-opacity-80 shadow-lg py-1">
+        <div className="z-40 flex justify-around bg-slate-700 backdrop-blur-md bg-opacity-80 shadow-lg py-1">
           {tabs.map((tab) => (
             <TabItem
               key={tab.id}

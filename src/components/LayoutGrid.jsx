@@ -45,14 +45,14 @@ function LayoutGrid({ cards, className }) {
   return (
     <div id="servicios" className="h-full pt-16 md:pt-36">
       <div className="flex justify-center items-center">
-        <p className="font-exo text-4xl md:text-5xl font-bold text-slate-800 dark:text-white z-40">
+        <p className="font-exo text-5xl md:text-7xl font-bold text-slate-800 dark:text-white z-40">
           Servicios
         </p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          class="size-11 m-1 text-amber-400 hover:text-amber-500"
+          class="m-1 text-amber-400 size-20 hover:text-amber-500"
         >
           <path
             fill-rule="evenodd"
