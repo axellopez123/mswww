@@ -59,7 +59,7 @@ const Modelo3D = ({ modelo }) => {
 
       <Suspense fallback={<CanvasLoader />}>
         <WebGLRendererConfig />
-        <PerspectiveCamera makeDefault position={[0, 0, 10]} />
+        <PerspectiveCamera makeDefault position={[0,0,10]} />
 
         <Lights />
         <HeroCamera>
