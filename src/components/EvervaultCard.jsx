@@ -52,7 +52,7 @@ export default function EvervaultCard({
       className={cn(
         `bg-transparent flex items-center justify-center w-full relative`,
         selected?.id === item.id
-          ? "h-screen md:max-h-screen overflow-y-auto"
+          ? "h-full overflow-y-auto"
           : "h-80",
         className
       )}
@@ -85,7 +85,7 @@ export default function EvervaultCard({
                 // </div>
                 <li
                   key={i}
-                  className="flex items-center p-2 rounded-lg shadow hover:shadow-xl transition-shadow backdrop-hue-rotate-180 backdrop-blur-lg	my-1"
+                  className="flex items-center p-2 rounded-lg shadow hover:shadow-xl transition-shadow backdrop-hue-rotate-180 backdrop-blur-lg	my-3"
                 >
                   <i class="bx bx-check bx-tada text-green-500 text-2xl mr-2"></i>
                   <span className="text-md md:text-3xl text-gray-800 dark:text-gray-200 font-bold	">
@@ -110,26 +110,27 @@ export default function EvervaultCard({
           <div
             class={`flex-1 h-full w-full ${selected?.id ? " " : "hidden"}  `}
           >
-            <div className="rounded-none md:rounded-2xl shadow-input relative flex justify-center h-full w-full">
-              <div className="absolute top-0 left-0 h-full w-full">
+            <div className="rounded-none md:rounded-2xl shadow-input flex flex-col justify-center h-full w-full">
+              <div className="flex-1 md:flex-none h-5/6 w-full">
                 {isCardFullyOpened && selected && (
                   <Modelo3D modelo={selected.modelo} />
                   // <Mod3D></Mod3D>
                 )}
               </div>
-              {/* <Link
+              <Link
                 to={"contacto"}
+                onClick={handleOnClose}
                 smooth={true}
                 duration={500}
-                className="absolute cursor-pointer transition-colors top-36 md:top-96"
+                className="flex-1 md:flex-none cursor-pointer transition-colors flex justify-center"
               >
-                <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                <button className="relative inline-flex h-16 overflow-hidden rounded-full p-[3px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                   <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-450 px-3 py-1 text-lg font-semibold text-white backdrop-blur-3xl">
                     Comenzar
                   </span>
                 </button>
-              </Link> */}
+              </Link>
               {/* <form className="my-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
                   <LabelInputContainer>
@@ -188,7 +189,7 @@ function CardPattern({ mouseX, mouseY, randomString, selected }) {
       >
         <span
           className={`absolute inset-x-0 h-full break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500 ${
-            selected?.id ? "text-8xl " : "text-6xl "
+            selected?.id ? "text-5xl md:text-8xl " : "text-6xl "
           }`}
         >
           {randomString}

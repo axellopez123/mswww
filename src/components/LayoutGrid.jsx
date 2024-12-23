@@ -13,7 +13,7 @@ function LayoutGrid({ cards, className }) {
   let [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleClick = (card) => {
-    if(card.id == selected?.id)
+    if(card.id === selected?.id)
       return;
     setLastSelected(selected);
     setSelected((prev) => (prev?.id === card.id ? null : card));
@@ -74,7 +74,7 @@ function LayoutGrid({ cards, className }) {
                   "",
                   "overflow-hidden",
                   selected?.id === card.id
-                    ? "rounded-lg cursor-pointer absolute inset-0 w-full h-screen md:h-full m-auto z-50 flex justify-center items-center flex-wrap flex-col"
+                    ? "rounded-lg cursor-pointer absolute inset-0 w-full h-full md:h-full z-50 flex justify-center items-center flex-wrap flex-col"
                     : lastSelected?.id === card.id
                     ? "z-40 rounded-xl h-full w-full"
                     : "rounded-xl h-full w-full"
