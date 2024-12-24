@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef  } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Input } from "./Input";
 import { Label } from "./Label";
 import { cn } from "../lib/utils";
@@ -11,7 +11,7 @@ import axios from "axios";
 import { useDrawerContext } from "../contexts/DrawerContext";
 import * as THREE from "three";
 import { CardBody, CardContainer, CardItem } from "./3DAvatar";
-
+import Footer from "./Footer";
 export function Contact() {
   const [customer, setCustomer] = useState({
     ip_address: "",
@@ -46,7 +46,6 @@ export function Contact() {
       ...prevCustomer,
       events: events,
     }));
-
   }, [events]);
 
   const handleChange = (e) => {
@@ -75,7 +74,7 @@ export function Contact() {
         },
       });
       setLoader(false);
-      
+
       showNotification(
         "🚀",
         "Recibimos tu mensaje",
@@ -96,25 +95,39 @@ export function Contact() {
         "Error al enviar datos:",
         error.response?.data || error.message
       );
-    }finally {
+    } finally {
       setLoader(false);
     }
   };
   return (
-    <div id="contacto" className="pb-32 pt-10 min-h-screen flex flex-col items-center justify-center bg-slate-300/30 dark:bg-black">
+    <div
+      id="contacto"
+      className="h-full md:h-screen pt-12 md:pt-28 pb-14 flex flex-col bg-slate-300/30 dark:bg-black"
+    >
       <div className="flex justify-center items-center mb-2">
         <p className="text-5xl md:text-7xl font-bold dark:text-white font-exo">
           Hablemos
         </p>
       </div>
-      <div className="flex justify-center items-center mb-2 md:mb-6 px-12 md:px-32">
-        <p className="font-inter text-2xl font-bold dark:text-white text-center">Transforma tus ideas en soluciones inteligentes con los Masters del Desarrollo. 🚀💡</p>
+      <div className="flex justify-center items-center mb-2 md:mb-6 px-4 md:px-32 flex-col">
+        <p className="font-inter text-3xl font-bold dark:text-white text-center">
+          Transforma tus ideas en soluciones inteligentes con los Masters del
+          Desarrollo. 🚀💡
+        </p>
+        <p className="font-inter text-sm md:text-xl font-semibold dark:text-white text-center px-0 md:px-16 pt-2">
+          Somos expertos apasionados con conocimientos avanzados y un enfoque
+          creativo para ofrecer soluciones innovadoras. Con años de experiencia
+          en el desarrollo de tecnología nos han permitido perfeccionar nuestras
+          habilidades y entender a fondo las necesidades de nuestros clientes
+          ofreciendoles nuestro compromiso con calidad, funcionalidad y
+          excelencia.
+        </p>
       </div>
       <div className=" flex flex-col md:flex-row w-full h-full dark:bg-black px-0 md:px-32">
         <div className="flex-1">
           <div className="flex flex-col md:flex-row h-full">
             <div className="w-full h-full flex flex-row px-5 py-8">
-            <div className="flex-1 flex flex-col items-center">
+              <div className="flex-1 flex flex-col items-center">
                 <CardContainer className="inter-var">
                   <CardBody className="relative group/card w-full md:w-5/6 h-full shadow-lg shadow-gray-600 dark:shadow-white rounded-xl">
                     <CardItem
@@ -183,7 +196,6 @@ export function Contact() {
         </div>
         <div className="flex-none bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent h-1 w-full md:h-full md:w-[3px] mb-3 md:my-0" />
         <div className="flex-1 w-full rounded-none px-5 md:rounded-2xl shadow-input bg-transparent dark:bg-black ">
-          
           <form className="" onSubmit={handleSubmit}>
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-2 md:mb-4">
               <LabelInputContainer>
@@ -250,9 +262,10 @@ export function Contact() {
               <BottomGradient />
             </button>
           </form>
-          
         </div>
       </div>
+      {/* FOOTER */}
+      <Footer></Footer>
     </div>
   );
 }
