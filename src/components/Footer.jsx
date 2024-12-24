@@ -13,7 +13,7 @@ export default function Footer() {
             </button>
             <button className="px-2 bg-slate-950 hover:bg-slate-800 text-sm text-white font-semibold flex items-center rounded-xl">
               <i className="bx bxl-tiktok text-lg"></i>
-              <span className="ml-2">Tiktok</span>
+              <span className="ml-2">TikTok</span>
             </button>
             <button className="px-2 bg-blue-500 hover:bg-blue-400 text-sm text-white font-semibold flex items-center rounded-xl">
               <i className="bx bxl-linkedin-square text-lg"></i>
