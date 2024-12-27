@@ -72,7 +72,7 @@ export function Contact() {
       events: customer.events,
       referrer: customer.referrer,
       user_agent: navigator.userAgent,
-      session_duration: endTime - navigationStartTime,
+      session_duration: (endTime - navigationStartTime)/1000,
     };
   
 
