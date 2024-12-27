@@ -109,7 +109,7 @@ export function Contact() {
   return (
     <div
       id="contacto"
-      className="h-full md:h-screen pt-12 md:pt-28 pb-14 flex flex-col bg-slate-300/30 dark:bg-black"
+      className="h-full md:h-screen pt-12 md:pt-28 pb-16 flex flex-col bg-slate-300/30 dark:bg-black"
     >
       <div className="flex justify-center items-center mb-2">
         <p className="text-5xl md:text-7xl font-bold dark:text-white font-exo">
@@ -206,7 +206,7 @@ export function Contact() {
           <form className="" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-2 md:mb-4">
               <LabelInputContainer>
-                <Label htmlFor="name">Nombre</Label>
+                <Label htmlFor="name">Nombre<span className="text-red-500">*</span></Label>
                 <Input
                   id="name"
                   type="text"
@@ -215,12 +215,12 @@ export function Contact() {
                   })}
                 />
                 {errors.name && (
-                  <p className="text-red-500 text-sm">{errors.name.message}</p>
+                  <p className="text-red-500 text-sm"><i class='bx bxs-error pr-1 text-lg'></i>{errors.name.message}</p>
                 )}
               </LabelInputContainer>
             </div>
             <LabelInputContainer className="mb-2 md:mb-4">
-              <Label htmlFor="email">Correo electronico</Label>
+              <Label htmlFor="email">Correo electronico<span className="text-red-500">*</span></Label>
               <Input
                 id="email"
                 type="email"
@@ -233,12 +233,12 @@ export function Contact() {
                 })}
               />
               {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
+                <p className="text-red-500 text-sm"><i class='bx bxs-error pr-1 text-lg'></i>{errors.email.message}</p>
               )}
             </LabelInputContainer>
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-2 md:mb-4">
               <LabelInputContainer>
-                <Label htmlFor="phone">Telefono</Label>
+                <Label htmlFor="phone">Telefono<span className="text-red-500">*</span></Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -251,11 +251,11 @@ export function Contact() {
                   })}
                 />
                 {errors.phone && (
-                  <p className="text-red-500 text-sm">{errors.phone.message}</p>
+                  <p className="text-red-500 text-sm"><i class='bx bxs-error pr-1 text-lg'></i>{errors.phone.message}</p>
                 )}
               </LabelInputContainer>
               <LabelInputContainer>
-                <Label htmlFor="website">Website</Label>
+                <Label htmlFor="website">Website <span className="text-xs">(Opcional)</span></Label>
                 <Input
                   id="website"
                   type="text"
@@ -264,7 +264,7 @@ export function Contact() {
               </LabelInputContainer>
             </div>
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="message">Mensaje</Label>
+              <Label htmlFor="message">Mensaje<span className="text-red-500">*</span></Label>
               <TextArea
                 id="message"
                 rows={4}
@@ -273,7 +273,7 @@ export function Contact() {
                 placeholder="Escribe tu mensaje aquí..."
               />
               {errors.message && (
-                  <p className="text-red-500 text-sm">{errors.message.message}</p>
+                  <p className="text-red-500 text-sm"><i class='bx bxs-error pr-1 text-lg'></i>{errors.message.message}</p>
                 )}
             </LabelInputContainer>
 
