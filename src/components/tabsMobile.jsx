@@ -4,11 +4,18 @@ import { useState } from "react";
 import { color, motion } from "framer-motion";
 import BackgroundGradient from "./BackgroundGradient";
 import { Link } from "react-scroll";
+import { useDrawerContext } from "../contexts/DrawerContext";
 
 const TabMobile = () => {
-  const [activeTab, setActiveTab] = useState("home");
+  const { activeSection, setActiveSection } = useDrawerContext();
 
   const tabs = [
+    {
+      id: "joyitas",
+      icon: <i class="bx bxl-sketch text-3xl mx-1"></i>,
+      label: "Joyitas",
+      color:"text-cyan-400"
+    },
     {
       id: "servicios",
       icon: (
@@ -27,12 +34,6 @@ const TabMobile = () => {
       ),
       label: "Servicios",
       color:"text-amber-400"
-    },
-    {
-      id: "joyitas",
-      icon: <i class="bx bxl-sketch text-3xl mx-1"></i>,
-      label: "Joyitas",
-      color:"text-cyan-400"
     },
     {
       id: "contacto",
@@ -54,7 +55,7 @@ const TabMobile = () => {
   ];
 
   const handleTabClick = (tabId) => {
-    setActiveTab(tabId);
+    setActiveSection(tabId);
   };
 
   return (
@@ -65,7 +66,7 @@ const TabMobile = () => {
             <TabItem
               key={tab.id}
               tab={tab}
-              isActive={activeTab === tab.id}
+              isActive={activeSection === tab.id}
               onClick={() => handleTabClick(tab.id)}
             />
           ))}

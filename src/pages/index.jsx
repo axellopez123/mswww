@@ -17,7 +17,7 @@ import {
 import { Link } from "react-scroll";
 import { useDrawerContext } from "../contexts/DrawerContext";
 export default function Home() {
-  const { notification } = useDrawerContext();
+  const { notification, setActiveSection } = useDrawerContext();
 
   useEffect(() => {}, [notification]);
 
@@ -160,6 +160,13 @@ export default function Home() {
   ];
 
   const [visible, setIsVisible] = useState(false);
+
+  const sections = [
+    { id: 'joyitas', label: 'Joyitas' },
+    { id: 'servicios', label: 'Servicios' },
+    { id: 'contacto', label: 'Contacto' },
+  ];
+
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
@@ -179,6 +186,31 @@ export default function Home() {
       behavior: "smooth", // Desplazamiento suave
     });
   };
+
+  const handleScroll = () => {
+    const offsets = sections.map((section) => {
+      const el = document.getElementById(section.id);
+      const { top, bottom } = el.getBoundingClientRect();
+      const isInView = top < window.innerHeight / 2 && bottom > window.innerHeight / 2;
+      return { id: section.id, isInView };
+    });
+
+    const active = offsets.find((section) => section.isInView);
+    if (active) {
+      if (navigator.vibrate) {
+        navigator.vibrate(500); // Vibración de 500ms
+      } 
+      setActiveSection(active.id);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
   return (
     <div className="bg-slate-300/30 dark:bg-black z-40">

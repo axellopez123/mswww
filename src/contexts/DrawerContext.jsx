@@ -19,12 +19,12 @@ export const DrawerProvider = ({ children }) => {
     time: 0,
   });
   const [navigationStartTime, setNavigationStartTime] = useState(null);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     // Capturar el tiempo de inicio al montar la página
     setNavigationStartTime(Date.now());
   }, []);
-
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
@@ -62,7 +62,9 @@ export const DrawerProvider = ({ children }) => {
         trackEvent,
         notification,
         showNotification,
-        navigationStartTime
+        navigationStartTime,
+        activeSection,
+        setActiveSection,
       }}
     >
       {children}
