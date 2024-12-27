@@ -7,15 +7,15 @@ export default function Footer() {
         {/* REDES SOCIALES */}
         <div className="flex-1 flex flex-col px-4 justify-center pt-2">
           <div className="flex space-x-4">
-            <button className="px-2 bg-green-500 hover:bg-green-400 text-sm text-white font-semibold flex items-center rounded-xl">
+            <button className="px-2 bg-green-500 hover:bg-green-400 text-sm text-white font-semibold flex items-center rounded-xl shadow-xl shadow-black">
               <i className="bx bxl-whatsapp text-lg"></i>
               <span className="ml-2">WhatsApp</span>
             </button>
-            <button className="px-2 bg-slate-950 hover:bg-slate-800 text-sm text-white font-semibold flex items-center rounded-xl">
+            <button className="px-2 bg-slate-950 hover:bg-slate-800 text-sm text-white font-semibold flex items-center rounded-xl shadow-xl shadow-black">
               <i className="bx bxl-tiktok text-lg"></i>
               <span className="ml-2">TikTok</span>
             </button>
-            <button className="px-2 bg-blue-500 hover:bg-blue-400 text-sm text-white font-semibold flex items-center rounded-xl">
+            <button className="px-2 bg-blue-500 hover:bg-blue-400 text-sm text-white font-semibold flex items-center rounded-xl shadow-xl shadow-black">
               <i className="bx bxl-linkedin-square text-lg"></i>
               <span className="ml-2">LinkedIn</span>
             </button>
@@ -24,11 +24,11 @@ export default function Footer() {
 
         {/* CONTACTO */}
         <div className="flex-1 flex flex-col justify-center items-end py-0 md:py-4 pr-24">
-          <p>master@arwax.pro</p>
+          <p className="text-md">master@arwax.pro</p>
         </div>
       </div>
       <div className="flex-1 bg-gray-400">
-        <p className="text-center">
+        <p className="text-center text-xs">
           © 2024 ARWAX. Todos los derechos reservados.
         </p>
       </div>

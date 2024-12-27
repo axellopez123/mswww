@@ -12,6 +12,8 @@ import { useDrawerContext } from "../contexts/DrawerContext";
 import * as THREE from "three";
 import { CardBody, CardContainer, CardItem } from "./3DAvatar";
 import Footer from "./Footer";
+import { useForm } from "react-hook-form";
+
 export function Contact() {
   const [customer, setCustomer] = useState({
     ip_address: "",
@@ -26,8 +28,12 @@ export function Contact() {
     session_duration: "420",
   });
   const [loader, setLoader] = useState(false);
-  const [message, setMessage] = useState("");
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm();
   const { events, trackEvent, showNotification } = useDrawerContext();
   const getClientIP = async () => {
     try {
@@ -56,23 +62,23 @@ export function Contact() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const onSubmit = async (data) => {
     setLoader(true);
-    setMessage("");
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Desplazamiento suave
+      behavior: "smooth",
     });
-    const url = "https://api.arwax.pro/api/bot/";
 
     try {
-      const response = await axios.post(url, customer, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        "https://api.arwax.pro/api/bot/",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setLoader(false);
 
       showNotification(
@@ -81,14 +87,15 @@ export function Contact() {
         "Pronto nos pondremos en contacto contigo.",
         5000 // Tiempo en milisegundos (5 segundos)
       );
+      reset();
       console.log("Datos enviados exitosamente:", response.data);
     } catch (error) {
       setLoader(false);
 
       showNotification(
-        "🚀",
-        "Recibimos tu mensaje",
-        "Pronto nos pondremos en contacto contigo.",
+        "❌",
+        "Error al enviar mensaje",
+        "Por favor, inténtalo de nuevo más tarde.",
         5000 // Tiempo en milisegundos (5 segundos)
       );
       console.error(
@@ -196,48 +203,63 @@ export function Contact() {
         </div>
         <div className="flex-none bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent h-1 w-full md:h-full md:w-[3px] mb-3 md:my-0" />
         <div className="flex-1 w-full rounded-none px-5 md:rounded-2xl shadow-input bg-transparent dark:bg-black ">
-          <form className="" onSubmit={handleSubmit}>
+          <form className="" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-2 md:mb-4">
               <LabelInputContainer>
-                <Label htmlFor="firstname">Nombre</Label>
+                <Label htmlFor="name">Nombre</Label>
                 <Input
-                  id="firstname"
-                  name="name"
+                  id="name"
                   type="text"
-                  value={customer.name}
-                  onChange={handleChange}
+                  {...register("name", {
+                    required: "El nombre es obligatorio",
+                  })}
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-sm">{errors.name.message}</p>
+                )}
               </LabelInputContainer>
             </div>
             <LabelInputContainer className="mb-2 md:mb-4">
               <Label htmlFor="email">Correo electronico</Label>
               <Input
                 id="email"
-                name="email"
                 type="email"
-                value={customer.email}
-                onChange={handleChange}
+                {...register("email", {
+                  required: "El correo es obligatorio",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Formato de correo inválido",
+                  },
+                })}
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              )}
             </LabelInputContainer>
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-2 md:mb-4">
               <LabelInputContainer>
-                <Label htmlFor="firstname">Telefono</Label>
+                <Label htmlFor="phone">Telefono</Label>
                 <Input
-                  id="firstname"
-                  name="phone"
-                  type="text"
-                  value={customer.phone}
-                  onChange={handleChange}
+                  id="phone"
+                  type="tel"
+                  {...register("phone", {
+                    required: "El teléfono es obligatorio",
+                    pattern: {
+                      value: /^[0-9]{10}$/,
+                      message: "El teléfono debe tener 10 dígitos",
+                    },
+                  })}
                 />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm">{errors.phone.message}</p>
+                )}
               </LabelInputContainer>
               <LabelInputContainer>
-                <Label htmlFor="lastname">Website</Label>
+                <Label htmlFor="website">Website</Label>
                 <Input
-                  id="lastname"
-                  name="website"
+                  id="website"
                   type="text"
-                  value={customer.website}
-                  onChange={handleChange}
+                  {...register("website")}
                 />
               </LabelInputContainer>
             </div>
@@ -245,20 +267,22 @@ export function Contact() {
               <Label htmlFor="message">Mensaje</Label>
               <TextArea
                 id="message"
-                placeholder=""
-                name="message"
-                type="text"
+                rows={4}
+                {...register("message", { required: "El mensaje es obligatorio" })}
                 className=""
-                value={customer.message}
-                onChange={handleChange}
+                placeholder="Escribe tu mensaje aquí..."
               />
+              {errors.message && (
+                  <p className="text-red-500 text-sm">{errors.message.message}</p>
+                )}
             </LabelInputContainer>
 
             <button
               className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
               type="submit"
             >
-              Enviar &rarr;
+                          {isSubmitting ? "Enviando..." : "Enviar"}
+                          
               <BottomGradient />
             </button>
           </form>
