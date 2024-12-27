@@ -54,14 +54,6 @@ export function Contact() {
     }));
   }, [events]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCustomer((prevCustomer) => ({
-      ...prevCustomer,
-      [name]: value,
-    }));
-  };
-
   const onSubmit = async (data) => {
     setLoader(true);
     window.scrollTo({
@@ -69,10 +61,18 @@ export function Contact() {
       behavior: "smooth",
     });
 
+    const enhancedData = {
+      ...data,
+      ip_address: customer.ip_address,
+      events: customer.events,
+      user_agent: navigator.userAgent,
+    };
+  
+
     try {
       const response = await axios.post(
         "https://api.arwax.pro/api/bot/",
-        data,
+        enhancedData,
         {
           headers: {
             "Content-Type": "application/json",
