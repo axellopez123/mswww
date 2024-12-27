@@ -19,7 +19,7 @@ export const DrawerProvider = ({ children }) => {
     time: 0,
   });
   const [navigationStartTime, setNavigationStartTime] = useState(null);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState("joyitas");
 
   useEffect(() => {
     // Capturar el tiempo de inicio al montar la página

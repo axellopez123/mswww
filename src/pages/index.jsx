@@ -198,7 +198,7 @@ export default function Home() {
     const active = offsets.find((section) => section.isInView);
     if (active) {
       if (navigator.vibrate) {
-        navigator.vibrate(500); // Vibración de 500ms
+        navigator.vibrate(100); // Vibración de 500ms
       } 
       setActiveSection(active.id);
     }
