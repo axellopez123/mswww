@@ -18,6 +18,13 @@ export const DrawerProvider = ({ children }) => {
     message: "",
     time: 0,
   });
+  const [navigationStartTime, setNavigationStartTime] = useState(null);
+
+  useEffect(() => {
+    // Capturar el tiempo de inicio al montar la página
+    setNavigationStartTime(Date.now());
+  }, []);
+
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
@@ -55,6 +62,7 @@ export const DrawerProvider = ({ children }) => {
         trackEvent,
         notification,
         showNotification,
+        navigationStartTime
       }}
     >
       {children}

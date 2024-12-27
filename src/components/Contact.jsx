@@ -34,7 +34,7 @@ export function Contact() {
     formState: { errors, isSubmitting },
     reset,
   } = useForm();
-  const { events, trackEvent, showNotification } = useDrawerContext();
+  const { events, trackEvent, showNotification, navigationStartTime } = useDrawerContext();
   const getClientIP = async () => {
     try {
       const response = await fetch("https://api.ipify.org?format=json");
@@ -44,10 +44,14 @@ export function Contact() {
       console.error("Error obteniendo la IP:", error);
     }
   };
+  const getReferrer = () => {
+    setCustomer((prevCustomer) => ({ ...prevCustomer, referrer: document.referrer || '' }));
+  };
 
   // useEffect para obtener la IP al montar el componente
   useEffect(() => {
     getClientIP();
+    getReferrer();
     setCustomer((prevCustomer) => ({
       ...prevCustomer,
       events: events,
@@ -60,12 +64,15 @@ export function Contact() {
       top: 0,
       behavior: "smooth",
     });
+    const endTime = Date.now();
 
     const enhancedData = {
       ...data,
       ip_address: customer.ip_address,
       events: customer.events,
+      referrer: customer.referrer,
       user_agent: navigator.userAgent,
+      session_duration: endTime - navigationStartTime,
     };
   
 
