@@ -7,6 +7,7 @@ import GridComponent from "../components/GridComponent";
 import HoverEffect from "../components/HoverEffect";
 import { Contact } from "../components/Contact";
 import { LayoutGrid } from "../components/LayoutGrid";
+import { debounce } from "lodash";
 import {
   AnimatePresence,
   motion,
@@ -187,6 +188,8 @@ export default function Home() {
     });
   };
 
+  const [lastActiveSection, setLastActiveSection] = useState(null);
+
   const handleScroll = () => {
     const offsets = sections.map((section) => {
       const el = document.getElementById(section.id);
@@ -194,22 +197,25 @@ export default function Home() {
       const isInView = top < window.innerHeight / 2 && bottom > window.innerHeight / 2;
       return { id: section.id, isInView };
     });
-
+  
     const active = offsets.find((section) => section.isInView);
-    if (active) {
+    if (active && active.id !== lastActiveSection) {
       if (navigator.vibrate) {
-        navigator.vibrate(100); // Vibración de 500ms
-      } 
+        navigator.vibrate(100);
+      }
+      setLastActiveSection(active.id);
       setActiveSection(active.id);
     }
   };
-
+  
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    const debouncedHandleScroll = debounce(handleScroll, 100); // Ejecutar cada 100ms
+    window.addEventListener("scroll", debouncedHandleScroll);
+  
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", debouncedHandleScroll);
     };
-  }, []);
+  }, [lastActiveSection, sections]);
 
 
   return (
