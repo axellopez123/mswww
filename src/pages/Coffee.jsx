@@ -1,0 +1,374 @@
+import React, { useState, useRef } from "react";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
+import { OrbitControls, Html } from "@react-three/drei";
+import { Model } from "../components/modelos3D/Coffee_cup";
+import Silk from "../components/Silk";
+import GlareHover from '../components/GlareHover';
+import BlurText from '../components/BlurText';
+import AnimatedContent from '../components/AnimatedContent ';
+import ProfileCard from '../components/ProfileCard ';
+import { useSpring } from "@react-spring/three";
+
+function CameraController({ desiredPosition, targetPosition, isUserInteracting }) {
+  const { camera } = useThree();
+  const currentPos = useRef(camera.position.clone());
+
+  useFrame(() => {
+    if (isUserInteracting) {
+      currentPos.current.copy(camera.position);
+    } else {
+      currentPos.current.lerp(
+        { x: desiredPosition[0], y: desiredPosition[1], z: desiredPosition[2] },
+        0.05
+      );
+      camera.position.copy(currentPos.current);
+      camera.lookAt(...targetPosition);
+    }
+  });
+
+  return null;
+}
+
+function Marker({ position, label }) {
+  return (
+    <Html
+      position={position}
+      center
+      style={{
+        background: "rgba(250, 240, 230, 0.9)",
+        padding: "6px 14px",
+        borderRadius: 12,
+        color: "#4B2E05",
+        fontWeight: "600",
+        fontSize: "1.1rem",
+        userSelect: "none",
+        pointerEvents: "none",
+        boxShadow: "0 0 10px rgba(75, 46, 5, 0.3)",
+        whiteSpace: "nowrap",
+        fontFamily: "'Georgia', serif",
+      }}
+    >
+      {label}
+    </Html>
+  );
+}
+
+export default function Coffee() {
+  const [modelPos] = useState([1.5, -0.5, -2]);
+  const [targetPos, setTargetPos] = useState(modelPos);
+  const [marker, setMarker] = useState({ position: null, label: "" });
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const [showProfileCard, setShowProfileCard] = useState(false);
+  const [profileCardPos, setProfileCardPos] = useState(null);
+
+  // Declara camPos solo una vez, con posición inicial lejana para animar
+  const [camPos, setCamPos] = useState([1.5, 12, 12]);
+
+  // Animación inicial de cámara con react-spring
+  useSpring({
+    from: { camPos: [1.5, 12, 12] },
+    to: { camPos: [1.5, 8.5, 6] },
+    config: { mass: 1, tension: 120, friction: 26 },
+    onChange: ({ value }) => {
+      if (value.camPos) setCamPos(value.camPos);
+    }
+  });
+
+  const moveCameraRelativeToObject = (offset, label = "") => {
+    const newCamPos = [
+      modelPos[0] + offset[0],
+      modelPos[1] + offset[1],
+      modelPos[2] + offset[2],
+    ];
+    setCamPos(newCamPos);
+    setTargetPos(modelPos);
+
+    if (label === "Centro") {
+      setShowProfileCard(true);
+      setProfileCardPos([modelPos[0] - 0.3, modelPos[1] + 1, modelPos[2]]);
+      setMarker({ position: null, label: "" });
+    } else {
+      setShowProfileCard(false);
+      setProfileCardPos(null);
+
+      if (label) {
+        const markerPos = [
+          modelPos[0] + offset[0] / 2,
+          modelPos[1] + offset[1] / 2,
+          modelPos[2] + offset[2] / 2,
+        ];
+        setMarker({ position: markerPos, label });
+      } else {
+        setMarker({ position: null, label: "" });
+      }
+    }
+  };
+
+  return (
+    <>
+      <Silk />
+
+      <div
+        className="relative min-h-screen font-sans text-white overflow-hidden flex flex-col items-center"
+        style={{
+          backgroundColor: "transparent",
+          paddingTop: "2rem",
+        }}
+      >
+        <nav className="flex justify-between items-center py-8 w-full max-w-5xl px-8">
+          <div className="flex gap-10">
+            {["TUESTE LIGERO", "TUESTE OSCURO"].map((item) => (
+              <a
+                key={item}
+                href="#"
+                className="text-sm uppercase tracking-widest transition-colors duration-300 hover:underline hover:text-[#f4e3d7]"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex gap-10">
+            {["Sobre nosotros", "contactos"].map((item) => (
+              <a
+                key={item}
+                href="#"
+                className="text-sm uppercase tracking-widest transition-colors duration-300 hover:underline hover:text-[#f4e3d7]"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+        </nav>
+
+        <GlareHover
+          className="relative overflow-hidden border-4 border-[#a67c4b] shadow-lg mb-10 glare-hover rounded-full "
+          width="400px"
+          height="400px"
+          background="rgba(58, 35, 11, 0.5)"
+          borderRadius="50%"
+          borderColor="#a67c4b"
+          glareColor="#ffffff"
+          glareOpacity={0.3}
+          glareAngle={-30}
+          glareSize={300}
+          transitionDuration={800}
+          playOnce={false}
+          style={{
+            boxShadow: "0 15px 30px rgba(58, 35, 11, 0.6)",
+            marginTop: "-50px",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+          }}
+        >
+          <Canvas
+            shadows
+            camera={{ position: camPos, fov: 25, near: 0.1, far: 1000 }}
+            style={{ borderRadius: "50%" }}
+          >
+            <ambientLight intensity={0.6} />
+            <directionalLight position={[5, 5, 5]} intensity={1} />
+            <Model position={modelPos} />
+            <CameraController
+              desiredPosition={camPos}
+              targetPosition={targetPos}
+              isUserInteracting={isUserInteracting}
+            />
+            {marker.position && <Marker position={marker.position} label={marker.label} />}
+            {showProfileCard && profileCardPos && (
+              <Html
+                center
+                position={[1.5, -0.8, -2]}
+                style={{
+                  pointerEvents: "auto",
+                  width: "auto",
+                  height: "auto",
+                }}
+              >
+                <div
+                  style={{
+                    width: "300px",
+                    maxWidth: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    pointerEvents: "auto",
+                    zIndex: 9999,
+                    transform: "scale(0.5)",  // si quieres solo escalar, pon solo esto
+                  }}
+                >
+                  <ProfileCard
+                    name="Ing. R. Rodriguez"
+                    title="Software Engineer"
+                    handle="ARWAX"
+                    status="Siempre listos"
+                    contactText="Contáctame"
+                    avatarUrl="/images/YO.png"
+                    showUserInfo={true}
+                    enableTilt={true}
+                    onContactClick={() => console.log("Contact clicked")}
+                    iconUrl="/images/code.png"
+                  />
+                </div>
+              </Html>
+            )}
+            <OrbitControls
+              target={[...modelPos]}
+              enablePan={false}
+              enableZoom={true}
+              enableRotate={true}
+              onStart={() => setIsUserInteracting(true)}
+              onEnd={() => setIsUserInteracting(false)}
+              rotateSpeed={0.5}
+              zoomSpeed={0.6}
+            />
+          </Canvas>
+        </GlareHover>
+
+        <div
+          className="text-center mb-12 w-full max-w-3xl px-6 py-4 mt-[-90px]"
+          style={{ position: "relative", zIndex: 9999 }}
+        >
+          <div className="flex justify-center">
+            <BlurText
+              text="Granos de café frescos"
+              delay={150}
+              animateBy="words"
+              direction="top"
+              className="text-5xl font-bold mb-3 text-center"
+              style={{
+                color: "#f4e3d7",
+                textShadow: "2px 2px 6px #3a230b",
+              }}
+            />
+          </div>
+
+          <p className="text-lg leading-relaxed" style={{ color: "#d6c3a3", fontStyle: "italic" }}>
+            Experimente la excelencia con nuestros granos de café premium, cuidadosamente seleccionados
+          </p>
+        </div>
+        <AnimatedContent
+          distance={14}
+          direction="horizontal"
+          reverse={false}
+          duration={1.2}
+          ease="bounce.out"
+          initialOpacity={0.2}
+          animateOpacity
+          scale={1.1}
+          threshold={0.2}
+          delay={0.3}
+        >
+          <div className="fixed top-[330px]  right-2 md:right-12 transform -translate-y-1/2 w-22 md:w-22 h-[260px] z-50">
+            <GlareHover
+              className="bg-white/90 backdrop-blur-sm rounded-xl p-3 border border-[#a67c4b] shadow-lg glare-hover"
+              glareColor="#ffffff"
+              glareOpacity={0.3}
+              glareAngle={-30}
+              glareSize={300}
+              transitionDuration={800}
+              playOnce={false}
+              width="250px"
+              height="250px"
+            >
+              <div className="flex justify-center mb-3">
+                <div className="flex items-center justify-center">
+                  <img
+                    src="/images/coffee_bean1.png"
+                    className="w-20 h-20 object-cover rounded-full rotate-[-20deg]"
+                    alt="Bean 1"
+                  />
+                  <img
+                    src="/images/coffee_bean2.png"
+                    className="w-14 h-14 object-cover rounded-full rotate-[-15deg] -ml-6 mt-5"
+                    alt="Bean 2"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center justify-center gap-1 mb-4">
+                <span className="text-sm uppercase tracking-wider text-[#f4e3d7]">
+                  DESDE
+                </span>
+                <span className="text-sm uppercase tracking-wider text-[#f4e3d7]">
+                  GRANOS DE ALTURA HASTA
+                </span>
+                <span className="text-sm uppercase tracking-wider text-[#f4e3d7]">
+                  TU TUESTE IDEAL
+                </span>
+              </div>
+
+              <button className="w-full bg-[#6f4e37] text-[#f4e3d7] text-xs font-bold py-2 px-4 rounded-full hover:bg-[#b88655] transition uppercase shadow-md">
+                + Incia
+              </button>
+            </GlareHover>
+          </div>
+        </AnimatedContent>
+
+        <AnimatedContent
+          distance={14}
+          direction="horizontal"
+          reverse={false}
+          duration={1.2}
+          ease="bounce.out"
+          initialOpacity={0.2}
+          animateOpacity
+          scale={1.1}
+          threshold={0.2}
+          delay={0.3}
+        >
+          <div className="fixed top-[350px] left-2 transform -translate-y-1/2 w-[220px] h-[300px] z-50">
+            <GlareHover
+              className="w-full h-full relative bg-white/90 backdrop-blur-sm rounded-xl p-3 border border-[#a67c4b] shadow-lg glare-hover"
+              glareColor="#ffffff"
+              glareOpacity={0.3}
+              glareAngle={-30}
+              glareSize={300}
+              transitionDuration={800}
+              playOnce={false}
+              style={{ pointerEvents: 'auto' }}
+              width="250PX"
+              height="250px"
+            >
+              <div className="grid grid-cols-2 gap-2 mb-3 pointer-events-auto z-50 relative">
+                {[
+                  { label: "Centro", offset: [0, 0, 6] },
+                  { label: "Zoom In", offset: [0, 0, 3] },
+                  { label: "Zoom Out", offset: [0, 0, 10] },
+                  { label: "Derecha", offset: [6, 0, 0] },
+                  { label: "Izquierda", offset: [-6, 0, 0] },
+                  { label: "Arriba", offset: [0, 6, 0] },
+                  { label: "Abajo", offset: [0, -6, 0] },
+                ].map(({ label, offset }) => (
+                  <button
+                    key={label}
+                    onClick={() => moveCameraRelativeToObject(offset, label)}
+                    className="text-xs font-semibold rounded-full transition duration-300 w-20 py-1 cursor-pointer z-50"
+                    style={{
+                      background: "linear-gradient(135deg, #6f4e37, #b88655)",
+                      color: "#f3e9d2",
+                      boxShadow: "0 2px 6px rgba(180, 135, 60, 0.4)",
+                      border: "1px solid #553c22",
+                      userSelect: "none",
+                      textTransform: "uppercase",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = "linear-gradient(135deg, #b88655, #6f4e37)";
+                      e.currentTarget.style.boxShadow = "0 4px 10px rgba(184, 134, 85, 0.6)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "linear-gradient(135deg, #6f4e37, #b88655)";
+                      e.currentTarget.style.boxShadow = "0 2px 6px rgba(180, 135, 60, 0.4)";
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </GlareHover>
+          </div>
+        </AnimatedContent>
+      </div>
+    </>
+  );
+}
