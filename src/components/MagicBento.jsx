@@ -541,7 +541,8 @@ const MagicBento = ({
 
   // El formulario completo que usaremos 2 veces (dentro y fuera del grid)
   const Formulario = () => (
-    <form className="flex flex-col gap-3 w-full max-w-[95%] sm:max-w-xs mx-auto text-white text-sm p-4 bg-black/30 rounded-lg backdrop-blur-sm ">
+    <form className="flex flex-col gap-3 w-full max-w-full mx-auto text-white text-sm p-4 bg-black/30 rounded-lg backdrop-blur-sm">
+
       {/* Fila: Nombre y Celular */}
       <div className="flex gap-3">
         <div className="flex flex-col w-1/2">
@@ -549,11 +550,11 @@ const MagicBento = ({
             Nombre
           </label>
           <input
-  id="input-nombre"
-  type="text"
-  placeholder="Tu nombre"
-  className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
-/>
+            id="input-nombre"
+            type="text"
+            placeholder="Tu nombre"
+            className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
+          />
 
         </div>
         <div className="flex flex-col w-1/2">
@@ -623,11 +624,9 @@ const MagicBento = ({
             const isFormCard = card.type === "form";
 
             // Ocultar formulario dentro del grid en móvil
-            const baseClassName = `card ${
-              textAutoHide ? "card--text-autohide" : ""
-            } ${enableBorderGlow ? "card--border-glow" : ""} ${
-              isFormCard && isMobile ? "form-in-grid-hidden" : ""
-            }`;
+            const baseClassName = `card ${textAutoHide ? "card--text-autohide" : ""
+              } ${enableBorderGlow ? "card--border-glow" : ""} ${isFormCard && isMobile ? "form-in-grid-hidden" : ""
+              }`;
 
             const cardProps = {
               className: baseClassName,

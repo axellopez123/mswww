@@ -88,7 +88,7 @@ function Header({ products }) {
     <div
       id="joyitas"
       ref={ref}
-      className="min-h-[180vh] sm:min-h-[170vh] md:min-h-[170vh] lg:min-h-[170vh] xl:min-h-[210vh] top-0 py-0 overflow-hidden antialiased relative 
+      className="min-h-[180vh] sm:min-h-[170vh] md:min-h-[170vh] lg:min-h-[170vh]  top-0 py-0 overflow-hidden antialiased relative 
       flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d] bg-white dark:bg-black transition-colors duration-500
       ">
       <div className="flex items-center justify-center h-screem w-screem w-screen ">
