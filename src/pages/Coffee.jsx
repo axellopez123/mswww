@@ -10,6 +10,7 @@ import ProfileCard from '../components/ProfileCard ';
 import { useSpring } from "@react-spring/three";
 import Carousel from '../components/Carousel';
 import '../pages/Coffee.css';
+
 function CameraController({ desiredPosition, targetPosition, isUserInteracting }) {
   const { camera } = useThree();
   const currentPos = useRef(camera.position.clone());
@@ -62,10 +63,8 @@ export default function Coffee() {
   const [showProfileCard, setShowProfileCard] = useState(false);
   const [profileCardPos, setProfileCardPos] = useState(null);
 
-  // Declara camPos solo una vez, con posición inicial lejana para animar
   const [camPos, setCamPos] = useState([1.5, 12, 12]);
 
-  // Animación inicial de cámara con react-spring
   useSpring({
     from: { camPos: [1.5, 12, 12] },
     to: { camPos: [1.5, 8.5, 6] },
@@ -109,7 +108,7 @@ export default function Coffee() {
   return (
     <>
       <Silk />
-      <nav className="fixed top-0 left-0 right-0 z-50  flex justify-between items-center py-8 w-full px-8">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-8 w-full px-8">
         <div className="flex gap-10">
           {["TUESTE LIGERO", "TUESTE OSCURO"].map((item) => (
             <a
@@ -136,16 +135,15 @@ export default function Coffee() {
       </nav>
 
       <div
-        className="relative min-h-screen font-sans text-white overflow-hidden flex flex-col items-center "
+        className="relative min-h-screen font-sans text-white overflow-hidden flex flex-col items-center justify-center"
         style={{
           backgroundColor: "transparent",
           paddingTop: "2rem",
+          paddingBottom: "2rem",
         }}
       >
-
-
         <GlareHover
-          className="relative overflow-hidden border-4 border-[#a67c4b] shadow-lg mb-10 glare-hover rounded-full "
+          className="relative overflow-hidden border-4 border-[#a67c4b] shadow-lg mb-10 glare-hover rounded-full"
           width="400px"
           height="400px"
           background="rgba(58, 35, 11, 0.5)"
@@ -159,7 +157,7 @@ export default function Coffee() {
           playOnce={false}
           style={{
             boxShadow: "0 15px 30px rgba(58, 35, 11, 0.6)",
-            marginTop: "0px",
+            marginTop: 0,
             backdropFilter: "blur(8px)",
             WebkitBackdropFilter: "blur(8px)",
           }}
@@ -197,7 +195,7 @@ export default function Coffee() {
                     alignItems: "center",
                     pointerEvents: "auto",
                     zIndex: 9999,
-                    transform: "scale(0.5)",  // si quieres solo escalar, pon solo esto
+                    transform: "scale(0.5)",
                   }}
                 >
                   <ProfileCard
@@ -229,7 +227,7 @@ export default function Coffee() {
         </GlareHover>
 
         <div
-          className="text-center mb-12 w-full max-w-3xl px-6 py-4 mt-[-90px]"
+          className="text-center mb-12 w-full max-w-3xl px-6 py-4"
           style={{ position: "relative", zIndex: 9999 }}
         >
           <div className="flex justify-center">
@@ -250,6 +248,9 @@ export default function Coffee() {
             Experimente la excelencia con nuestros granos de café premium, cuidadosamente seleccionados
           </p>
         </div>
+
+        {/* Resto de tu código con AnimatedContent, botones, modal, etc., sin cambios */}
+
         <AnimatedContent
           distance={14}
           direction="horizontal"
@@ -262,60 +263,59 @@ export default function Coffee() {
           threshold={0.2}
           delay={0.3}
         >
-          <div className="fixed top-[330px]  right-2 md:right-12 transform -translate-y-1/2 w-22 md:w-22 h-[260px] z-50">
+          <div className="fixed top-[330px] right-2 md:right-12 transform -translate-y-1/2 w-[230px] md:w-[260px] lg:w-[300px] h-[260px] md:h-[290px] lg:h-[320px] z-50">
             <GlareHover
-              className="bg-white/90 backdrop-blur-sm rounded-xl p-3 border border-[#a67c4b] shadow-lg glare-hover"
+              className="bg-white/90 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-[#a67c4b] shadow-lg glare-hover"
               glareColor="#ffffff"
               glareOpacity={0.3}
               glareAngle={-30}
               glareSize={300}
               transitionDuration={800}
               playOnce={false}
-              width="250px"
-              height="250px"
+              width="100%"
+              height="100%"
             >
               <div className="flex justify-center mb-3">
                 <div className="flex items-center justify-center">
                   <img
                     src="/images/coffee_bean1.png"
-                    className="w-20 h-20 object-cover rounded-full rotate-[-20deg]"
+                    className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-cover rounded-full rotate-[-20deg]"
                     alt="Bean 1"
                   />
                   <img
                     src="/images/coffee_bean2.png"
-                    className="w-14 h-14 object-cover rounded-full rotate-[-15deg] -ml-6 mt-5"
+                    className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-cover rounded-full rotate-[-15deg] -ml-4 md:-ml-6 mt-3 md:mt-5"
                     alt="Bean 2"
                   />
                 </div>
               </div>
 
-              <div className="flex flex-col items-center justify-center gap-1 mb-4">
-                <span className="text-sm uppercase tracking-wider text-[#f4e3d7]">
+              <div className="flex flex-col items-center justify-center gap-1 mb-4 text-center">
+                <span className="text-xs md:text-sm lg:text-base uppercase tracking-wider text-[#f4e3d7]">
                   DESDE
                 </span>
-                <span className="text-sm uppercase tracking-wider text-[#f4e3d7]">
+                <span className="text-xs md:text-sm lg:text-base uppercase tracking-wider text-[#f4e3d7]">
                   GRANOS DE ALTURA HASTA
                 </span>
-                <span className="text-sm uppercase tracking-wider text-[#f4e3d7]">
+                <span className="text-xs md:text-sm lg:text-base uppercase tracking-wider text-[#f4e3d7]">
                   TU TUESTE IDEAL
                 </span>
               </div>
 
               <button
                 onClick={() => setShowModal(true)}
-                className="w-full bg-[#6f4e37] text-[#f4e3d7] text-xs font-bold py-2 px-4 z-0 rounded-full hover:bg-[#b88655] transition uppercase shadow-md"
+                className="w-full bg-[#6f4e37] text-[#f4e3d7] text-xs md:text-sm font-bold py-2 px-4 z-0 rounded-full hover:bg-[#b88655] transition uppercase shadow-md"
               >
                 + Inicia
               </button>
-
             </GlareHover>
           </div>
         </AnimatedContent>
+
+
         {showModal && (
           <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
             <div className="bg-white rounded-2xl shadow-2xl w-[90%] max-w-md p-6 relative animate-fade-in-up">
-
-
               <button
                 onClick={() => setShowModal(false)}
                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl"
@@ -341,34 +341,31 @@ export default function Coffee() {
           </div>
         )}
 
-
+        
         <AnimatedContent
-          distance={14}
-          direction="horizontal"
-          reverse={false}
-          duration={1.2}
-          ease="bounce.out"
-          initialOpacity={0.2}
-          animateOpacity
-          scale={1.1}
-          threshold={0.2}
-          delay={0.3}
-        >
-          <div className="fixed top-[350px] left-2 transform -translate-y-1/2 w-[220px] h-[300px] z-50">
-            <GlareHover
-              className="w-full h-full relative bg-white/90 backdrop-blur-sm rounded-xl p-3 border border-[#a67c4b] shadow-lg glare-hover"
-              glareColor="#ffffff"
-              glareOpacity={0.3}
-              glareAngle={-30}
-              glareSize={300}
-              transitionDuration={800}
-              playOnce={false}
-              style={{ pointerEvents: 'auto' }}
-              width="250PX"
-              height="250px"
-            >
-              <div className="grid grid-cols-2 gap-2 mb-3 pointer-events-auto z-50 relative">
-                <Carousel
+  distance={14}
+  direction="horizontal"
+  reverse={false}
+  duration={1.2}
+  ease="bounce.out"
+  initialOpacity={0.2}
+  animateOpacity
+  scale={1.1}
+  threshold={0.2}
+  delay={0.3}
+>
+  <div className="fixed top-[330px] left-2 md:left-12 transform -translate-y-1/2 w-[230px] md:w-[260px] lg:w-[300px] h-[260px] md:h-[290px] lg:h-[320px] z-50">
+    <GlareHover
+      className="bg-white/90 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-[#a67c4b] shadow-lg glare-hover"
+      glareColor="#ffffff"
+      glareOpacity={0.3}
+      glareAngle={-30}
+      glareSize={300}
+      transitionDuration={800}
+      playOnce={false}
+      width="100%"
+      height="100%"
+    ><Carousel
                   baseWidth={230}
                   autoplay={true}
                   autoplayDelay={3000}
@@ -376,12 +373,12 @@ export default function Coffee() {
                   loop={true}
                   round={false}
                 />
+      
+    </GlareHover>
+  </div>
+</AnimatedContent>
 
-              </div>
-            </GlareHover>
 
-          </div>
-        </AnimatedContent>
         <div className="flex gap-4 items-center mb-3 pointer-events-auto z-50 relative">
           {[
             { label: "Crafted by", offset: [0, 0, 6] },
@@ -412,7 +409,6 @@ export default function Coffee() {
             </button>
           ))}
         </div>
-
       </div>
     </>
   );
