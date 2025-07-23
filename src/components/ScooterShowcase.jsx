@@ -4,7 +4,7 @@ import MagicBento from './MagicBento'
 export default function ScooterShowcase() {
   return (
     
-    <div className="w-full mx-auto p-4 bg-white dark:bg-black  rounded-2xl text-gray-900 dark:text-white MT-10">
+    <div className="w-full mx-auto p-4 bg-white dark:bg-black  rounded-2xl text-gray-900 dark:text-white ">
 
   <MagicBento 
         textAutoHide={true}
