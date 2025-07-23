@@ -259,7 +259,9 @@ function Index() {
               delay={150}
               animateBy="words"
               direction="top"
-              className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold text-black dark:text-white drop-shadow-[-5px_1px_2px_rgba(255,255,255,0.1)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)]"
+              className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${
+                currentBackground === 'aurora' ? 'text-[#eaecee]' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'
+            }`}
             />
             <BlurText
               id="titulo2"
@@ -267,14 +269,18 @@ function Index() {
               delay={250}
               animateBy="words"
               direction="top"
-              className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold text-black dark:text-white drop-shadow-[-5px_1px_2px_rgba(255,255,255,0.1)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)]"
+               className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${
+                currentBackground === 'aurora' ? 'text-[#eaecee]' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'
+            }`}
             />
             <BlurText
               text="Destaca en el mercado digital, confiando en nuestros expertos para llevar tu empresa al nivel que siempre has deseado."
               delay={100}
               animateBy="words"
               direction="top"
-              className="text-3xl sm:text-4x1 md:text-4x1 lg:text-4xl xl:text-4xl font-semibold text-neutral-800 dark:text-white"
+              className={`text-3xl sm:text-4x1 md:text-4x1 lg:text-4xl xl:text-4xl font-semibold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${
+                currentBackground === 'aurora' ? 'text-white' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'
+            }`}
             />
             
           </div>
