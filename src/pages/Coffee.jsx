@@ -8,7 +8,8 @@ import BlurText from '../components/BlurText';
 import AnimatedContent from '../components/AnimatedContent ';
 import ProfileCard from '../components/ProfileCard ';
 import { useSpring } from "@react-spring/three";
-
+import Carousel from '../components/Carousel';
+import '../pages/Coffee.css';
 function CameraController({ desiredPosition, targetPosition, isUserInteracting }) {
   const { camera } = useThree();
   const currentPos = useRef(camera.position.clone());
@@ -83,7 +84,7 @@ export default function Coffee() {
     setCamPos(newCamPos);
     setTargetPos(modelPos);
 
-    if (label === "Centro") {
+    if (label === "Crafted by") {
       setShowProfileCard(true);
       setProfileCardPos([modelPos[0] - 0.3, modelPos[1] + 1, modelPos[2]]);
       setMarker({ position: null, label: "" });
@@ -103,43 +104,45 @@ export default function Coffee() {
       }
     }
   };
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
       <Silk />
+      <nav className="fixed top-0 left-0 right-0 z-50  flex justify-between items-center py-8 w-full px-8">
+        <div className="flex gap-10">
+          {["TUESTE LIGERO", "TUESTE OSCURO"].map((item) => (
+            <a
+              key={item}
+              href="#"
+              className="text-white text-sm uppercase tracking-widest transition-colors duration-300 hover:underline hover:text-[#f4d03f]"
+            >
+              {item}
+            </a>
+          ))}
+        </div>
+
+        <div className="flex gap-10">
+          {["Sobre nosotros", "contactos"].map((item) => (
+            <a
+              key={item}
+              href="#"
+              className="text-white text-sm uppercase tracking-widest transition-colors duration-300 hover:underline hover:text-[#f4d03f]"
+            >
+              {item}
+            </a>
+          ))}
+        </div>
+      </nav>
 
       <div
-        className="relative min-h-screen font-sans text-white overflow-hidden flex flex-col items-center"
+        className="relative min-h-screen font-sans text-white overflow-hidden flex flex-col items-center "
         style={{
           backgroundColor: "transparent",
           paddingTop: "2rem",
         }}
       >
-        <nav className="flex justify-between items-center py-8 w-full max-w-5xl px-8">
-          <div className="flex gap-10">
-            {["TUESTE LIGERO", "TUESTE OSCURO"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-sm uppercase tracking-widest transition-colors duration-300 hover:underline hover:text-[#f4e3d7]"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
 
-          <div className="flex gap-10">
-            {["Sobre nosotros", "contactos"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-sm uppercase tracking-widest transition-colors duration-300 hover:underline hover:text-[#f4e3d7]"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-        </nav>
 
         <GlareHover
           className="relative overflow-hidden border-4 border-[#a67c4b] shadow-lg mb-10 glare-hover rounded-full "
@@ -156,7 +159,7 @@ export default function Coffee() {
           playOnce={false}
           style={{
             boxShadow: "0 15px 30px rgba(58, 35, 11, 0.6)",
-            marginTop: "-50px",
+            marginTop: "0px",
             backdropFilter: "blur(8px)",
             WebkitBackdropFilter: "blur(8px)",
           }}
@@ -298,12 +301,46 @@ export default function Coffee() {
                 </span>
               </div>
 
-              <button className="w-full bg-[#6f4e37] text-[#f4e3d7] text-xs font-bold py-2 px-4 rounded-full hover:bg-[#b88655] transition uppercase shadow-md">
-                + Incia
+              <button
+                onClick={() => setShowModal(true)}
+                className="w-full bg-[#6f4e37] text-[#f4e3d7] text-xs font-bold py-2 px-4 z-0 rounded-full hover:bg-[#b88655] transition uppercase shadow-md"
+              >
+                + Inicia
               </button>
+
             </GlareHover>
           </div>
         </AnimatedContent>
+        {showModal && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl shadow-2xl w-[90%] max-w-md p-6 relative animate-fade-in-up">
+
+
+              <button
+                onClick={() => setShowModal(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl"
+              >
+                ✕
+              </button>
+              <h2 className="text-xl font-bold text-[#6f4e37] mb-4">Bienvenido</h2>
+              <p className="text-sm text-gray-600 mb-4">
+                Aquí puedes iniciar sesión o continuar con tu proceso.
+              </p>
+              <div className="flex justify-end gap-2">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 rounded-md text-sm bg-gray-200 hover:bg-gray-300 text-gray-800"
+                >
+                  Cancelar
+                </button>
+                <button className="px-4 py-2 rounded-md text-sm bg-[#6f4e37] hover:bg-[#b88655] text-[#f4e3d7] font-semibold">
+                  Continuar
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
 
         <AnimatedContent
           distance={14}
@@ -331,43 +368,51 @@ export default function Coffee() {
               height="250px"
             >
               <div className="grid grid-cols-2 gap-2 mb-3 pointer-events-auto z-50 relative">
-                {[
-                  { label: "Centro", offset: [0, 0, 6] },
-                  { label: "Zoom In", offset: [0, 0, 3] },
-                  { label: "Zoom Out", offset: [0, 0, 10] },
-                  { label: "Derecha", offset: [6, 0, 0] },
-                  { label: "Izquierda", offset: [-6, 0, 0] },
-                  { label: "Arriba", offset: [0, 6, 0] },
-                  { label: "Abajo", offset: [0, -6, 0] },
-                ].map(({ label, offset }) => (
-                  <button
-                    key={label}
-                    onClick={() => moveCameraRelativeToObject(offset, label)}
-                    className="text-xs font-semibold rounded-full transition duration-300 w-20 py-1 cursor-pointer z-50"
-                    style={{
-                      background: "linear-gradient(135deg, #6f4e37, #b88655)",
-                      color: "#f3e9d2",
-                      boxShadow: "0 2px 6px rgba(180, 135, 60, 0.4)",
-                      border: "1px solid #553c22",
-                      userSelect: "none",
-                      textTransform: "uppercase",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = "linear-gradient(135deg, #b88655, #6f4e37)";
-                      e.currentTarget.style.boxShadow = "0 4px 10px rgba(184, 134, 85, 0.6)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "linear-gradient(135deg, #6f4e37, #b88655)";
-                      e.currentTarget.style.boxShadow = "0 2px 6px rgba(180, 135, 60, 0.4)";
-                    }}
-                  >
-                    {label}
-                  </button>
-                ))}
+                <Carousel
+                  baseWidth={230}
+                  autoplay={true}
+                  autoplayDelay={3000}
+                  pauseOnHover={true}
+                  loop={true}
+                  round={false}
+                />
+
               </div>
             </GlareHover>
+
           </div>
         </AnimatedContent>
+        <div className="flex gap-4 items-center mb-3 pointer-events-auto z-50 relative">
+          {[
+            { label: "Crafted by", offset: [0, 0, 6] },
+            { label: "Contáctame", offset: [0, 6, 0] },
+          ].map(({ label, offset }) => (
+            <button
+              key={label}
+              onClick={() => moveCameraRelativeToObject(offset, label)}
+              className="text-sm font-bold rounded-full transition duration-300 w-28 py-2 cursor-pointer z-50 tracking-wider"
+              style={{
+                background: "rgba(0, 0, 0, 0.7)",
+                color: "#fcebd5",
+                border: "1px solid #a87c4f",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
+                textTransform: "uppercase",
+                backdropFilter: "blur(4px)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(30, 20, 10, 0.9)";
+                e.currentTarget.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.6)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(0, 0, 0, 0.7)";
+                e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.4)";
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
       </div>
     </>
   );
