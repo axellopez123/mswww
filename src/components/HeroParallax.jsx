@@ -10,7 +10,8 @@ import GooeyNav from './GooeyNav';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import ScooterShowcase from './ScooterShowcase';
 import { Navbear } from './Navbear';
-import MagicBento from './MagicBento'
+import MagicBento from './MagicBento';
+import RotatingText from './RotatingText';
 
 const BACKGROUNDS = {
   vortex: VortexProps,
@@ -36,8 +37,8 @@ function Header({ products }) {
 
   const springConfig = { stiffness: 500, damping: 30, bounce: 100 };
   const velocity = 100;
-  const translateX = useSpring(useTransform(scrollYProgress, [0, 1], [0, 400]), springConfig);
-  const translateXReverse = useSpring(useTransform(scrollYProgress, [0, 1], [0, -1000]), springConfig);
+  const translateX = useSpring(useTransform(scrollYProgress, [0, 1], [0, 300]), springConfig);
+  const translateXReverse = useSpring(useTransform(scrollYProgress, [0, 1], [0, -100]), springConfig);
   const rotateX = useSpring(useTransform(scrollYProgress, [0, 0.2], [15, 0]), springConfig);
   const opacity = useSpring(useTransform(scrollYProgress, [0, 0.2], [0.2, 1]), springConfig);
   const rotateZ = useSpring(useTransform(scrollYProgress, [0, 0.2], [20, 0]), springConfig);
@@ -67,78 +68,79 @@ function Header({ products }) {
   }, []);
 
 
-  return (<> <div>
-    {showNavbear ? (
-      <motion.div
-        initial={{ y: '-100%', opacity: 0 }}
-        animate={{ y: '0%', opacity: 1 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-        style={{
-          position: 'fixed', // aseguramos que se vea claramente
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 1000,
-        }}
-      >
-        <Navbear />
-      </motion.div>
-    ) : null}
-  </div>
-    <div
-      id="joyitas"
-      ref={ref}
-      className="min-h-[180vh] sm:min-h-[170vh] md:min-h-[170vh] lg:min-h-[170vh]  top-0 py-0 overflow-hidden antialiased relative 
-      flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d] bg-white dark:bg-black transition-colors duration-500
-      ">
-      <div className="flex items-center justify-center h-screem w-screem w-screen ">
-        <Index />
+  return (
+    <>
+      <div>
+        {showNavbear ? (
+          <motion.div
+            initial={{ y: '-100%', opacity: 0 }}
+            animate={{ y: '0%', opacity: 1 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 1000,
+            }}
+          >
+            <Navbear />
+          </motion.div>
+        ) : null}
       </div>
-
-
-      <motion.div
-        style={{
-          rotateX,
-          rotateZ,
-          translateY,
-          opacity,
-        }}
-        className="
+      <div
+        id="joyitas"
+        ref={ref}
+        className="min-h-[210vh] sm:min-h-[210vh] md:min-h-[210vh] lg:min-h-[195vh]  top-0 py-0 overflow-hidden antialiased relative 
+          flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d] bg-white dark:bg-black transition-colors duration-500
+          ">
+        <div className="flex items-center justify-center h-screem w-screem w-screen ">
+          <Index />
+        </div>
+        <motion.div
+          style={{
+            rotateX,
+            rotateZ,
+            translateY,
+            opacity,
+          }}
+          className="
           bg-white dark:bg-black 
           text-black dark:text-white 
           transition-colors duration-500
           rounded-xl p-6 shadow-lg -mt-[90px]
         "
-      >
-        <div className="flex justify-center items-center mb-12 ">
-          <p className="font-exo text-5xl md:text-7xl font-bold dark:text-white">Joyitas</p><i class='bx bxl-sketch text-cyan-400 hover:text-cyan-500 text-7xl md:text-9xl'></i>
-        </div>
-        <motion.div
-          ref={firstRowRef}
-          className="flex flex-row mb-20 space-x-20 overflow-x-auto scrollbar-hide no-scrollbar"
-          style={{ scrollBehavior: "smooth" }}
         >
-          {firstRow.map((product) => (
-            <ProductCard product={product} translate={translateX} key={product.title} />
-          ))}
+          <div className="flex justify-center items-center mb-12 ">
+            <p className="font-exo text-5xl md:text-7xl font-bold dark:text-white">Joyitas</p><i class='bx bxl-sketch text-cyan-400 hover:text-cyan-500 text-7xl md:text-9xl'></i>
+          </div>
+          <motion.div
+            ref={firstRowRef}
+            className="flex flex-row mb-20 space-x-20 overflow-x-auto scrollbar-hide no-scrollbar"
+            style={{ scrollBehavior: "smooth" }}
+          >
+            {firstRow.map((product) => (
+              <ProductCard product={product} translate={translateX} key={product.title} />
+            ))}
+          </motion.div>
+
+          <motion.div
+            ref={secondRowRef}
+            className="flex flex-row mb-20 space-x-20 overflow-x-auto scrollbar-hide no-scrollbar"
+            style={{ scrollBehavior: "smooth" }}
+          >
+            {secondRow.map((product) => (
+              <ProductCard product={product} translate={translateXReverse} key={product.title} />
+            ))}
+          </motion.div>
+
+
         </motion.div>
 
-        <motion.div
-          ref={secondRowRef}
-          className="flex flex-row mb-20 space-x-20 overflow-x-auto scrollbar-hide no-scrollbar"
-          style={{ scrollBehavior: "smooth" }}
-        >
-          {secondRow.map((product) => (
-            <ProductCard product={product} translate={translateXReverse} key={product.title} />
-          ))}
-        </motion.div>
 
+      </div>
+      <ScooterShowcase />
 
-      </motion.div>
-
-
-    </div> <ScooterShowcase />
-    
 
     </>
 
@@ -169,29 +171,29 @@ function Index() {
   const positionY = scrollY * 0.8;
 
   const handleChangeBackground = (newBackground) => {
-  if (transitioning) return; 
+    if (transitioning) return;
 
-  setPrevBackground(currentBackground);
-  setTransitioning(true);
+    setPrevBackground(currentBackground);
+    setTransitioning(true);
 
-  const el = document.getElementById("titulo");
-  const el2 = document.getElementById("titulo2");
-  if (el) {
-    /*if (newBackground === "aurora") {
-      el.style.filter = "drop-shadow(-5px 1px 2px rgb(0, 0, 0))";
-      el2.style.filter = "drop-shadow(-5px 1px 2px rgb(0, 0, 0))";
-    } else {
-      el.style.filter = "drop-shadow(-5px 1px 2px rgba(0, 0, 0, 0.7))";
-      el2.style.filter = "drop-shadow(-5px 1px 2px rgba(0, 0, 0, 0.7))";
-    }*/
-  }
+    const el = document.getElementById("titulo");
+    const el2 = document.getElementById("titulo2");
+    if (el) {
+      /*if (newBackground === "aurora") {
+        el.style.filter = "drop-shadow(-5px 1px 2px rgb(0, 0, 0))";
+        el2.style.filter = "drop-shadow(-5px 1px 2px rgb(0, 0, 0))";
+      } else {
+        el.style.filter = "drop-shadow(-5px 1px 2px rgba(0, 0, 0, 0.7))";
+        el2.style.filter = "drop-shadow(-5px 1px 2px rgba(0, 0, 0, 0.7))";
+      }*/
+    }
 
-  setTimeout(() => {
-    setCurrentBackground(newBackground);
-    setPrevBackground(null);
-    setTransitioning(false);
-  }, 1000);
-};
+    setTimeout(() => {
+      setCurrentBackground(newBackground);
+      setPrevBackground(null);
+      setTransitioning(false);
+    }, 1000);
+  };
 
 
   useEffect(() => {
@@ -252,16 +254,14 @@ function Index() {
 
         <div className="flex flex-col lg:flex-row justify-between items-center w-full gap-8 px-4 lg:px-16 py-10">
           {/* Contenido principal */}
-          <div className="w-full lg:w-4/5 flex flex-col justify-center space-y-4 min-h-[60vh] text-center lg:text-left">
+          <div className="hidden lg:flex w-full lg:w-4/5 flex-col justify-center space-y-4 min-h-[60vh] text-center lg:text-left">
             <BlurText
               id="titulo"
               text="Impulsa tu empresa"
               delay={150}
               animateBy="words"
               direction="top"
-              className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${
-                currentBackground === 'aurora' ? 'text-[#eaecee]' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'
-            }`}
+              className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${currentBackground === 'aurora' ? 'text-[#eaecee]' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'}`}
             />
             <BlurText
               id="titulo2"
@@ -269,21 +269,51 @@ function Index() {
               delay={250}
               animateBy="words"
               direction="top"
-               className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${
-                currentBackground === 'aurora' ? 'text-[#eaecee]' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'
-            }`}
+              className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${currentBackground === 'aurora' ? 'text-[#eaecee]' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'}`}
             />
             <BlurText
               text="Destaca en el mercado digital, confiando en nuestros expertos para llevar tu empresa al nivel que siempre has deseado."
               delay={100}
               animateBy="words"
               direction="top"
-              className={`text-3xl sm:text-4x1 md:text-4x1 lg:text-4xl xl:text-4xl font-semibold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${
-                currentBackground === 'aurora' ? 'text-white' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'
-            }`}
+              className={`text-3xl sm:text-4x1 md:text-4x1 lg:text-4xl xl:text-4xl font-semibold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${currentBackground === 'aurora' ? 'text-white' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'}`}
             />
-            
           </div>
+
+          <div className="block lg:hidden w-screen min-h-[90vh] flex flex-col items-start justify-center px-6 py-10  ">
+            <div className="w-full max-w-md mb-60">
+              <p className={`text-[56px]  leading-[1.1] font-black italic tracking-wide text-black dark:text-white drop-shadow-md select-none drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${currentBackground === 'aurora' ? 'text-white' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'}`}>
+                Somos expertos en
+              </p>
+            <br></br><br></br>
+              <div className="overflow-hidden">
+                <RotatingText
+                  texts={[
+                    'Desarrollo de software',
+                    'Inteligencia artificial',
+                    'Arquitectura de datos',
+                    'Sistemas a medida'
+                  ]}
+                  className={`text-[30px]  leading-[1.1] font-black italic tracking-wide 
+                    text-gray-700 dark:text-white drop-shadow-md select-none 
+                    drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)]
+                     dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${currentBackground === 'aurora' ? 'text-gray-100' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'}`}
+                  mainClassName=""
+                  staggerFrom="last"
+                  initial={{ y: '100%' }}
+                  animate={{ y: 0 }}
+                  exit={{ y: '-120%' }}
+                  staggerDuration={.03}
+                  splitLevelClassName="overflow-hidden"
+                  transition={{ type: 'spring', damping: 60, stiffness: 400 }}
+                  rotationInterval={4100}
+                />
+              </div>
+            </div>
+          </div>
+
+
+
 
           {/* Contenedor vacío o para imagen/icono */}
           <div className="w-full lg:w-1/5 flex justify-center lg:justify-start">

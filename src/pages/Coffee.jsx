@@ -341,42 +341,42 @@ export default function Coffee() {
           </div>
         )}
 
-        
+
         <AnimatedContent
-  distance={14}
-  direction="horizontal"
-  reverse={false}
-  duration={1.2}
-  ease="bounce.out"
-  initialOpacity={0.2}
-  animateOpacity
-  scale={1.1}
-  threshold={0.2}
-  delay={0.3}
->
-  <div className="fixed top-[330px] left-2 md:left-12 transform -translate-y-1/2 w-[230px] md:w-[260px] lg:w-[300px] h-[260px] md:h-[290px] lg:h-[320px] z-50">
-    <GlareHover
-      className="bg-white/90 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-[#a67c4b] shadow-lg glare-hover"
-      glareColor="#ffffff"
-      glareOpacity={0.3}
-      glareAngle={-30}
-      glareSize={300}
-      transitionDuration={800}
-      playOnce={false}
-      width="100%"
-      height="100%"
-    ><Carousel
-                  baseWidth={230}
-                  autoplay={true}
-                  autoplayDelay={3000}
-                  pauseOnHover={true}
-                  loop={true}
-                  round={false}
-                />
-      
-    </GlareHover>
-  </div>
-</AnimatedContent>
+          distance={14}
+          direction="horizontal"
+          reverse={false}
+          duration={1.2}
+          ease="bounce.out"
+          initialOpacity={0.2}
+          animateOpacity
+          scale={1.1}
+          threshold={0.2}
+          delay={0.3}
+        >
+          <div className="fixed top-[330px] left-2 md:left-12 transform -translate-y-1/2 w-[230px] md:w-[260px] lg:w-[300px] h-[260px] md:h-[290px] lg:h-[320px] z-50">
+            <GlareHover
+              className="bg-white/90 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-[#a67c4b] shadow-lg glare-hover"
+              glareColor="#ffffff"
+              glareOpacity={0.3}
+              glareAngle={-30}
+              glareSize={300}
+              transitionDuration={800}
+              playOnce={false}
+              width="100%"
+              height="100%"
+            ><Carousel
+                baseWidth={230}
+                autoplay={true}
+                autoplayDelay={3000}
+                pauseOnHover={true}
+                loop={true}
+                round={false}
+              />
+
+            </GlareHover>
+          </div>
+        </AnimatedContent>
 
 
         <div className="flex gap-4 items-center mb-3 pointer-events-auto z-50 relative">
