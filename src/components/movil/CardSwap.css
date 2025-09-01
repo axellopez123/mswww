@@ -1,0 +1,56 @@
+.card_ {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 12px;
+  border: 1px solid #fff;
+  background: #000000;
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  z-index: 999;
+   aspect-ratio: 4/3;
+  min-height: 200px;
+  width: 100%;
+  max-width: 100%;
+  padding: 1.25em;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--background-dark);
+  font-weight: 300;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 200px;
+}
+
+
+.card-swap-container {
+  position: relative;
+  overflow: visible; /* <- para que el contenido pueda "salir" */
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+ 
+}
+
+/* Escalado para tablets */
+@media (max-width: 768px) {
+  .card-swap-container {
+
+    transform-origin: center center;
+  }
+}
+
+/* Escalado para móviles */
+@media (max-width: 480px) {
+  .card-swap-container {
+
+    transform-origin: center center;
+  }
+}
