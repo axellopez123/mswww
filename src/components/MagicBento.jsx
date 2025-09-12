@@ -541,80 +541,77 @@ const navigate = useNavigate();
 
   // El formulario completo que usaremos 2 veces (dentro y fuera del grid)
   const Formulario = () => (
-    <form className="flex flex-col gap-3 w-full max-w-full mx-auto text-white text-sm p-4 bg-black/30 rounded-lg backdrop-blur-sm">
+    <>
+      <form className="flex flex-col gap-3 w-full max-w-full mx-auto text-white text-sm p-4 bg-black/30 rounded-lg backdrop-blur-sm">
 
-      {/* Fila: Nombre y Celular */}
-      <div className="flex gap-3">
-        <div className="flex flex-col w-1/2">
-          <label htmlFor="name" className="mb-1">
-            Nombre
+        {/* Fila: Nombre y Celular */}
+        <div className="flex gap-3">
+          <div className="flex flex-col w-1/2">
+            <label htmlFor="name" className="mb-1">
+              Nombre
+            </label>
+            <input
+              id="input-nombre"
+              type="text"
+              placeholder="Tu nombre"
+              className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
+            />
+
+          </div>
+          <div className="flex flex-col w-1/2">
+            <label htmlFor="phone" className="mb-1">
+              Celular
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              placeholder="(55) 1234-5678"
+              className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
+            />
+          </div>
+        </div>
+
+        {/* Fila: Correo */}
+        <div className="flex flex-col">
+          <label htmlFor="email" className="mb-1">
+            Correo
           </label>
           <input
-            id="input-nombre"
-            type="text"
-            placeholder="Tu nombre"
+            id="email"
+            type="email"
+            placeholder="correo@ejemplo.com"
             className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
           />
-
         </div>
-        <div className="flex flex-col w-1/2">
-          <label htmlFor="phone" className="mb-1">
-            Celular
+
+        {/* Fila: Mensaje */}
+        <div className="flex flex-col">
+          <label htmlFor="message" className="mb-1">
+            Mensaje
           </label>
-          <input
-            id="phone"
-            type="tel"
-            placeholder="(55) 1234-5678"
-            className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
+          <textarea
+            id="message"
+            rows="3"
+            placeholder="¿En qué te ayudamos?"
+            className="px-3 py-2 rounded bg-white/10 placeholder-white text-white resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
           />
         </div>
-      </div>
 
-      {/* Fila: Correo */}
-      <div className="flex flex-col">
-        <label htmlFor="email" className="mb-1">
-          Correo
-        </label>
-        <input
-          id="email"
-          type="email"
-          placeholder="correo@ejemplo.com"
-          className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
-        />
-      </div>
-
-      {/* Fila: Mensaje */}
-      <div className="flex flex-col">
-        <label htmlFor="message" className="mb-1">
-          Mensaje
-        </label>
-        <textarea
-          id="message"
-          rows="3"
-          placeholder="¿En qué te ayudamos?"
-          className="px-3 py-2 rounded bg-white/10 placeholder-white text-white resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
-        />
-      </div>
-
-      <div className="flex items-center gap-3 mt-2 w-full">
-  {/* Botón Enviar */}
-  <button
-    type="submit"
-    className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded transition w-full"
-  >
-    Enviar
-  </button>
-
-  {/* Botón Paquete */}
-  <button
-    onClick={() => navigate("/paquete")}
-    className="bg-gray-100 hover:bg-gray-200 text-black font-medium py-2 px-6 rounded shadow transition w-full"
-  >
-    Paquete
-  </button>
-</div>
-
-    </form>
+        {/* Botón */}
+        <button
+          type="submit"
+          className="mt-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded transition w-full"
+        >
+          Enviar
+        </button>
+      </form>
+      <button
+        onClick={() => navigate("/paquete")}
+        className="mt-2 bg-white hover:bg-purple-700 hover:text-white  text-black font-semibold py-2 rounded transition w-full"
+      >
+        Paquete
+      </button>
+    </>
   );
 
   return (
