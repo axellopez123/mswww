@@ -215,7 +215,6 @@ function Index() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  const navigate = useNavigate();
   return (
 
     <div className="relative w-full min-h-screen overflow-hidden">
@@ -255,51 +254,31 @@ function Index() {
 
         <div className="flex flex-col lg:flex-row justify-between items-center w-full gap-8 px-4 lg:px-16 py-10">
           {/* Contenido principal */}
-         <div className="hidden lg:flex w-full lg:w-4/5 flex-col justify-center space-y-4 min-h-[60vh] text-center lg:text-left">
-  <BlurText
-    id="titulo"
-    text="Impulsa tu empresa"
-    delay={150}
-    animateBy="words"
-    direction="top"
-    className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${
-      currentBackground === "aurora"
-        ? "text-[#eaecee]"
-        : "text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]"
-    }`}
-  />
-  <BlurText
-    id="titulo2"
-    text="a otro nivel"
-    delay={250}
-    animateBy="words"
-    direction="top"
-    className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${
-      currentBackground === "aurora"
-        ? "text-[#eaecee]"
-        : "text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]"
-    }`}
-  />
-  <BlurText
-    text="Destaca en el mercado digital, confiando en nuestros expertos para llevar tu empresa al nivel que siempre has deseado."
-    delay={100}
-    animateBy="words"
-    direction="top"
-    className={`text-3xl sm:text-4x1 md:text-4x1 lg:text-4xl xl:text-4xl font-semibold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${
-      currentBackground === "aurora"
-        ? "text-white"
-        : "text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]"
-    }`}
-  />
-
-  {/* Botón Paquete al final */}
-  <button
-    onClick={() => navigate("/paquete")}
-    className="mt-6 inline-block bg-gray-100 text-black font-medium px-6 py-3 rounded-lg shadow hover:bg-gray-200 transition self-center lg:self-start"
-  >
-    Paquete
-  </button>
-</div>
+          <div className="hidden lg:flex w-full lg:w-4/5 flex-col justify-center space-y-4 min-h-[60vh] text-center lg:text-left">
+            <BlurText
+              id="titulo"
+              text="Impulsa tu empresa"
+              delay={150}
+              animateBy="words"
+              direction="top"
+              className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${currentBackground === 'aurora' ? 'text-[#eaecee]' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'}`}
+            />
+            <BlurText
+              id="titulo2"
+              text="a otro nivel"
+              delay={250}
+              animateBy="words"
+              direction="top"
+              className={`text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${currentBackground === 'aurora' ? 'text-[#eaecee]' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'}`}
+            />
+            <BlurText
+              text="Destaca en el mercado digital, confiando en nuestros expertos para llevar tu empresa al nivel que siempre has deseado."
+              delay={100}
+              animateBy="words"
+              direction="top"
+              className={`text-3xl sm:text-4x1 md:text-4x1 lg:text-4xl xl:text-4xl font-semibold drop-shadow-[-5px_1px_2px_rgba(0,0,0,0.7)] dark:drop-shadow-[2px_2px_2px_rgba(0,0,0,0.3)] ${currentBackground === 'aurora' ? 'text-white' : 'text-black dark:text-white drop-shadow-[2px_2px_2px_rgba(7,255,255,0.1)]'}`}
+            />
+          </div>
 
           <div className="block lg:hidden w-screen min-h-[90vh] flex flex-col items-start justify-center px-6 py-10  ">
             <div className="w-full max-w-md mb-60">

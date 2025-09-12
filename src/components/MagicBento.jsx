@@ -1,7 +1,7 @@
 import { useRef, useEffect, useCallback, useState } from "react";
 import { gsap } from "gsap";
 import "./MagicBento.css";
-
+import { Routes, Route, useNavigate } from 'react-router-dom';
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = "132, 0, 255";
@@ -535,7 +535,7 @@ const MagicBento = ({
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
-
+const navigate = useNavigate();
   // Obtener la tarjeta del formulario
   const formCard = cardData.find((card) => card.type === "form");
 
@@ -596,13 +596,24 @@ const MagicBento = ({
         />
       </div>
 
-      {/* Botón */}
-      <button
-        type="submit"
-        className="mt-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded transition w-full"
-      >
-        Enviar
-      </button>
+      <div className="flex items-center gap-3 mt-2 w-full">
+  {/* Botón Enviar */}
+  <button
+    type="submit"
+    className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded transition w-full"
+  >
+    Enviar
+  </button>
+
+  {/* Botón Paquete */}
+  <button
+    onClick={() => navigate("/paquete")}
+    className="bg-gray-100 hover:bg-gray-200 text-black font-medium py-2 px-6 rounded shadow transition w-full"
+  >
+    Paquete
+  </button>
+</div>
+
     </form>
   );
 
