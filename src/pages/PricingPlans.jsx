@@ -37,7 +37,7 @@ const plans = [
     note: "1 Administrador",
     featured: true,
     infra: [
-      "Infraestructura en la nube (AWS / GCP / Azure)",
+      "Infraestructura en la nube",
       "Base de datos escalable y segura",
       "Servidores optimizados para alto rendimiento",
       "Certificado SSL y encriptación de datos",
