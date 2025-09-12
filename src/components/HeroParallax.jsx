@@ -342,6 +342,9 @@ function ProductCard({
     if (product.title == '3D Coffee') {
       navigate('/coffee');
     }
+    if (product.title === 'Inmobiliaria') {
+  window.location.href = "https://inmobiliaria.arwax.pro/";
+}
   };
 
 

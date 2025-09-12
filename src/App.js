@@ -4,16 +4,20 @@ import Logo from "./components/Logo";
 import TextLogo from "./components/TextLogo";
 import "./components/Logo.css";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Header from './components/HeroParallax';
 import { DrawerProvider } from './contexts/DrawerContext';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Coffee from './pages/Coffee';
+import PricingPlans from './pages/PricingPlans';
 import CardSwap, { Card } from './components/movil/CardSwap';
 import { FiMenu, FiBell, FiUser } from "react-icons/fi";
-import { FiCpu, FiArrowRight } from "react-icons/fi";
-
+import { FiCpu, FiArrowRight, FiArrowLeft } from "react-icons/fi";
+import { DragCloseDrawer } from "./components/movil/DragCloseDrawer";
 import DecryptedText from './components/movil/DecryptedText';
+import './style/britney.css';
+import LiquidChrome from './components/movil/LiquidChrome';
+
 function App() {
   const words = `Optimiza tu negocio`;
 
@@ -61,7 +65,7 @@ function App() {
     },
 
   ];
-   const products = [
+  const products = [
     {
       title: "Moonbeam",
       link: "https://gomoonbeam.com",
@@ -150,9 +154,17 @@ function App() {
     const timeout = setTimeout(() => setVisible(true), 6000);
     return () => clearTimeout(timeout);
   }, []);
-  const [imageData, setImageData] = useState(null);
-  const [selectedTitle, setSelectedTitle] = useState(products_movil[0]?.title || "");
 
+  const [selectedTitle, setSelectedTitle] = useState(products_movil[0]?.title || "");
+  const cardSwapRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [open, setOpen] = useState(false); // controla si el menú está abierto
+  const [showCardSwap, setShowCardSwap] = useState(true);
+  const toggleMenu = () => {
+    setShowCardSwap(false);
+    setOpen(true);
+
+  };
 
   return (
     <DrawerProvider >
@@ -177,124 +189,131 @@ function App() {
             {showSecondDiv && (
               <>
                 {/* Versión móvil/tablet */}
-<Box className="block lg:hidden w-full h-screen overflow-hidden justify-center items-center bg-gray-100">
-  <header
-    className={`w-full p-4 text-white text-lg font-semibold flex items-center justify-between bg-transparent transition-all duration-700 ${
-      show ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5"
-    }`}
-  >
-    <div className="flex items-center gap-2">
-      <FiMenu
-        size={24}
-        color="black"
-        className="drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black]"
-      />
-    </div>
-    <div className="flex-1 text-center"></div>
-    <div className="flex items-center gap-4">
-      <FiBell
-        size={24}
-        color="black"
-        className="drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black]"
-      />
-      <FiUser
-        size={24}
-        color="black"
-        strokeWidth={2}
-        className="drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black]"
-      />
-    </div>
-  </header>
+                <Box className="block lg:hidden w-full h-screen overflow-hidden justify-center items-center bg-gray-100">
+                  <header
+                    className={`w-full p-4 text-white text-lg font-semibold flex items-center justify-between bg-transparent transition-all duration-700 ${show ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5"
+                      }`}
+                  >
+                    <div className="flex items-center gap-2">
 
-  <CardSwap
-    cardDistance={30}
-    verticalDistance={20}
-    delay={4000}
-    pauseOnHover={true}
-    height={320}
-    width={370}
-    onCardChange={(index) => {
-      setSelectedTitle(products_movil[index].title);
-    }}
-  >
-    {products_movil.map((product, index) => (
-      <Card
-        key={index}
-        className="overflow-hidden rounded-xl shadow-md cursor-pointer"
-      >
-        <a
-          href={product.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block relative group w-full h-full"
-        >
-          {/* Imagen */}
-          <img
-            src={product.thumbnail}
-            alt={product.title}
-            className="w-full rounded-xl h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-          {/* Overlay inferior para título */}
-          <div className="absolute bottom-0 left-0 w-full bg-black/40 p-3">
-            <h3 className="text-white text-lg font-semibold truncate">
-              {product.title}
-            </h3>
-          </div>
-        </a>
-      </Card>
-    ))}
-  </CardSwap>
+                      <button onClick={toggleMenu}>
+                        <FiMenu
+                          size={20}
+                          color="black"
+                          className="drop-shadow-[0_0_1px_black] cursor-pointer"
+                        />
+                      </button>
+                    </div>
+                    <div className="flex-1 text-center"></div>
+                    <div className="flex items-center gap-4">
+                      <FiBell
+                        size={24}
+                        color="black"
+                        className="drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black]"
+                      />
+                      <FiUser
+                        size={24}
+                        color="black"
+                        strokeWidth={2}
+                        className="drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black]"
+                      />
+                    </div>
+                  </header>
+                  {showCardSwap && (
+                    <CardSwap
+                      cardDistance={30}
+                      verticalDistance={20}
+                      delay={4000}
+                      pauseOnHover={true}
+                      height={320}
+                      width={370}
+                      onCardChange={(index) => {
+                        setSelectedTitle(products_movil[index].title);
+                        setCurrentIndex(index);
+                      }}
+                      activeIndex={currentIndex}
+                      ref={cardSwapRef}
+                    >
+                      {products_movil.map((product, index) => (
+                        <Card
+                          key={index}
+                          className="overflow-hidden rounded-xl shadow-md cursor-pointer"
+                        >
+                          <a
+                            href={product.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block relative group w-full h-full"
+                          >
+                            {/* Imagen */}
+                            <img
+                              src={product.thumbnail}
+                              alt={product.title}
+                              className="w-full rounded-xl h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                            {/* Overlay inferior para título */}
+                            <div className="absolute bottom-0 left-0 w-full bg-black/40 p-3">
+                              <h3 className="text-white text-lg font-semibold truncate">
+                                {product.title}
+                              </h3>
+                            </div>
+                          </a>
+                        </Card>
+                      ))}
+                    </CardSwap>
+                  )}
+                  {showCardSwap && (
+                    <div className="relative min-h-screen bg-gray-100 ">
+                      {/* FONDO del footer */}
+                      <div className="fixed bottom-0 left-0 w-full h-[120px] z-40 pointer-events-none">
+                        <VortexProps className="w-full h-full text-1xl">
+                          <Logo className="text-white text-1xl" text="ARWAX" />
+                        </VortexProps>
+                      </div>
 
-  <div className="relative min-h-screen bg-gray-100 ">
-    {/* FONDO del footer */}
-    <div className="fixed bottom-0 left-0 w-full h-[120px] z-40 pointer-events-none">
-      <VortexProps className="w-full h-full text-1xl">
-        <Logo className="text-white text-1xl" text="ARWAX" />
-      </VortexProps>
-    </div>
+                      {/* FOOTER */}
+                      <footer
+                        className={`fixed bottom-0 left-0 w-full z-50 h-[120px] transition-all duration-700 ease-out transform 
+                      ${visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} 
+                      bg-white bg-opacity-20 backdrop-blur-md text-white text-sm rounded-t-xl py-6 flex items-center justify-between px-6`}
+                      >
+                        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white text-purple-900 rounded-full w-12 h-12 flex items-center justify-center shadow-md">
+                          <FiCpu size={24} />
+                        </div>
 
-    {/* FOOTER */}
-    <footer
-      className={`fixed bottom-0 left-0 w-full z-50 h-[120px] transition-all duration-700 ease-out transform 
-        ${visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} 
-        bg-white bg-opacity-20 backdrop-blur-md text-white text-sm rounded-t-xl py-6 flex items-center justify-between px-6`}
-    >
-      <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white text-purple-900 rounded-full w-12 h-12 flex items-center justify-center shadow-md">
-        <FiCpu size={24} />
-      </div>
+                        <div className="flex flex-col text-left font-sans">
+                          <span className="text-gray-700 text-lg font-bold mb-1 uppercase tracking-wide">
+                            Impulsa
+                          </span>
+                          <DecryptedText
+                            text={selectedTitle}
+                            animateOn="view"
+                            revealDirection="center"
+                            className="text-2xl md:text-6xl font-extrabold text-purple-900 leading-none uppercase transform transition-transform duration-200 hover:scale-105 [text-shadow:_1px_1px_#fff,_-1px_-1px_#fff,_1px_-1px_#fff,_-1px_1px_#fff]"
+                            encryptedClassName="text-2xl md:text-6xl font-extrabold text-gray-700 leading-none uppercase transform transition-transform duration-200 hover:scale-105 [text-shadow:_1px_1px_#fff,_-1px_-1px_#fff,_1px_-1px_#fff,_-1px_1px_#fff]"
+                          />
+                          <span className="text-gray-700 font-bold text-lg mt-1 self-start uppercase tracking-wide">
+                            Siempre
+                          </span>
+                        </div>
 
-      <div className="flex flex-col text-left font-sans">
-        <span className="text-gray-700 text-lg font-bold mb-1 uppercase tracking-wide">
-          Impulsa
-        </span>
-        <DecryptedText
-          text={selectedTitle}
-          animateOn="view"
-          revealDirection="center"
-          className="text-2xl md:text-6xl font-extrabold text-purple-900 leading-none uppercase transform transition-transform duration-200 hover:scale-105 [text-shadow:_1px_1px_#fff,_-1px_-1px_#fff,_1px_-1px_#fff,_-1px_1px_#fff]"
-          encryptedClassName="text-2xl md:text-6xl font-extrabold text-gray-700 leading-none uppercase transform transition-transform duration-200 hover:scale-105 [text-shadow:_1px_1px_#fff,_-1px_-1px_#fff,_1px_-1px_#fff,_-1px_1px_#fff]"
-        />
-        <span className="text-gray-700 font-bold text-lg mt-1 self-start uppercase tracking-wide">
-          Siempre
-        </span>
-      </div>
+                        <div className="flex items-center gap-4">
+                          <span className="bg-white text-purple-900 rounded-full px-4 py-1 font-semibold cursor-pointer select-none">
+                            Buy now
+                          </span>
+                          <button className="bg-purple-900 rounded-full p-2 flex items-center justify-center hover:bg-purple-500 transition">
+                            <FiArrowRight className="text-white" size={20} />
+                          </button>
+                        </div>
+                      </footer>
+                    </div>
+                  )}
+                </Box>
 
-      <div className="flex items-center gap-4">
-        <span className="bg-white text-purple-900 rounded-full px-4 py-1 font-semibold cursor-pointer select-none">
-          Buy now
-        </span>
-        <button className="bg-purple-900 rounded-full p-2 flex items-center justify-center hover:bg-purple-500 transition">
-          <FiArrowRight className="text-white" size={20} />
-        </button>
-      </div>
-    </footer>
-  </div>
-</Box>
-
-{/* Versión escritorio */}
-<Box className="hidden lg:flex h-screen flex-col fade-in">
-  <Header products={products} />
-</Box>
+                {/* Versión escritorio */}
+                <Box className="hidden lg:flex h-screen flex-col fade-in">
+                  <Header products={products} />
+                </Box>
 
               </>
             )}
@@ -304,7 +323,51 @@ function App() {
 
         {/* Ruta para Coffee */}
         <Route path="/coffee" element={<Coffee />} />
+        <Route path="/paquete" element={<PricingPlans />} />
+        
       </Routes>
+      <DragCloseDrawer open={open} setOpen={setOpen} setShowCardSwap={setShowCardSwap}>
+        <div className="relative w-full h-full">
+          {/* Fondo / efecto LiquidChrome */}
+          <LiquidChrome className="absolute inset-0 w-full h-full" />
+
+          {/* Texto centrado por encima */}
+          <div className="absolute inset-0 flex mt-5 justify-center">
+            <div className="mx-auto max-w-2xl space-y-4 text-center text-neutral-400 px-4 sm:px-6 lg:px-0">
+              <h2
+                className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-200"
+                style={{
+                  fontFamily: "GeneralSans-VariableItalic",
+                  textShadow: `
+                    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000
+                  `
+                }}
+              >
+                Automatización
+              </h2>
+              <h2
+                className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-200"
+                style={{
+                  fontFamily: "GeneralSans-VariableItalic",
+                  textShadow: `
+                    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000
+                  `
+                }}
+              >
+                con IA
+              </h2>
+            </div>
+          </div>
+
+        </div>
+      </DragCloseDrawer>
+
     </DrawerProvider>
   );
 }
