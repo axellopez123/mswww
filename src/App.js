@@ -17,6 +17,7 @@ import { DragCloseDrawer } from "./components/movil/DragCloseDrawer";
 import DecryptedText from './components/movil/DecryptedText';
 import './style/britney.css';
 import LiquidChrome from './components/movil/LiquidChrome';
+import ShuffleHero from './components/ShuffleHero';
 
 function App() {
   const words = `Optimiza tu negocio`;
@@ -324,7 +325,7 @@ function App() {
         {/* Ruta para Coffee */}
         <Route path="/coffee" element={<Coffee />} />
         <Route path="/paquete" element={<PricingPlans />} />
-        
+        <Route path='/proyecto' element={<ShuffleHero/>} />
       </Routes>
       <DragCloseDrawer open={open} setOpen={setOpen} setShowCardSwap={setShowCardSwap}>
         <div className="relative w-full h-full">

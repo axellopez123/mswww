@@ -605,12 +605,22 @@ const navigate = useNavigate();
           Enviar
         </button>
       </form>
-      <button
-        onClick={() => navigate("/paquete")}
-        className="mt-2 bg-white hover:bg-purple-700 hover:text-white  text-black font-semibold py-2 rounded transition w-full"
-      >
-        Paquete
-      </button>
+     <div className="flex gap-2 mt-2">
+  <button
+    onClick={() => navigate("/paquete")}
+    className="flex-1 bg-white hover:bg-purple-700 hover:text-white text-black font-semibold py-2 rounded transition"
+  >
+    Paquete
+  </button>
+
+  <button
+    onClick={() => navigate("/proyecto")}
+    className="flex-1 bg-white hover:bg-purple-700 hover:text-white text-black font-semibold py-2 rounded transition"
+  >
+    Proyecto
+  </button>
+</div>
+
     </>
   );
 
