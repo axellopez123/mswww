@@ -150,10 +150,9 @@ const CardSwap = ({
         );
       }
     });
-if (!elFront) {
-  console.warn("Front card ref is null, skipping animation");
-  return;
-}
+
+    if (!elFront) return;
+
     const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
     tl.addLabel("return", `promote+=${config.durMove * config.returnDelay}`);
     tl.call(() => { if (elFront) gsap.set(elFront, { zIndex: backSlot.zIndex }); }, undefined, "return");
@@ -167,14 +166,12 @@ if (!elFront) {
     });
   };
 
-  // Animar a un nuevo orden (sin llamar swap repetidamente)
   const animateToOrder = (newOrder) => {
     if (!refs || refs.length < 1) return;
     const total = refs.length;
     const tl = gsap.timeline();
     tlRef.current = tl;
 
-    // Para cada elemento original (origIdx) colocarlo en la posición pos dentro del stack
     newOrder.forEach((origIdx, pos) => {
       const el = refs[origIdx]?.current;
       if (!el) return;
@@ -190,36 +187,60 @@ if (!elFront) {
     });
   };
 
-  // goToIndex robusto: construye nueva orden, anima a ella, reinicia intervalo
   const goToIndex = (index) => {
     if (index === order.current[0]) return;
     clearInterval(intervalRef.current);
-
-    // nueva orden: clicked al frente, luego los demás en el mismo orden relativo (sin el clicked)
     const newOrder = [index, ...order.current.filter(i => i !== index)];
     animateToOrder(newOrder);
-
     intervalRef.current = window.setInterval(swap, delay);
   };
 
-  // Init & efectos: recalcula posiciones cuando cambia el número de children u otros props relevantes
-  useEffect(() => {
-    // asegúrate de que order tenga longitud correcta si cambió childArr
-    if (order.current.length !== childArr.length) {
-      order.current = Array.from({ length: childArr.length }, (_, i) => i);
-    }
+  const goToNext = () => {
+    clearInterval(intervalRef.current);
+    swap();
+    intervalRef.current = window.setInterval(swap, delay);
+  };
 
+  const goToPrevious = () => {
+    if (!refs || refs.length < 2 || order.current.length < 2) return;
+    clearInterval(intervalRef.current);
+    const lastIdx = order.current[order.current.length - 1];
+    const rest = order.current.slice(0, -1);
+    const newOrder = [lastIdx, ...rest];
+    animateToOrder(newOrder);
+    intervalRef.current = window.setInterval(swap, delay);
+  };
+
+  /* ---------- Touch Handlers ---------- */
+  const touchStart = useRef(null);
+  const touchEnd = useRef(null);
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    touchEnd.current = null;
+    touchStart.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchMove = (e) => {
+    touchEnd.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart.current || !touchEnd.current) return;
+    const distance = touchStart.current - touchEnd.current;
+    if (distance > minSwipeDistance) goToNext();
+    else if (distance < -minSwipeDistance) goToPrevious();
+  };
+
+  useEffect(() => {
     const total = refs.length;
     refs.forEach((r, i) => {
       const isFrontCard = order.current[0] === i;
       placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount, isFrontCard);
     });
 
-    // iniciar ciclo
-    swap();
     intervalRef.current = window.setInterval(swap, delay);
 
-    // pauseOnHover handlers (con guards)
     if (pauseOnHover && container.current) {
       const node = container.current;
       const pause = () => { tlRef.current?.pause(); clearInterval(intervalRef.current); };
@@ -232,12 +253,9 @@ if (!elFront) {
         clearInterval(intervalRef.current);
       };
     }
-
     return () => clearInterval(intervalRef.current);
-    // IMPORTANTE: incluye childArr.length para recalcular cuando cambia el número de tarjetas
   }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing, childArr.length]);
 
-  // Render: clonamos children para inyectar ref y tamaño
   const rendered = childArr.map((child, i) =>
     isValidElement(child)
       ? cloneElement(child, {
@@ -257,8 +275,10 @@ if (!elFront) {
       ref={container}
       className="card-swap-container relative flex flex-col items-center"
       style={{ width, height, minHeight: "400px" }}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     >
-      {/* HEADER */}
       <div className="bg- w-full p-2 relative" style={{ height: `calc(50vh - 64px)` }}>
         <div className="absolute top-1/3 left-[36%] -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4">
           <motion.img
@@ -273,50 +293,28 @@ if (!elFront) {
         <CircularText text="REACT*ARWAX*" onHover="speedUp" spinDuration={20} className="custom-class mt-5" />
       </div>
 
-      {/* TARJETAS */}
       <div className="absolute top-0 left-0 w-full h-full overflow-visible" style={{ zIndex: 2000 }}>
         {rendered}
       </div>
 
-      {/* MINIATURAS (sin texto) */}
-      <div className="flex justify-center gap-2 mt-[220px] relative z-[9999]">
+      <div className="flex justify-center gap-2 mt-[220px] relative z-[13000]">
         {childArr.map((child, idx) => {
           if (!isValidElement(child)) return null;
           const isActive = activeIndex === idx;
-
-          // Encuentra el src de la imagen dentro del child (si existe)
           const src = findImageSrc(child);
-
           return (
             <motion.button
               key={idx}
               onClick={() => goToIndex(idx)}
-              className={`cursor-pointer overflow-hidden rounded-md border-2 p-0 ${isActive ? "border-bg-purple-900 " : "border-gray-300"
-                }`}
+              className={`cursor-pointer overflow-hidden rounded-md border-2 p-0 ${isActive ? "border-bg-purple-900 " : "border-gray-300"}`}
               initial={{ scale: 0.8, opacity: 0.5 }}
-              animate={{
-                scale: isActive ? 1.2 : 0.9, // 👉 activo más grande
-                opacity: isActive ? 1 : 0.6,
-              }}
+              animate={{ scale: isActive ? 1.2 : 0.9, opacity: isActive ? 1 : 0.6 }}
               whileHover={{ scale: isActive ? 1.25 : 1.05, opacity: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-              }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
               style={{ width: 50, height: 50 }}
-              aria-label={`Ir a tarjeta ${idx + 1}`}
             >
               {src ? (
-                <motion.img
-                  key={src} // 🔑 importante para que se reanime al cambiar
-                  src={src}
-                  alt={`thumb-${idx}`}
-                  className="w-full h-full object-cover"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                />
+                <motion.img src={src} alt={`thumb-${idx}`} className="w-full h-full object-cover" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3, ease: "easeOut" }} />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gray-100"></div>
               )}
@@ -325,6 +323,14 @@ if (!elFront) {
         })}
       </div>
 
+      <div className="absolute top-[40%] left-0 w-full flex justify-between px-4 z-[10000] pointer-events-none">
+        <button onClick={goToPrevious} className="pointer-events-auto bg-purple-900/60 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md border border-white/20 shadow-lg active:scale-90 transition-transform">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button onClick={goToNext} className="pointer-events-auto bg-purple-900/60 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md border border-white/20 shadow-lg active:scale-90 transition-transform">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
     </div>
   );
 };

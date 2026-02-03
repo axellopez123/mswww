@@ -18,6 +18,8 @@ import DecryptedText from './components/movil/DecryptedText';
 import './style/britney.css';
 import LiquidChrome from './components/movil/LiquidChrome';
 import ShuffleHero from './components/ShuffleHero';
+import ProfileCard from './components/ProfileCard ';
+import { FiX } from "react-icons/fi";
 
 function App() {
   const words = `Optimiza tu negocio`;
@@ -51,7 +53,7 @@ function App() {
     },
     {
       title: "3D Coffee",
-      link: "http://localhost:3000/coffee",
+      link: "https://arwax.pro/coffee",
       thumbnail: "/images/coffe_page.png",
     },
     {
@@ -161,10 +163,17 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [open, setOpen] = useState(false); // controla si el menú está abierto
   const [showCardSwap, setShowCardSwap] = useState(true);
+  const [showProfileCard, setShowProfileCard] = useState(false);
+
   const toggleMenu = () => {
     setShowCardSwap(false);
     setOpen(true);
+  };
 
+  const handleWhatsAppContact = () => {
+    const whatsappMessage = `Hola, me interesa contactar contigo para impulsar ${selectedTitle}.`;
+    const whatsappUrl = `https://wa.me/523328707144?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -174,7 +183,6 @@ function App() {
         <Route path="/" element={
           <>
             {showFirstDiv && (
-
               <Box className={`${fadeOut ? 'fade-out' : ''}`}>
                 <VortexProps className="w-full h-full">
                   <div className="w-full h-full rounded-[22px] flex justify-center items-center">
@@ -196,7 +204,6 @@ function App() {
                       }`}
                   >
                     <div className="flex items-center gap-2">
-
                       <button onClick={toggleMenu}>
                         <FiMenu
                           size={20}
@@ -212,14 +219,53 @@ function App() {
                         color="black"
                         className="drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black]"
                       />
-                      <FiUser
-                        size={24}
-                        color="black"
-                        strokeWidth={2}
-                        className="drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black] drop-shadow-[0_0_1px_black]"
-                      />
+                      <button onClick={() => setShowProfileCard(!showProfileCard)}>
+                        <FiUser
+                          size={24}
+                          color="black"
+                          strokeWidth={2}
+                          className="drop-shadow-[0_0_1px_black]"
+                        />
+                      </button>
                     </div>
                   </header>
+
+                  {/* Profile Card Overlay */}
+                  {showProfileCard && (
+                    <div className="fixed inset-0 z-[20000] flex items-center justify-center p-4">
+                      {/* Background blur/overlay */}
+                      <div
+                        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                        onClick={() => setShowProfileCard(false)}
+                      />
+
+                      {/* Close button */}
+                      <button
+                        onClick={() => setShowProfileCard(false)}
+                        className="absolute top-10 right-10 z-[20001] bg-white/10 p-2 rounded-full text-white backdrop-blur-md"
+                      >
+                        <FiX size={24} />
+                      </button>
+
+                      <div className="relative z-[20001] w-full max-w-[340px]">
+                        <ProfileCard
+                          name="Ing. R. Rodriguez"
+                          title="Software Engineer"
+                          handle="ARWAX"
+                          status="Siempre listos"
+                          contactText="Contáctame"
+                          avatarUrl="/images/YO.png"
+                          showUserInfo={true}
+                          enableTilt={true}
+                          onContactClick={() => {
+                            setShowProfileCard(false);
+                            handleWhatsAppContact();
+                          }}
+                          iconUrl="/images/code.png"
+                        />
+                      </div>
+                    </div>
+                  )}
                   {showCardSwap && (
                     <CardSwap
                       cardDistance={30}
@@ -274,7 +320,7 @@ function App() {
 
                       {/* FOOTER */}
                       <footer
-                        className={`fixed bottom-0 left-0 w-full z-50 h-[120px] transition-all duration-700 ease-out transform 
+                        className={`fixed bottom-0 left-0 w-full z-[12000] h-[120px] transition-all duration-700 ease-out transform 
                       ${visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} 
                       bg-white bg-opacity-20 backdrop-blur-md text-white text-sm rounded-t-xl py-6 flex items-center justify-between px-6`}
                       >
@@ -299,10 +345,16 @@ function App() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <span className="bg-white text-purple-900 rounded-full px-4 py-1 font-semibold cursor-pointer select-none">
-                            Buy now
+                          <span
+                            onClick={handleWhatsAppContact}
+                            className="bg-white text-purple-900 rounded-full px-4 py-1 font-semibold cursor-pointer select-none"
+                          >
+                            Contactar
                           </span>
-                          <button className="bg-purple-900 rounded-full p-2 flex items-center justify-center hover:bg-purple-500 transition">
+                          <button
+                            onClick={handleWhatsAppContact}
+                            className="bg-purple-900 rounded-full p-2 flex items-center justify-center hover:bg-purple-500 transition"
+                          >
                             <FiArrowRight className="text-white" size={20} />
                           </button>
                         </div>
@@ -315,17 +367,15 @@ function App() {
                 <Box className="hidden lg:flex h-screen flex-col fade-in">
                   <Header products={products} />
                 </Box>
-
               </>
             )}
-
           </>
         } />
 
         {/* Ruta para Coffee */}
         <Route path="/coffee" element={<Coffee />} />
         <Route path="/paquete" element={<PricingPlans />} />
-        <Route path='/proyecto' element={<ShuffleHero/>} />
+        <Route path='/proyecto' element={<ShuffleHero />} />
       </Routes>
       <DragCloseDrawer open={open} setOpen={setOpen} setShowCardSwap={setShowCardSwap}>
         <div className="relative w-full h-full">
@@ -363,12 +413,38 @@ function App() {
               >
                 con IA
               </h2>
+
+              <div className="flex justify-center -mt-2">
+                <button
+                  onClick={handleWhatsAppContact}
+                  className="group relative px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-white text-[10px] uppercase tracking-widest font-medium transition-all duration-300 hover:bg-white/10 hover:border-white/30 active:scale-95 flex items-center gap-2"
+                >
+                  <span>Contactar</span>
+                  <FiArrowRight className="text-white/40 transition-transform duration-300 group-hover:translate-x-1" size={12} />
+                </button>
+              </div>
+
+              <div className="w-full flex justify-center mt-2 px-6">
+                <div className="relative group w-full max-w-[300px] p-5 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_0_40px_rgba(132,0,255,0.1)] transition-all duration-500 hover:border-purple-500/20">
+                  {/* Glow effect background */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/5 via-transparent to-cyan-400/5 rounded-3xl" />
+
+                  <img
+                    src="/images/n8n.png"
+                    alt="n8n automation"
+                    className="relative w-full h-auto object-contain rounded-2xl drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] transform transition-transform duration-500 group-hover:scale-105"
+                  />
+
+                  {/* Subtle caption */}
+                  <p className="relative mt-3 text-[9px] uppercase tracking-[0.2em] text-neutral-400 font-medium text-center">
+                    Motor de flujos para potenciar la lógica
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-
         </div>
       </DragCloseDrawer>
-
     </DrawerProvider>
   );
 }

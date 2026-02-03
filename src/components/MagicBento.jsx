@@ -519,35 +519,32 @@ const useMobileDetection = () => {
   return isMobile;
 };
 
-const MagicBento = ({
-  textAutoHide = true,
-  enableStars = true,
-  enableSpotlight = true,
-  enableBorderGlow = true,
-  disableAnimations = false,
-  spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS,
-  particleCount = DEFAULT_PARTICLE_COUNT,
-  enableTilt = false,
-  glowColor = DEFAULT_GLOW_COLOR,
-  clickEffect = true,
-  enableMagnetism = true,
-}) => {
-  const gridRef = useRef(null);
-  const isMobile = useMobileDetection();
-  const shouldDisableAnimations = disableAnimations || isMobile;
-const navigate = useNavigate();
-  // Obtener la tarjeta del formulario
-  const formCard = cardData.find((card) => card.type === "form");
+const Formulario = () => {
+  const navigate = useNavigate();
 
-  // El formulario completo que usaremos 2 veces (dentro y fuera del grid)
-  const Formulario = () => (
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById("input-nombre")?.value || "";
+    const celular = document.getElementById("phone")?.value || "";
+    const correo = document.getElementById("email")?.value || "";
+    const mensaje = document.getElementById("message")?.value || "";
+
+    const whatsappMessage = `Hola, me interesa contactar contigo.\n\nNombre: ${nombre}\nCelular: ${celular}\nCorreo: ${correo}\nMensaje: ${mensaje}`;
+    const whatsappUrl = `https://wa.me/523328707144?text=${encodeURIComponent(whatsappMessage)}`;
+
+    window.open(whatsappUrl, "_blank");
+  };
+
+  return (
     <>
-      <form className="flex flex-col gap-3 w-full max-w-full mx-auto text-white text-sm p-4 bg-black/30 rounded-lg backdrop-blur-sm">
-
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-3 w-full max-w-full mx-auto text-white text-sm p-4 bg-black/30 rounded-lg backdrop-blur-sm"
+      >
         {/* Fila: Nombre y Celular */}
         <div className="flex gap-3">
           <div className="flex flex-col w-1/2">
-            <label htmlFor="name" className="mb-1">
+            <label htmlFor="input-nombre" className="mb-1">
               Nombre
             </label>
             <input
@@ -556,7 +553,6 @@ const navigate = useNavigate();
               placeholder="Tu nombre"
               className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
             />
-
           </div>
           <div className="flex flex-col w-1/2">
             <label htmlFor="phone" className="mb-1">
@@ -605,28 +601,164 @@ const navigate = useNavigate();
           Enviar
         </button>
       </form>
-     <div className="flex gap-2 mt-2">
-  <button
-    onClick={() => navigate("/paquete")}
-    className="flex-1 bg-white hover:bg-purple-700 hover:text-white text-black font-semibold py-2 rounded transition"
-  >
-    Paquete
-  </button>
-
-  <button
-    onClick={() => navigate("/proyecto")}
-    className="flex-1 bg-white hover:bg-purple-700 hover:text-white text-black font-semibold py-2 rounded transition"
-  >
-    Proyecto
-  </button>
-</div>
-
+      <div className="flex gap-2 mt-2">
+        <button
+          onClick={() => navigate("/paquete")}
+          className="flex-1 bg-white hover:bg-purple-700 hover:text-white text-black font-semibold py-2 rounded transition"
+        >
+          Paquete
+        </button>
+        <button
+          onClick={() => navigate("/proyecto")}
+          className="flex-1 bg-white hover:bg-purple-700 hover:text-white text-black font-semibold py-2 rounded transition"
+        >
+          Proyecto
+        </button>
+      </div>
     </>
   );
+};
+
+const MagicBento = ({
+  textAutoHide = true,
+  enableStars = true,
+  enableSpotlight = true,
+  enableBorderGlow = true,
+  disableAnimations = false,
+  spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS,
+  particleCount = DEFAULT_PARTICLE_COUNT,
+  enableTilt = false,
+  glowColor = DEFAULT_GLOW_COLOR,
+  clickEffect = true,
+  enableMagnetism = true,
+}) => {
+  const gridRef = useRef(null);
+  const isMobile = useMobileDetection();
+  const shouldDisableAnimations = disableAnimations || isMobile;
+  const navigate = useNavigate();
+  // Obtener la tarjeta del formulario
+  const formCard = cardData.find((card) => card.type === "form");
+
+  const scrollLeft = () => {
+    if (gridRef.current) {
+      gridRef.current.scrollBy({
+        left: -window.innerWidth * 0.85,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (gridRef.current) {
+      gridRef.current.scrollBy({
+        left: window.innerWidth * 0.85,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  // El formulario completo que usaremos 2 veces (dentro y fuera del grid)
+  const Formulario_Deprecated = () => {
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById("input-nombre")?.value || "";
+      const celular = document.getElementById("phone")?.value || "";
+      const correo = document.getElementById("email")?.value || "";
+      const mensaje = document.getElementById("message")?.value || "";
+
+      const whatsappMessage = `Hola, me interesa contactar contigo.\n\nNombre: ${nombre}\nCelular: ${celular}\nCorreo: ${correo}\nMensaje: ${mensaje}`;
+      const whatsappUrl = `https://wa.me/523328707144?text=${encodeURIComponent(whatsappMessage)}`;
+
+      window.open(whatsappUrl, "_blank");
+    };
+
+    return (
+      <>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-3 w-full max-w-full mx-auto text-white text-sm p-4 bg-black/30 rounded-lg backdrop-blur-sm"
+        >
+          {/* Fila: Nombre y Celular */}
+          <div className="flex gap-3">
+            <div className="flex flex-col w-1/2">
+              <label htmlFor="input-nombre" className="mb-1">
+                Nombre
+              </label>
+              <input
+                id="input-nombre"
+                type="text"
+                placeholder="Tu nombre"
+                className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
+              />
+            </div>
+            <div className="flex flex-col w-1/2">
+              <label htmlFor="phone" className="mb-1">
+                Celular
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                placeholder="(55) 1234-5678"
+                className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
+              />
+            </div>
+          </div>
+
+          {/* Fila: Correo */}
+          <div className="flex flex-col">
+            <label htmlFor="email" className="mb-1">
+              Correo
+            </label>
+            <input
+              id="email"
+              type="email"
+              placeholder="correo@ejemplo.com"
+              className="px-3 py-2 rounded bg-white/10 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
+            />
+          </div>
+
+          {/* Fila: Mensaje */}
+          <div className="flex flex-col">
+            <label htmlFor="message" className="mb-1">
+              Mensaje
+            </label>
+            <textarea
+              id="message"
+              rows="3"
+              placeholder="¿En qué te ayudamos?"
+              className="px-3 py-2 rounded bg-white/10 placeholder-white text-white resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
+            />
+          </div>
+
+          {/* Botón */}
+          <button
+            type="submit"
+            className="mt-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded transition w-full"
+          >
+            Enviar
+          </button>
+        </form>
+        <div className="flex gap-2 mt-2">
+          <button
+            onClick={() => navigate("/paquete")}
+            className="flex-1 bg-white hover:bg-purple-700 hover:text-white text-black font-semibold py-2 rounded transition"
+          >
+            Paquete
+          </button>
+          <button
+            onClick={() => navigate("/proyecto")}
+            className="flex-1 bg-white hover:bg-purple-700 hover:text-white text-black font-semibold py-2 rounded transition"
+          >
+            Proyecto
+          </button>
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="relative w-full flex justify-center items-center min-h-[350px] md:min-h-0">
         {enableSpotlight && (
           <GlobalSpotlight
             gridRef={gridRef}
@@ -694,6 +826,25 @@ const navigate = useNavigate();
             );
           })}
         </BentoCardGrid>
+
+        <button
+          onClick={scrollLeft}
+          className="carousel-nav-btn left-btn"
+          aria-label="Previous card"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button
+          onClick={scrollRight}
+          className="carousel-nav-btn right-btn"
+          aria-label="Next card"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
 
       {/* Formulario duplicado para móviles, fuera del grid */}

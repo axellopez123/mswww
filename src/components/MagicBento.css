@@ -102,17 +102,40 @@
   line-clamp: var(--clamp-desc);
 }
 
-@media (max-width: 599px) {
+@media (max-width: 768px) {
   .card-grid {
-    grid-template-columns: 1fr;
-    width: 90%;
-    margin: 0 auto;
-    padding: 0.5em;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    width: 100%;
+    padding: 20px 1rem;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .card-grid::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
   }
 
   .card {
-    width: 100%;
-    min-height: 180px;
+    flex: 0 0 85%;
+    width: 85%;
+    min-height: 300px;
+    scroll-snap-align: center;
+    margin-top: -2.25rem;
+    /* -mt-9 approx equivalent */
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* shadow-md */
+    cursor: pointer;
   }
 }
 
@@ -204,7 +227,9 @@
   position: relative;
   user-select: none;
 }
+
 @media (max-width: 768px) {
+
   /* Ocultar el formulario dentro del grid */
   .form-in-grid-hidden {
     display: none !important;
@@ -220,9 +245,57 @@
 }
 
 @media (min-width: 769px) {
+
   /* Ocultar el formulario externo en pantallas grandes */
   .mobile-form-container {
     display: none;
   }
+
+  .carousel-nav-btn {
+    display: none;
+  }
 }
 
+@media (max-width: 768px) {
+  .carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(132, 0, 255, 0.85);
+    /* More vibrant purple */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10000;
+    /* High z-index */
+    box-shadow: 0 0 15px rgba(132, 0, 255, 0.5);
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+    padding: 0;
+  }
+
+  .carousel-nav-btn:active {
+    transform: translateY(-50%) scale(0.9);
+    background: rgba(132, 0, 255, 1);
+  }
+
+  .carousel-nav-btn.left-btn {
+    left: 8px;
+  }
+
+  .carousel-nav-btn.right-btn {
+    right: 8px;
+  }
+}
+
+@media (min-width: 769px) {
+  .carousel-nav-btn {
+    display: none !important;
+  }
+}
